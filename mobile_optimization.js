@@ -189,3 +189,4 @@
     // Export for debugging
     window.mobileOptimized = true;
 })();
+
