@@ -2555,7 +2555,9 @@ function toggleZoom(e) {
  * @param e - The click event
  */
 function handleBackgroundClick(e) {
-    if(e.target.id === "imageModal") {
+    // Only close if clicking directly on the modal background
+    // (not on arrows, image, or any other child elements)
+    if (e.target === e.currentTarget) {
         e.target.style.display = "none";
     }
 }
@@ -5042,6 +5044,7 @@ function debugFilterState() {
 
 </script>
 </body></html>
+
 
 
 
