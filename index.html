@@ -851,21 +851,16 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     }
     
     /* FIX 14: Image modal - Proper positioning (NO transform) */
-    #imageModal {
-        transform: none !important;
-        width: 100% !important;
-        left: 0 !important;
-    }
-    #prevBtn {
-        left: calc(7.5% - 10px) !important; /* 7.5% = (100% - 85%)/2 */
-    }
-    #nextBtn {
-        right: calc(7.5% - 10px) !important; /* Same calculation */
-    }
     #modalImg {
-        max-width: 85% !important;  /* Shrink image to 85% of screen width */
+        max-width: 75% !important;  /* Shrink image to 85% of screen width */
         max-height: 70vh !important; /* Limit height */
         margin: auto !important;
+    }
+    #prevBtn {
+        left: calc(5% - 10px) !important; /* 7.5% = (100% - 85%)/2 */
+    }
+    #nextBtn {
+        right: calc(5% - 10px) !important; /* Same calculation */
     }
     
     /* FIX 15: Elegant alert - Proper positioning */
@@ -5022,5 +5017,6 @@ function debugFilterState() {
 
 </script>
 </body></html>
+
 
 
