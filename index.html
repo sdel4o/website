@@ -857,17 +857,10 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         margin: auto !important;
     }
     #prevBtn {
-        left: calc(5% - 10px) !important; /* 7.5% = (100% - 85%)/2 */
+        left: calc(5% - 5px) !important; /* 7.5% = (100% - 85%)/2 */
     }
     #nextBtn {
-        right: calc(5% - 10px) !important; /* Same calculation */
-    }
-    .modal-arrows {
-        /* Add these lines to fix mobile touch, click once to change img*/
-        -webkit-tap-highlight-color: transparent !important;
-        touch-action: manipulation !important;
-        cursor: pointer !important;
-        user-select: none !important;
+        right: calc(5% - 5px) !important; /* Same calculation */
     }
     
     /* FIX 15: Elegant alert - Proper positioning */
@@ -1338,6 +1331,7 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
     opacity: 0.7;
     transition: opacity 0.3s ease;
+    touch-action: manipulation;
 }
 
 .modal-arrows:hover {
@@ -5024,6 +5018,7 @@ function debugFilterState() {
 
 </script>
 </body></html>
+
 
 
 
