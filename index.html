@@ -1673,8 +1673,8 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
 <!-- Image Zoom Modal -->
 <div id="imageModal" onclick="handleBackgroundClick(event)">
     <img id="modalImg" onclick="toggleZoom(event)">
-    <button class="modal-arrows" id="prevBtn" onclick="changeModalImage(-1)" style="display:none;">&lt;</button>
-    <button class="modal-arrows" id="nextBtn" onclick="changeModalImage(1)" style="display:none;">&gt;</button>
+    <button class="modal-arrows" id="prevBtn" onclick="event.stopPropagation(); changeModalImage(-1)" style="display:none;">&lt;</button>
+    <button class="modal-arrows" id="nextBtn" onclick="event.stopPropagation(); changeModalImage(1)" style="display:none;">&gt;</button>
 </div>
 
 <!-- Product Catalog Container -->
@@ -5044,6 +5044,7 @@ function debugFilterState() {
 
 </script>
 </body></html>
+
 
 
 
