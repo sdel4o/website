@@ -875,7 +875,6 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         cursor: pointer !important;
         user-select: none !important;
         outline: none !important;
-        pointer-events: auto !important; /* ADD THIS LINE */
     }
     .modal-arrows:focus,
     .modal-arrows:active,
@@ -2555,8 +2554,7 @@ function toggleZoom(e) {
  * @param e - The click event
  */
 function handleBackgroundClick(e) {
-    // Only close if clicking directly on the modal background
-    // (not on arrows, image, or any other child elements)
+    // Only close if clicking the modal background, not children
     if (e.target === e.currentTarget) {
         e.target.style.display = "none";
     }
@@ -5044,6 +5042,7 @@ function debugFilterState() {
 
 </script>
 </body></html>
+
 
 
 
