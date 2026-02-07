@@ -860,35 +860,22 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         max-width: 75% !important;
         max-height: 70vh !important;
     }
-    /* CHANGE THESE LINES: */
     #nextBtn {
-        right: 1% !important; /* Changed from 1% to 5% */
+    right: 1% !important; 
     }
     #prevBtn {
-        left: 1% !important;  /* Changed from 1% to 5% */
+    left: 1% !important; 
     }
-    .modal-arrows {
-        /* fixes mobile touch */
-        z-index: 1007 !important;
-        -webkit-tap-highlight-color: transparent !important;
-        touch-action: manipulation !important;
-        cursor: pointer !important;
-        user-select: none !important;
-        outline: none !important;
-        position: relative;
+   .modal-arrows {
+    /* fixes mobile touch */
+    z-index: 10007 !important;
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    outline: none !important;
+    position: relative;
     }
-    #imageModal {
-    z-index: 1001;
-    position: fixed;
-    }
-    .modal-arrows:focus,
-    .modal-arrows:active,
-    .modal-arrows:hover {
-        background: transparent !important;
-        opacity: 1 !important;
-        transform: translateY(-50%) !important;
-    }
-    
     /* FIX 15: Elegant alert - Proper positioning */
     .elegant-alert-overlay {
         transform: none !important;
@@ -1318,6 +1305,7 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
     -moz-user-drag: none;
     -o-user-drag: none;
     user-drag: none;
+    pointer-events: auto;
 }
 
 .product-name { font-size: 0.65em; margin: 10px 0 -10px; font-weight: 600; min-height: 2.5em; color: #333; text-transform: capitalize; }
@@ -1364,9 +1352,8 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
     background: transparent;
 }
 
-/* CHANGE THESE LINES: */
 #prevBtn {
-    left: 25%;  
+    left: 25%;
 }
 
 #nextBtn {
@@ -1675,8 +1662,8 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
 <!-- Image Zoom Modal -->
 <div id="imageModal" onclick="handleBackgroundClick(event)">
     <img id="modalImg" onclick="toggleZoom(event)">
-    <button class="modal-arrows" id="prevBtn" onclick="event.stopPropagation(); changeModalImage(-1)" style="display:none;">&lt;</button>
-    <button class="modal-arrows" id="nextBtn" onclick="event.stopPropagation(); changeModalImage(1)" style="display:none;">&gt;</button>
+    <button class="modal-arrows" id="prevBtn" onclick="changeModalImage(-1)" style="display:none;">&lt;</button>
+    <button class="modal-arrows" id="nextBtn" onclick="changeModalImage(1)" style="display:none;">&gt;</button>
 </div>
 
 <!-- Product Catalog Container -->
@@ -1807,7 +1794,7 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
                         </div>
                     </div>
                 </div>
-                <div class="product-card" data-sku="W4BL61WGLZ0-JBLK" data-name="oxana hooded puffer coat - black" data-price="238.0" data-weight="1.25" data-category="Apparel" data-gender="Women" data-type="Coats" data-brand="Guess" data-tag="Guess" data-source="Guess" data-img="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,,w_800,c_scale/v1/NA/Style/ECOMM/W4BL61WGLZ0-JBLK">
+                <div class="product-card" data-sku="W4BL61WGLZ0-JBLK" data-name="oxana hooded puffer coat - black" data-price="238.0" data-weight="1.25" data-category="Clothing" data-gender="Women" data-type="Coats" data-brand="Guess" data-tag="Guess" data-source="Guess" data-img="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,,w_800,c_scale/v1/NA/Style/ECOMM/W4BL61WGLZ0-JBLK">
                     <div class="folder-tag">Guess</div>
                     <div class="main-image"><img id="prod-Guess-3" src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,,w_800,c_scale/v1/NA/Style/ECOMM/W4BL61WGLZ0-JBLK" onclick="openImageModal(this.src)"></div>
                     <div class="thumbnails"><img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W4BL61WGLZ0-JBLK" class="thumbnail-img" data-main-id="prod-Guess-3" data-full-src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W4BL61WGLZ0-JBLK" onclick="updateMainImage(this)"><img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W4BL61WGLZ0-JBLK-ALT1" class="thumbnail-img" data-main-id="prod-Guess-3" data-full-src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W4BL61WGLZ0-JBLK-ALT1" onclick="updateMainImage(this)"><img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W4BL61WGLZ0-JBLK-ALT2" class="thumbnail-img" data-main-id="prod-Guess-3" data-full-src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W4BL61WGLZ0-JBLK-ALT2" onclick="updateMainImage(this)"><img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W4BL61WGLZ0-JBLK-ALT3" class="thumbnail-img" data-main-id="prod-Guess-3" data-full-src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W4BL61WGLZ0-JBLK-ALT3" onclick="updateMainImage(this)"><img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W4BL61WGLZ0-JBLK-ALT4" class="thumbnail-img" data-main-id="prod-Guess-3" data-full-src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W4BL61WGLZ0-JBLK-ALT4" onclick="updateMainImage(this)"><img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W4BL61WGLZ0-JBLK-ALT5" class="thumbnail-img" data-main-id="prod-Guess-3" data-full-src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W4BL61WGLZ0-JBLK-ALT5" onclick="updateMainImage(this)"></div>
@@ -1849,7 +1836,7 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
                         </div>
                     </div>
                 </div>
-                <div class="product-card" data-sku="W3YP39KBT00-JBLK" data-name="tessa smocked top - black" data-price="79.0" data-weight="0.25" data-category="Apparel" data-gender="Women" data-type="Tops" data-brand="Guess" data-tag="Guess" data-source="Guess" data-img="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,,w_800,c_scale/v1/NA/Style/ECOMM/W3YP39KBT00-JBLK">
+                <div class="product-card" data-sku="W3YP39KBT00-JBLK" data-name="tessa smocked top - black" data-price="79.0" data-weight="0.25" data-category="Clothing" data-gender="Women" data-type="Tops" data-brand="Guess" data-tag="Guess" data-source="Guess" data-img="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,,w_800,c_scale/v1/NA/Style/ECOMM/W3YP39KBT00-JBLK">
                     <div class="folder-tag">Guess</div>
                     <div class="main-image"><img id="prod-Guess-4" src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,,w_800,c_scale/v1/NA/Style/ECOMM/W3YP39KBT00-JBLK" onclick="openImageModal(this.src)"></div>
                     <div class="thumbnails"><img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W3YP39KBT00-JBLK" class="thumbnail-img" data-main-id="prod-Guess-4" data-full-src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W3YP39KBT00-JBLK" onclick="updateMainImage(this)"><img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W3YP39KBT00-JBLK-ALT1" class="thumbnail-img" data-main-id="prod-Guess-4" data-full-src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W3YP39KBT00-JBLK-ALT1" onclick="updateMainImage(this)"><img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W3YP39KBT00-JBLK-ALT2" class="thumbnail-img" data-main-id="prod-Guess-4" data-full-src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W3YP39KBT00-JBLK-ALT2" onclick="updateMainImage(this)"><img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W3YP39KBT00-JBLK-ALT3" class="thumbnail-img" data-main-id="prod-Guess-4" data-full-src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W3YP39KBT00-JBLK-ALT3" onclick="updateMainImage(this)"><img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W3YP39KBT00-JBLK-ALT4" class="thumbnail-img" data-main-id="prod-Guess-4" data-full-src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W3YP39KBT00-JBLK-ALT4" onclick="updateMainImage(this)"></div>
@@ -1891,7 +1878,7 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
                         </div>
                     </div>
                 </div>
-                <div class="product-card" data-sku="W5RA1DD4K31-GDNS" data-name="eco low-rise slouchy jeans - blue" data-price="118.0" data-weight="0.75" data-category="Apparel" data-gender="" data-type="Jeans" data-brand="Guess" data-tag="Guess" data-source="Guess" data-img="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,,w_800,c_scale/v1/NA/Style/ECOMM/W5RA1DD4K31-GDNS">
+                <div class="product-card" data-sku="W5RA1DD4K31-GDNS" data-name="eco low-rise slouchy jeans - blue" data-price="118.0" data-weight="0.75" data-category="Clothing" data-gender="" data-type="Jeans" data-brand="Guess" data-tag="Guess" data-source="Guess" data-img="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,,w_800,c_scale/v1/NA/Style/ECOMM/W5RA1DD4K31-GDNS">
                     <div class="folder-tag">Guess</div>
                     <div class="main-image"><img id="prod-Guess-5" src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,,w_800,c_scale/v1/NA/Style/ECOMM/W5RA1DD4K31-GDNS" onclick="openImageModal(this.src)"></div>
                     <div class="thumbnails"><img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W5RA1DD4K31-GDNS" class="thumbnail-img" data-main-id="prod-Guess-5" data-full-src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W5RA1DD4K31-GDNS" onclick="updateMainImage(this)"><img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W5RA1DD4K31-GDNS-ALT1" class="thumbnail-img" data-main-id="prod-Guess-5" data-full-src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W5RA1DD4K31-GDNS-ALT1" onclick="updateMainImage(this)"><img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W5RA1DD4K31-GDNS-ALT2" class="thumbnail-img" data-main-id="prod-Guess-5" data-full-src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W5RA1DD4K31-GDNS-ALT2" onclick="updateMainImage(this)"><img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W5RA1DD4K31-GDNS-ALT3" class="thumbnail-img" data-main-id="prod-Guess-5" data-full-src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W5RA1DD4K31-GDNS-ALT3" onclick="updateMainImage(this)"><img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W5RA1DD4K31-GDNS-ALT4" class="thumbnail-img" data-main-id="prod-Guess-5" data-full-src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W5RA1DD4K31-GDNS-ALT4" onclick="updateMainImage(this)"><img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W5RA1DD4K31-GDNS-ALT5" class="thumbnail-img" data-main-id="prod-Guess-5" data-full-src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/NA/Style/ECOMM/W5RA1DD4K31-GDNS-ALT5" onclick="updateMainImage(this)"></div>
@@ -2557,8 +2544,7 @@ function toggleZoom(e) {
  * @param e - The click event
  */
 function handleBackgroundClick(e) {
-    // Only close if clicking the modal background, not children
-    if (e.target === e.currentTarget) {
+    if(e.target.id === "imageModal") {
         e.target.style.display = "none";
     }
 }
@@ -5045,29 +5031,3 @@ function debugFilterState() {
 
 </script>
 </body></html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
