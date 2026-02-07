@@ -862,10 +862,10 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     }
     /* CHANGE THESE LINES: */
     #prevBtn {
-        left: 5% !important;  /* Changed from 1% to 5% */
+        left: 1% !important;  /* Changed from 1% to 5% */
     }
     #nextBtn {
-        right: 5% !important; /* Changed from 1% to 5% */
+        right: 1% !important; /* Changed from 1% to 5% */
     }
     .modal-arrows {
         /* fixes mobile touch */
@@ -1332,6 +1332,7 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
     padding: 40px 0;
     transition: transform 0.2s ease;
     cursor: zoom-in;
+    pointer-events: none !important;
 }
 #modalImg.zoomed {
     max-width: none;
@@ -5041,6 +5042,7 @@ function debugFilterState() {
 
 </script>
 </body></html>
+
 
 
 
