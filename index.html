@@ -862,6 +862,13 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     #nextBtn {
         right: calc(5% - 10px) !important; /* Same calculation */
     }
+    .modal-arrows {
+        /* Add these lines to fix mobile touch, click once to change img*/
+        -webkit-tap-highlight-color: transparent !important;
+        touch-action: manipulation !important;
+        cursor: pointer !important;
+        user-select: none !important;
+    }
     
     /* FIX 15: Elegant alert - Proper positioning */
     .elegant-alert-overlay {
@@ -5017,6 +5024,7 @@ function debugFilterState() {
 
 </script>
 </body></html>
+
 
 
 
