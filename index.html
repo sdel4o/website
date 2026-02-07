@@ -851,6 +851,12 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     }
     
     /* FIX 14: Image modal - Proper positioning (NO transform) */
+    #imageModal {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        height: 100vh !important;
+    }
     #modalImg {
         max-width: 75% !important;  /* Shrink image to 85% of screen width */
         max-height: 70vh !important; /* Limit height */
@@ -5025,6 +5031,7 @@ function debugFilterState() {
 
 </script>
 </body></html>
+
 
 
 
