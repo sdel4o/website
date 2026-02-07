@@ -569,11 +569,12 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     font-weight: 500;
 }
 
-/* Gold select styling - FROM NEW CODE */
+/* ============ MODERN CUSTOM DROPDOWN STYLES ============ */
 .gold-select {
     width: 100%;
-    padding: 14px 20px;
+    padding: 12px 18px;
     border: 2px solid #D4AF37;
+    box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.3);
     border-radius: 30px;
     background: #000;
     color: #FFD700;
@@ -581,7 +582,6 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     font-size: 0.9em;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -591,6 +591,17 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     background-size: 20px;
     padding-right: 50px;
     box-sizing: border-box;
+}
+
+.gold-select:focus {
+    outline: none;
+    border-color: #FFD700;
+}
+
+.gold-select option {
+    background: #000;
+    color: #FFD700;
+    border: 1px solid #D4AF37;
 }
 
 /* ============ SIMPLE MOBILE OPTIMIZATION - Mobile CSS ============ */
@@ -729,7 +740,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         -webkit-appearance: none !important;
         -moz-appearance: none !important;
         appearance: none !important;
-        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D4AF37'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e") !important;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www3.org/2000/svg' viewBox='0 0 24 24' fill='%23D4AF37'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e") !important;
         background-repeat: no-repeat !important;
         background-position: right 15px center !important;
         background-size: 18px !important;
@@ -1610,7 +1621,7 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
         <input type="text" id="searchInput" oninput="debouncedApplyFilters()" placeholder="🔍 Search products...">
     </div>
     
-    <!-- Top Row: All Filters -->
+    <!-- Top Row: All Filters (GOLD SELECT STYLING) -->
     <div class="filter-top-row">
         <!-- Brand -->
         <select id="brandFilter" class="gold-select" onchange="handleBrandChange()">
@@ -3268,7 +3279,241 @@ function applyFilters() {
 // ===========================================================================
 // --------------------------- END OF FIX -----------------------------------
 // ===========================================================================
+// ============================================
+// CUSTOM DROPDOWN FUNCTIONS (for filters)
+// ============================================
 
+let activeCustomDropdown = null;
+
+/**
+ * Toggles a custom dropdown
+ * @param type - The dropdown type (brand, category, etc.)
+ */
+function toggleCustomDropdown(type) {
+    // Close any open dropdown first
+    closeAllCustomDropdowns();
+    
+    const dropdown = document.getElementById(`${type}-dropdown`);
+    const trigger = document.querySelector(`#${type}-dropdown`).closest('.custom-select-wrapper').querySelector('.custom-select-trigger');
+    const overlay = document.querySelector('.custom-select-overlay');
+    
+    if (dropdown) {
+        activeCustomDropdown = type;
+        dropdown.classList.add('active');
+        trigger.classList.add('active');
+        
+        // Mobile portrait: show overlay and prevent body scroll
+        if (window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches) {
+            if (overlay) {
+                overlay.classList.add('active');
+            }
+            document.body.style.overflow = 'hidden';
+        }
+        // Desktop & landscape: no overlay, allow scrolling
+        else {
+            if (overlay) {
+                overlay.classList.remove('active');
+            }
+            document.body.style.overflow = '';
+        }
+    }
+}
+
+/**
+ * Closes a specific custom dropdown
+ * @param type - The dropdown type to close
+ */
+function closeCustomDropdown(type) {
+    const dropdown = document.getElementById(`${type}-dropdown`);
+    const trigger = document.querySelector(`#${type}-dropdown`).closest('.custom-select-wrapper').querySelector('.custom-select-trigger');
+    const overlay = document.querySelector('.custom-select-overlay');
+    
+    if (dropdown) {
+        dropdown.classList.remove('active');
+        trigger.classList.remove('active');
+        activeCustomDropdown = null;
+    }
+    
+    // Always hide overlay and restore scrolling
+    if (overlay) {
+        overlay.classList.remove('active');
+    }
+    document.body.style.overflow = '';
+}
+
+/**
+ * Closes all custom dropdowns
+ */
+function closeAllCustomDropdowns() {
+    document.querySelectorAll('.custom-select-dropdown.active').forEach(dropdown => {
+        dropdown.classList.remove('active');
+    });
+    
+    document.querySelectorAll('.custom-select-trigger.active').forEach(trigger => {
+        trigger.classList.remove('active');
+    });
+    
+    const overlay = document.querySelector('.custom-select-overlay');
+    if (overlay) {
+        overlay.classList.remove('active');
+    }
+    
+    activeCustomDropdown = null;
+    document.body.style.overflow = '';
+}
+
+/**
+ * Selects an option in a custom dropdown
+ * @param type - The dropdown type
+ * @param value - The selected value
+ * @param label - The display label
+ */
+function selectCustomOption(type, value, label) {
+    // Update the hidden input
+    const filterInput = document.getElementById(`${type}Filter`);
+    if (filterInput) {
+        filterInput.value = value;
+    }
+    
+    // Update the trigger display
+    const trigger = document.querySelector(`#${type}-dropdown`).closest('.custom-select-wrapper').querySelector('.custom-select-trigger .select-placeholder');
+    if (trigger) {
+        trigger.textContent = label;
+        trigger.style.color = value ? '#FFD700' : '#FFD700';
+        trigger.style.fontWeight = value ? '600' : '500';
+    }
+    
+    // Remove selected class from all options and add to selected one
+    const options = document.querySelectorAll(`#${type}-options .custom-select-option`);
+    options.forEach(option => {
+        option.classList.remove('selected');
+        if (option.dataset.value === value) {
+            option.classList.add('selected');
+        }
+    });
+    
+    // Close the dropdown (works for both mobile and desktop)
+    closeCustomDropdown(type);
+    
+    // Trigger the appropriate filter change function
+    switch(type) {
+        case 'brand':
+            handleBrandChange();
+            break;
+        case 'subBrand':
+            handleSubBrandChange();
+            break;
+        case 'category':
+            handleCategoryChange();
+            break;
+        case 'type':
+            handleTypeChange();
+            break;
+        case 'gender':
+            handleGenderChange();
+            break;
+    }
+}
+
+/**
+ * Populates a custom dropdown with options
+ * @param type - The dropdown type
+ * @param options - Array of {value: '', label: ''} objects
+ * @param currentValue - Currently selected value
+ */
+function populateCustomSelect(type, options, currentValue) {
+    const optionsContainer = document.getElementById(`${type}-options`);
+    if (!optionsContainer) return;
+    
+    let html = '';
+    
+    // Add "All" option first
+    const allOption = {
+        value: '',
+        label: type === 'brand' ? 'All Brands' : 
+               type === 'subBrand' ? 'Sub-Brand' : 
+               type === 'category' ? 'All Categories' :
+               type === 'type' ? 'All Product Types' :
+               'All Genders'
+    };
+    
+    html += `<div class="custom-select-option ${currentValue === '' ? 'selected' : ''}" 
+                    data-value="" 
+                    onclick="selectCustomOption('${type}', '', '${allOption.label}')">
+                ${allOption.label}
+            </div>`;
+    
+    // Add other options
+    options.forEach(option => {
+        if (!option.value || option.value.trim() === '') return;
+        
+        const isSelected = option.value === currentValue;
+        html += `<div class="custom-select-option ${isSelected ? 'selected' : ''}" 
+                        data-value="${option.value}" 
+                        onclick="selectCustomOption('${type}', '${option.value}', '${option.label}')">
+                    ${option.label}
+                </div>`;
+    });
+    
+    optionsContainer.innerHTML = html;
+    
+    // Update the trigger placeholder
+    const trigger = document.querySelector(`#${type}-dropdown`).closest('.custom-select-wrapper').querySelector('.custom-select-trigger .select-placeholder');
+    if (trigger) {
+        const selectedOption = currentValue ? 
+            options.find(opt => opt.value === currentValue)?.label || allOption.label : 
+            allOption.label;
+        trigger.textContent = selectedOption;
+        trigger.style.color = currentValue ? '#FFD700' : '#FFD700';
+        trigger.style.fontWeight = currentValue ? '600' : '500';
+    }
+}
+
+/**
+ * Gets the current value of a custom dropdown
+ * @param type - The dropdown type
+ * @returns The current value or empty string
+ */
+function getCustomSelectValue(type) {
+    const input = document.getElementById(`${type}Filter`);
+    return input ? input.value : '';
+}
+
+// Close dropdowns when clicking outside (desktop) or on overlay (mobile)
+document.addEventListener('click', function(e) {
+    // Don't close if clicking on a dropdown trigger or option
+    if (e.target.closest('.custom-select-trigger') || 
+        e.target.closest('.custom-select-option') ||
+        e.target.closest('.custom-select-close')) {
+        return;
+    }
+    
+    // Close if clicking outside on desktop
+    if (window.innerWidth > 768 || 
+        (window.innerWidth <= 768 && window.matchMedia("(orientation: landscape)").matches)) {
+        if (activeCustomDropdown && !e.target.closest('.custom-select-dropdown')) {
+            closeAllCustomDropdowns();
+        }
+    }
+    // Mobile portrait: close when clicking overlay
+    else if (window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches) {
+        if (e.target.classList.contains('custom-select-overlay')) {
+            closeAllCustomDropdowns();
+        }
+    }
+});
+
+// Close dropdowns with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        if (activeCustomDropdown) {
+            closeAllCustomDropdowns();
+        }
+        if (activeSizePicker) {
+            closeAllSizePickers();
+        }
+    }
+});
 
 // FIX: Proper initial product loading
 function loadInitialProducts() {
@@ -3681,44 +3926,41 @@ function checkAndResetIfFiltersCleared() {
 // GENDER POSITION HANDLING
 // ============================================
 
-/**
- * Updates gender filter position based on sub-brand visibility
- */
 function updateGenderPosition() {
     if (window.innerWidth <= 768) {
-        const subBrand = document.getElementById("subBrandFilter");
-        const gender = document.getElementById("genFilter");
+        const subBrandWrapper = document.getElementById("subBrandWrapper");
+        const genderWrapper = document.querySelector('.custom-select-wrapper:has(#gender-dropdown)');
         const topRow = document.querySelector(".filter-top-row");
         
-        if (!gender || !topRow) return;
+        if (!genderWrapper || !topRow) return;
         
         // Reset all styles first
-        gender.style.gridColumn = "";
-        gender.style.justifySelf = "";
-        gender.style.textAlign = "";
+        genderWrapper.style.gridColumn = "";
+        genderWrapper.style.justifySelf = "";
+        genderWrapper.style.textAlign = "";
         
         // Check if sub-brand is visible
-        const subBrandVisible = subBrand && 
-            (subBrand.style.display === "inline-block" || 
-             subBrand.style.display === "block" ||
-             window.getComputedStyle(subBrand).display !== "none");
+        const subBrandVisible = subBrandWrapper && 
+            (subBrandWrapper.style.display === "inline-block" || 
+             subBrandWrapper.style.display === "block" ||
+             window.getComputedStyle(subBrandWrapper).display !== "none");
         
         // Get total visible filters
-        const visibleFilters = Array.from(topRow.querySelectorAll('.gold-select'))
-            .filter(select => select.style.display !== 'none' && 
-                    window.getComputedStyle(select).display !== 'none');
+        const visibleFilters = Array.from(topRow.querySelectorAll('.custom-select-wrapper'))
+            .filter(wrapper => wrapper.style.display !== 'none' && 
+                    window.getComputedStyle(wrapper).display !== 'none');
         
         // Logic based on your requirements
         if (subBrandVisible && visibleFilters.length === 5) {
             // Sub-brand is present (5 filters) - gender aligned left
-            gender.style.gridColumn = "1";
-            gender.style.justifySelf = "start";
-            gender.style.textAlign = "left";
+            genderWrapper.style.gridColumn = "1";
+            genderWrapper.style.justifySelf = "start";
+            genderWrapper.style.textAlign = "left";
         } else if (!subBrandVisible && visibleFilters.length === 4) {
             // No sub-brand (4 filters) - gender in normal grid position
-            gender.style.gridColumn = "";
-            gender.style.justifySelf = "";
-            gender.style.textAlign = "center";
+            genderWrapper.style.gridColumn = "";
+            genderWrapper.style.justifySelf = "";
+            genderWrapper.style.textAlign = "center";
         }
     }
 }
