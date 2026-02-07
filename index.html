@@ -856,7 +856,10 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         width: 100% !important;
         left: 0 !important;
     }
-    
+    #prevBtn, #nextBtn {
+        transform: translateY(-50%) !important; /* Keep arrow vertical centering */
+        position: fixed !important; /* Ensure they stay fixed on mobile */
+    }
     #modalImg {
         max-width: 95% !important;
         max-height: 70vh !important;
@@ -1317,6 +1320,35 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
     transform: scale(1.5);
 }
 
+.modal-arrows {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 40px;
+    padding: 15px;
+    cursor: pointer;
+    z-index: 1002;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.modal-arrows:hover {
+    opacity: 1;
+    background: transparent;
+}
+
+#prevBtn {
+    left: 25%;
+}
+
+#nextBtn {
+    right: 25%;
+}
+
 /* ============ CHECKOUT MODAL STYLES ============ */
 #checkoutModal { 
     display: none;
@@ -1617,7 +1649,11 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
 <div class="size-overlay" onclick="closeAllSizePickers()"></div>
 
 <!-- Image Zoom Modal -->
-<div id="imageModal" onclick="handleBackgroundClick(event)"><img id="modalImg" onclick="toggleZoom(event)"></div>
+<div id="imageModal" onclick="handleBackgroundClick(event)">
+    <img id="modalImg" onclick="toggleZoom(event)">
+    <button class="modal-arrows" id="prevBtn" onclick="changeModalImage(-1)" style="display:none;">&lt;</button>
+    <button class="modal-arrows" id="nextBtn" onclick="changeModalImage(1)" style="display:none;">&gt;</button>
+</div>
 
 <!-- Product Catalog Container -->
 <div class="catalog-container" id="container">
@@ -2383,6 +2419,105 @@ function openImageModal(src) {
     modalImg.classList.remove("zoomed");
     modal.style.display = "block";
 }
+
+/**
+ * Stores image array for current product when opening modal
+ */
+let currentModalImages = [];
+let currentModalIndex = 0;
+
+/**
+ * Opens the image modal with navigation arrows if multiple images exist
+ * @param src - The source URL of the image to display
+ * @param productCard - The product card element (optional, for getting thumbnails)
+ */
+function openImageModal(src) {
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImg");
+    
+    // Get all thumbnails from the current product
+    const productCard = modalImg.closest('.product-card') || 
+                       document.querySelector(`[data-img="${src}"]`) ||
+                       document.querySelector(`img[src="${src}"]`)?.closest('.product-card');
+    
+    // Reset modal state
+    modalImg.classList.remove("zoomed");
+    modalImg.src = src;
+    modal.style.display = "block";
+    
+    // Get all images for this product
+    currentModalImages = [];
+    currentModalIndex = 0;
+    
+    if (productCard) {
+        // Get main image
+        const mainImg = productCard.querySelector('.main-image img');
+        if (mainImg && mainImg.src) {
+            currentModalImages.push(mainImg.src);
+        }
+        
+        // Get all thumbnail images
+        const thumbnails = productCard.querySelectorAll('.thumbnail-img');
+        thumbnails.forEach(thumb => {
+            if (thumb.src && !currentModalImages.includes(thumb.src)) {
+                currentModalImages.push(thumb.src);
+            }
+        });
+        
+        // Find current image index
+        currentModalIndex = currentModalImages.findIndex(img => img === src);
+        if (currentModalIndex === -1) currentModalIndex = 0;
+    }
+    
+    // Show/hide arrows based on number of images
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    
+    if (currentModalImages.length > 1) {
+        prevBtn.style.display = "block";
+        nextBtn.style.display = "block";
+    } else {
+        prevBtn.style.display = "none";
+        nextBtn.style.display = "none";
+    }
+}
+
+/**
+ * Changes image in modal by direction (-1 for previous, 1 for next)
+ * @param direction - -1 for previous, 1 for next
+ */
+function changeModalImage(direction) {
+    if (currentModalImages.length === 0) return;
+    
+    currentModalIndex += direction;
+    
+    // Handle wrapping
+    if (currentModalIndex < 0) {
+        currentModalIndex = currentModalImages.length - 1;
+    } else if (currentModalIndex >= currentModalImages.length) {
+        currentModalIndex = 0;
+    }
+    
+    const modalImg = document.getElementById("modalImg");
+    modalImg.src = currentModalImages[currentModalIndex];
+    modalImg.classList.remove("zoomed");
+}
+
+/**
+ * Handle keyboard navigation (left/right arrows)
+ */
+document.addEventListener('keydown', function(e) {
+    const modal = document.getElementById("imageModal");
+    if (modal.style.display === "block") {
+        if (e.key === "ArrowLeft") {
+            changeModalImage(-1);
+        } else if (e.key === "ArrowRight") {
+            changeModalImage(1);
+        } else if (e.key === "Escape") {
+            modal.style.display = "none";
+        }
+    }
+});
 
 /**
  * Toggles zoom on the modal image when clicked
