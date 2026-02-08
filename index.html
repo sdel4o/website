@@ -8,6 +8,305 @@
 body { font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0px 20px; }
 h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; margin-bottom: 20px; font-weight: 600; }
 
+/* ============ CUSTOM FILTER SELECTOR STYLES ============ */
+.custom-select-wrapper {
+    position: relative;
+    width: 100%;
+    z-index: 1000;
+}
+
+.custom-select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    border: 2px solid #D4AF37;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
+    color: #FFD700;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 44px;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.custom-select-trigger:hover {
+    border-color: #FFD700;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+}
+
+.custom-select-trigger.active {
+    border-color: #FFD700;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+}
+
+.select-placeholder {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+}
+
+.select-arrow {
+    font-size: 0.8em;
+    margin-left: 10px;
+    color: #D4AF37;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.custom-select-trigger.active .select-arrow {
+    transform: rotate(180deg);
+}
+
+/* DESKTOP CUSTOM SELECT DROPDOWN (default for all devices) */
+.custom-select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: 300px;
+    background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
+    border: 2px solid #D4AF37;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    z-index: 1001;
+    margin-top: 5px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.custom-select-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.custom-select-header {
+    display: none; /* Hidden for desktop */
+}
+
+.custom-select-close {
+    display: none; /* Hidden for desktop */
+}
+
+.custom-select-option {
+    padding: 8px 20px;
+    text-align: left;
+    border: none;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    background: transparent;
+    color: #FFD700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.custom-select-option:last-child {
+    border-bottom: none;
+}
+
+.custom-select-option:hover {
+    background: rgba(212, 175, 55, 0.15);
+    color: #FFD700;
+}
+
+.custom-select-option.selected {
+    background: #D4AF37;
+    color: #000;
+    font-weight: 600;
+}
+
+/* NO OVERLAY FOR DESKTOP */
+.custom-select-overlay {
+    display: none !important;
+}
+
+/* ============ MOBILE CUSTOM SELECT (Portrait only) ============ */
+@media (max-width: 768px) and (orientation: portrait) {
+    .custom-select-trigger {
+        padding: 10px 14px !important;
+        font-size: 0.85em !important;
+        min-height: 40px;
+    }
+
+    .custom-select-dropdown {
+        /* MOBILE-ONLY STYLES */
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto;
+        width: 100%;
+        max-height: 70vh;
+        border-radius: 16px 16px 0 0;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+        margin: 0;
+        transform: translateY(100%);
+        opacity: 1;
+        visibility: visible;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 10002;
+    }
+    
+    .custom-select-dropdown.active {
+        transform: translateY(0);
+    }
+    
+    .custom-select-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 20px;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        font-weight: 600;
+        font-size: 1em;
+        color: #FFD700;
+        position: sticky;
+        top: 0;
+        background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+        z-index: 2;
+        border-radius: 14px 14px 0 0;
+    }
+    
+    .custom-select-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        font-size: 1.2em;
+        color: #FFD700;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        transition: background 0.2s ease;
+    }
+    
+    .custom-select-close:hover {
+        background: rgba(212, 175, 55, 0.2);
+    }
+    
+    .custom-select-options {
+        padding: 10px 0;
+        max-height: calc(70vh - 70px);
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .custom-select-option {
+        padding: 14px 20px;
+        text-align: left;
+        border: none;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        margin: 0;
+    }
+    
+    /* MOBILE OVERLAY */
+    .custom-select-overlay {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.7);
+        z-index: 10001;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        backdrop-filter: blur(3px);
+    }
+    
+    .custom-select-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* Improve touch targets */
+    .custom-select-option {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+    
+    /* Performance optimizations */
+    .custom-select-dropdown {
+        -webkit-overflow-scrolling: touch;
+        will-change: transform;
+        contain: layout style paint;
+    }
+}
+
+/* ============ LANDSCAPE MOBILE ============ */
+@media (max-width: 768px) and (orientation: landscape) {
+    /* Use desktop styles for landscape (no overlay, no bottom sheet) */
+    .custom-select-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: auto;
+        top: auto;
+        bottom: 100%;
+        width: 100%;
+        max-height: 200px;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        margin-top: 5px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .custom-select-dropdown.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    .custom-select-header {
+        display: none;
+    }
+    
+    .custom-select-close {
+        display: none;
+    }
+    
+    .custom-select-options {
+        flex-direction: column;
+        gap: 0;
+        display: flex;
+    }
+    
+    .custom-select-option {
+        padding: 10px 16px;
+        text-align: left;
+        border: none;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        margin: 0;
+    }
+    
+    .custom-select-overlay {
+        display: none !important;
+    }
+}
 
 /* ============ SIZE PICKER STYLES - DESKTOP FIRST APPROACH ============ */
 .size-picker {
@@ -26,7 +325,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     background: white;
     cursor: pointer;
     font-size: 0.80em;
-    font-family: {CATALOG_SETTINGS["PRODUCT_NAME_FONT_FAMILY"]};
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #555;
     min-width: 60px;
     transition: border-color 0.2s ease;
@@ -569,6 +868,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     font-weight: 500;
 }
 
+
 /* ============ MODERN CUSTOM DROPDOWN STYLES ============ */
 .gold-select {
     width: 100%;
@@ -724,27 +1024,23 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     }
     
     /* FIX 5: Filter selects - Smaller */
-    .filter-top-row .gold-select {
+    .custom-select-trigger {
         width: 100% !important;
         box-sizing: border-box !important;
         padding: 10px 12px !important;
         margin: 0 !important;
         border: 2px solid #D4AF37 !important;
         border-radius: 30px !important;
-        background: #000 !important;
+        background: linear-gradient(135deg, #000 0%, #2d2d2d 100%) !important;
         color: #FFD700 !important;
         font-family: 'Montserrat', sans-serif !important;
         font-size: 0.85em !important;
         font-weight: 500 !important;
         cursor: pointer !important;
-        -webkit-appearance: none !important;
-        -moz-appearance: none !important;
-        appearance: none !important;
-        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www3.org/2000/svg' viewBox='0 0 24 24' fill='%23D4AF37'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e") !important;
-        background-repeat: no-repeat !important;
-        background-position: right 15px center !important;
-        background-size: 18px !important;
-        padding-right: 40px !important;
+        min-height: 40px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
     }
     
     #subBrandFilter[style*="inline-block"] + * + * + * + #genFilter {
@@ -959,7 +1255,6 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         padding: 10px 0 !important;
     }
     /* ===== END OF NEW FIX 17 ===== */
-}
 
 /* Small phones */
 @media (max-width: 375px) and (orientation: portrait) {
@@ -997,11 +1292,9 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         margin-bottom: 10px !important;
     }
     
-    .filter-top-row .gold-select {
+    .custom-select-trigger {
         padding: 8px 10px !important;
         font-size: 0.8em !important;
-        background-position: right 12px center !important;
-        padding-right: 35px !important;
     }
     
     .sort-button-container .filter-btn {
@@ -1097,19 +1390,17 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     }
     
     /* Filter selects - Fill grid cells */
-    .filter-top-row .gold-select {
+    .custom-select-trigger {
         width: 100% !important;
         padding: 8px 12px !important;
         font-size: 0.8em !important;
         box-sizing: border-box !important;
         margin: 0 !important;
         border-radius: 25px !important;
-        background-position: right 12px center !important;
-        padding-right: 35px !important;
     }
     
     /* Fix sub-brand filter if present */
-    #subBrandFilter[style*="inline-block"] {
+    #subBrandWrapper[style*="inline-block"] {
         grid-column: span 1 !important;
     }
     
@@ -1621,33 +1912,111 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
         <input type="text" id="searchInput" oninput="debouncedApplyFilters()" placeholder="🔍 Search products...">
     </div>
     
-    <!-- Top Row: All Filters (GOLD SELECT STYLING) -->
-    <div class="filter-top-row">
-        <!-- Brand -->
-        <select id="brandFilter" class="gold-select" onchange="handleBrandChange()">
-            <option value="">All Brands</option>
-        </select>
-        
-        <!-- Sub-Brand (shown conditionally) -->
-        <select id="subBrandFilter" class="gold-select" onchange="handleSubBrandChange()" style="display: none;">
-            <option value="">Sub-Brand</option>
-        </select>
-        
-        <!-- Category -->
-        <select id="catFilter" class="gold-select" onchange="handleCategoryChange()">
-            <option value="">All Categories</option>
-        </select>
-        
-        <!-- Product Type -->
-        <select id="typeFilter" class="gold-select" onchange="handleTypeChange()">
-            <option value="">All Product Types</option>
-        </select>
-        
-        <!-- Gender -->
-        <select id="genFilter" class="gold-select" onchange="handleGenderChange()">
-            <option value="">All Genders</option>
-        </select>
+<!-- Top Row: All Filters (CUSTOM DROPDOWN STYLING) -->
+<div class="filter-top-row">
+    <!-- Custom Brand Dropdown -->
+    <div class="custom-select-wrapper">
+        <div class="custom-select-trigger" onclick="toggleCustomDropdown('brand')">
+            <span class="select-placeholder">All Brands</span>
+            <span class="select-arrow">▼</span>
+        </div>
+        <div class="custom-select-dropdown" id="brand-dropdown">
+            <div class="custom-select-header">
+                <span>Select Brand</span>
+                <button class="custom-select-close" onclick="closeCustomDropdown('brand')">✕</button>
+            </div>
+            <div class="custom-select-options" id="brand-options">
+                <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('brand', '', 'All Brands')">
+                    All Brands
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="brandFilter" value="">
     </div>
+    
+    <!-- Custom Sub-Brand Dropdown -->
+    <div class="custom-select-wrapper" id="subBrandWrapper" style="display: none;">
+        <div class="custom-select-trigger" onclick="toggleCustomDropdown('subBrand')">
+            <span class="select-placeholder">Sub-Brand</span>
+            <span class="select-arrow">▼</span>
+        </div>
+        <div class="custom-select-dropdown" id="subBrand-dropdown">
+            <div class="custom-select-header">
+                <span>Select Sub-Brand</span>
+                <button class="custom-select-close" onclick="closeCustomDropdown('subBrand')">✕</button>
+            </div>
+            <div class="custom-select-options" id="subBrand-options">
+                <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('subBrand', '', 'Sub-Brand')">
+                    Sub-Brand
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="subBrandFilter" value="">
+    </div>
+    
+    <!-- Custom Category Dropdown -->
+    <div class="custom-select-wrapper">
+        <div class="custom-select-trigger" onclick="toggleCustomDropdown('category')">
+            <span class="select-placeholder">All Categories</span>
+            <span class="select-arrow">▼</span>
+        </div>
+        <div class="custom-select-dropdown" id="category-dropdown">
+            <div class="custom-select-header">
+                <span>Select Category</span>
+                <button class="custom-select-close" onclick="closeCustomDropdown('category')">✕</button>
+            </div>
+            <div class="custom-select-options" id="category-options">
+                <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('category', '', 'All Categories')">
+                    All Categories
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="catFilter" value="">
+    </div>
+    
+    <!-- Custom Type Dropdown -->
+    <div class="custom-select-wrapper">
+        <div class="custom-select-trigger" onclick="toggleCustomDropdown('type')">
+            <span class="select-placeholder">All Product Types</span>
+            <span class="select-arrow">▼</span>
+        </div>
+        <div class="custom-select-dropdown" id="type-dropdown">
+            <div class="custom-select-header">
+                <span>Select Product Type</span>
+                <button class="custom-select-close" onclick="closeCustomDropdown('type')">✕</button>
+            </div>
+            <div class="custom-select-options" id="type-options">
+                <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('type', '', 'All Product Types')">
+                    All Product Types
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="typeFilter" value="">
+    </div>
+    
+    <!-- Custom Gender Dropdown -->
+    <div class="custom-select-wrapper">
+        <div class="custom-select-trigger" onclick="toggleCustomDropdown('gender')">
+            <span class="select-placeholder">All Genders</span>
+            <span class="select-arrow">▼</span>
+        </div>
+        <div class="custom-select-dropdown" id="gender-dropdown">
+            <div class="custom-select-header">
+                <span>Select Gender</span>
+                <button class="custom-select-close" onclick="closeCustomDropdown('gender')">✕</button>
+            </div>
+            <div class="custom-select-options" id="gender-options">
+                <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('gender', '', 'All Genders')">
+                    All Genders
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="genFilter" value="">
+    </div>
+</div>
+
+<!-- Custom dropdown overlay (mobile) -->
+<div class="custom-select-overlay" onclick="closeAllCustomDropdowns()"></div>
     
     <!-- Bottom Row: Sort Button Only (View selector removed) -->
     <div class="filter-bottom-row">
@@ -2280,6 +2649,309 @@ function throttle(func, limit = 100) {
 const debouncedApplyFilters = debounce(applyFilters, 300);
 
 // ============================================
+// CUSTOM FILTER SELECTOR FUNCTIONS (UPDATED TO MATCH SIZE PICKER)
+// ============================================
+
+let activeCustomDropdown = null;
+
+/**
+ * Toggles a custom dropdown
+ * @param type - The dropdown type (brand, category, etc.)
+ */
+function toggleCustomDropdown(type) {
+    // Close any open dropdown first
+    closeAllCustomDropdowns();
+    
+    const dropdown = document.getElementById(`${type}-dropdown`);
+    const trigger = document.querySelector(`#${type}-dropdown`).closest('.custom-select-wrapper').querySelector('.custom-select-trigger');
+    const overlay = document.querySelector('.custom-select-overlay');
+    
+    if (dropdown) {
+        activeCustomDropdown = type;
+        dropdown.classList.add('active');
+        trigger.classList.add('active');
+        
+        // Mobile portrait: show overlay and prevent body scroll
+        if (window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches) {
+            if (overlay) {
+                overlay.classList.add('active');
+            }
+            document.body.style.overflow = 'hidden';
+        }
+        // Desktop & landscape: no overlay, allow scrolling
+        else {
+            if (overlay) {
+                overlay.classList.remove('active');
+            }
+            document.body.style.overflow = '';
+        }
+    }
+}
+
+/**
+ * Closes a specific custom dropdown
+ * @param type - The dropdown type to close
+ */
+function closeCustomDropdown(type) {
+    const dropdown = document.getElementById(`${type}-dropdown`);
+    const trigger = document.querySelector(`#${type}-dropdown`).closest('.custom-select-wrapper').querySelector('.custom-select-trigger');
+    const overlay = document.querySelector('.custom-select-overlay');
+    
+    if (dropdown) {
+        dropdown.classList.remove('active');
+        trigger.classList.remove('active');
+        activeCustomDropdown = null;
+    }
+    
+    // Always hide overlay and restore scrolling
+    if (overlay) {
+        overlay.classList.remove('active');
+    }
+    document.body.style.overflow = '';
+}
+
+/**
+ * Closes all custom dropdowns
+ */
+function closeAllCustomDropdowns() {
+    document.querySelectorAll('.custom-select-dropdown.active').forEach(dropdown => {
+        dropdown.classList.remove('active');
+    });
+    
+    document.querySelectorAll('.custom-select-trigger.active').forEach(trigger => {
+        trigger.classList.remove('active');
+    });
+    
+    const overlay = document.querySelector('.custom-select-overlay');
+    if (overlay) {
+        overlay.classList.remove('active');
+    }
+    
+    activeCustomDropdown = null;
+    document.body.style.overflow = '';
+}
+
+/**
+ * Selects an option in a custom dropdown
+ * @param type - The dropdown type
+ * @param value - The selected value
+ * @param label - The display label
+ */
+/**
+ * Selects an option in a custom dropdown
+ * @param type - The dropdown type
+ * @param value - The selected value
+ * @param label - The display label
+ */
+function selectCustomOption(type, value, label) {
+    console.log(`🔄 selectCustomOption called: type=${type}, value=${value}, label=${label}`);
+    
+    // Map dropdown types to their correct input IDs
+    const inputIdMap = {
+        'brand': 'brandFilter',
+        'subBrand': 'subBrandFilter',
+        'category': 'catFilter',      // FIXED: was 'categoryFilter'
+        'type': 'typeFilter',
+        'gender': 'genFilter'         // FIXED: was 'genderFilter'
+    };
+    
+    const inputId = inputIdMap[type];
+    if (!inputId) {
+        console.error(`❌ No input ID mapped for type: ${type}`);
+        return;
+    }
+    
+    // Update the hidden input
+    const filterInput = document.getElementById(inputId);
+    if (filterInput) {
+        console.log(`Updating ${inputId} from "${filterInput.value}" to "${value}"`);
+        filterInput.value = value;
+    } else {
+        console.error(`❌ ${inputId} input not found! Looking for #${inputId}`);
+        // Debug: show all filter inputs
+        const allFilters = Array.from(document.querySelectorAll('input[id$="Filter"]')).map(i => i.id);
+        console.log("Available filter inputs:", allFilters);
+    }
+    
+    // Update the trigger display
+    const dropdown = document.getElementById(`${type}-dropdown`);
+    if (!dropdown) {
+        console.error(`❌ ${type}-dropdown not found!`);
+        return;
+    }
+    
+    const trigger = dropdown.closest('.custom-select-wrapper').querySelector('.custom-select-trigger .select-placeholder');
+    if (trigger) {
+        const displayLabel = label || (type === 'brand' ? 'All Brands' : 
+                                     type === 'subBrand' ? 'Sub-Brand' : 
+                                     type === 'category' ? 'All Categories' :
+                                     type === 'type' ? 'All Product Types' :
+                                     'All Genders');
+        trigger.textContent = displayLabel;
+        trigger.style.color = value ? '#FFD700' : '#FFD700';
+        trigger.style.fontWeight = value ? '600' : '500';
+        console.log(`✅ Updated trigger text to: "${displayLabel}"`);
+    } else {
+        console.error(`❌ Trigger not found for ${type} dropdown`);
+    }
+    
+    // Remove selected class from all options and add to selected one
+    const options = document.querySelectorAll(`#${type}-options .custom-select-option`);
+    options.forEach(option => {
+        option.classList.remove('selected');
+        if (option.dataset.value === value) {
+            option.classList.add('selected');
+        }
+    });
+    
+    // Close the dropdown (works for both mobile and desktop)
+    closeCustomDropdown(type);
+    
+    console.log(`📞 Calling ${type} filter change handler...`);
+    
+    // Trigger the appropriate filter change function
+    switch(type) {
+        case 'brand':
+            handleBrandChange();
+            break;
+        case 'subBrand':
+            handleSubBrandChange();
+            break;
+        case 'category':
+            handleCategoryChange();
+            break;
+        case 'type':
+            handleTypeChange();
+            break;
+        case 'gender':
+            handleGenderChange();
+            break;
+    }
+    
+    console.log(`✅ ${type} selection complete`);
+}
+
+/**
+ * Populates a custom dropdown with options
+ * @param type - The dropdown type
+ * @param options - Array of {value: '', label: ''} objects
+ * @param currentValue - Currently selected value
+ */
+function populateCustomSelect(type, options, currentValue) {
+    const optionsContainer = document.getElementById(`${type}-options`);
+    if (!optionsContainer) return;
+    
+    let html = '';
+    
+    // Add "All" option first
+    const allOption = {
+        value: '',
+        label: type === 'brand' ? 'All Brands' : 
+               type === 'subBrand' ? 'Sub-Brand' : 
+               type === 'category' ? 'All Categories' :
+               type === 'type' ? 'All Product Types' :
+               'All Genders'
+    };
+    
+    html += `<div class="custom-select-option ${currentValue === '' ? 'selected' : ''}" 
+                    data-value="" 
+                    onclick="selectCustomOption('${type}', '', '${allOption.label}')">
+                ${allOption.label}
+            </div>`;
+    
+    // Add other options
+    options.forEach(option => {
+        if (!option.value || option.value.trim() === '') return;
+        
+        const isSelected = option.value === currentValue;
+        html += `<div class="custom-select-option ${isSelected ? 'selected' : ''}" 
+                        data-value="${option.value}" 
+                        onclick="selectCustomOption('${type}', '${option.value}', '${option.label}')">
+                    ${option.label}
+                </div>`;
+    });
+    
+    optionsContainer.innerHTML = html;
+    
+    // Update the trigger placeholder
+    const trigger = document.querySelector(`#${type}-dropdown`).closest('.custom-select-wrapper').querySelector('.custom-select-trigger .select-placeholder');
+    if (trigger) {
+        const selectedOption = currentValue ? 
+            options.find(opt => opt.value === currentValue)?.label || allOption.label : 
+            allOption.label;
+        trigger.textContent = selectedOption;
+        trigger.style.color = currentValue ? '#FFD700' : '#FFD700';
+        trigger.style.fontWeight = currentValue ? '600' : '500';
+    }
+}
+
+/**
+ * Gets the current value of a custom dropdown
+ * @param type - The dropdown type
+ * @returns The current value or empty string
+ */
+/**
+ * Gets the current value of a custom dropdown
+ * @param type - The dropdown type
+ * @returns The current value or empty string
+ */
+function getCustomSelectValue(type) {
+    // Map dropdown types to their correct input IDs
+    const inputIdMap = {
+        'brand': 'brandFilter',
+        'subBrand': 'subBrandFilter',
+        'category': 'catFilter',      // FIXED
+        'type': 'typeFilter',
+        'gender': 'genFilter'         // FIXED
+    };
+    
+    const inputId = inputIdMap[type];
+    if (!inputId) {
+        console.error(`No input ID mapped for type: ${type}`);
+        return '';
+    }
+    
+    const input = document.getElementById(inputId);
+    return input ? input.value : '';
+}
+
+// Close dropdowns when clicking outside (desktop) or on overlay (mobile)
+document.addEventListener('click', function(e) {
+    // Don't close if clicking on a dropdown trigger or option
+    if (e.target.closest('.custom-select-trigger') || 
+        e.target.closest('.custom-select-option') ||
+        e.target.closest('.custom-select-close')) {
+        return;
+    }
+    
+    // Close if clicking outside on desktop
+    if (window.innerWidth > 768 || 
+        (window.innerWidth <= 768 && window.matchMedia("(orientation: landscape)").matches)) {
+        if (activeCustomDropdown && !e.target.closest('.custom-select-dropdown')) {
+            closeAllCustomDropdowns();
+        }
+    }
+    // Mobile portrait: close when clicking overlay
+    else if (window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches) {
+        if (e.target.classList.contains('custom-select-overlay')) {
+            closeAllCustomDropdowns();
+        }
+    }
+});
+
+// Close dropdowns with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        if (activeCustomDropdown) {
+            closeAllCustomDropdowns();
+        }
+        if (activeSizePicker) {
+            closeAllSizePickers();
+        }
+    }
+});
+
+// ============================================
 // SIZE PICKER FUNCTIONS (UPDATED)
 // ============================================
 
@@ -2809,7 +3481,7 @@ function sortByPrice() {
 
 // FIX 1: CORRECT FILTER CLEAR LOGIC
 function handleBrandChange() {
-    const selectedBrand = document.getElementById("brandFilter").value;
+    const selectedBrand = getCustomSelectValue("brand");
     
     console.log(`🚨 BRAND CHANGED to: ${selectedBrand} - Clearing Sub-brand, Category, Type`);
     
@@ -2829,7 +3501,7 @@ function handleBrandChange() {
 }
 
 function handleSubBrandChange() {
-    const selectedSubBrand = document.getElementById("subBrandFilter").value;
+    const selectedSubBrand = getCustomSelectValue("subBrand");
     console.log(`🏷️ SUB-BRAND CHANGED to: ${selectedSubBrand} - Clearing Category, Type`);
     
     // Sub-Brand clears Category, Type ONLY
@@ -2847,7 +3519,7 @@ function handleSubBrandChange() {
 }
 
 function handleCategoryChange() {
-    const selectedCategory = document.getElementById("catFilter").value;
+    const selectedCategory = getCustomSelectValue("category");
     console.log(`📁 CATEGORY CHANGED to: ${selectedCategory} - Clearing Product Type ONLY`);
     
     // Category only clears Type
@@ -2907,11 +3579,11 @@ function handleSearch() {
 
 // FIX 2: SIMPLIFIED getAvailableOptions - FIX BRANDS ISSUE
 function getAvailableOptions() {
-    const selectedBrand = document.getElementById("brandFilter").value;
-    const selectedSubBrand = document.getElementById("subBrandFilter").value;
-    const selectedCategory = document.getElementById("catFilter").value;
-    const selectedType = document.getElementById("typeFilter").value;
-    const selectedGender = document.getElementById("genFilter").value;
+    const selectedBrand = getCustomSelectValue("brand");
+    const selectedSubBrand = getCustomSelectValue("subBrand");
+    const selectedCategory = getCustomSelectValue("category");
+    const selectedType = getCustomSelectValue("type");
+    const selectedGender = getCustomSelectValue("gender");
     const searchTerm = document.getElementById("searchInput").value.toLowerCase();
     
     const brandSet = new Set();
@@ -3108,7 +3780,19 @@ function getAvailableOptions() {
     return { brandSet, subSet, catSet, typeSet, genSet };
 }
 
-// FIX 3: PROPER DROPDOWN POPULATION
+// FIX 3: UPDATED DROPDOWN POPULATION FOR CUSTOM SELECTORS
+function populateCustomSelectWithOptions(type, set, currentVal) {
+    const options = Array.from(set)
+        .filter(val => val && val.trim() !== '')
+        .sort((a, b) => a.localeCompare(b))
+        .map(val => ({
+            value: val,
+            label: val
+        }));
+    
+    populateCustomSelect(type, options, currentVal);
+}
+
 function populateSelectWithAllOptions(id, set, currentVal) {
     const el = document.getElementById(id);
     
@@ -3162,13 +3846,14 @@ function populateSelect(id, set, currentVal) {
     el.innerHTML = html;
     cachedDropdowns[cacheKey] = html;
 }
-// FIX 4: REBUILD DROPDOWNS
+
+// FIX 4: REBUILD DROPDOWNS - UPDATED FOR CUSTOM SELECTORS
 function rebuildDropdowns() {
-    const selectedBrand = document.getElementById("brandFilter").value;
-    const selectedSubBrand = document.getElementById("subBrandFilter").value;
-    const selectedCategory = document.getElementById("catFilter").value;
-    const selectedType = document.getElementById("typeFilter").value;
-    const selectedGender = document.getElementById("genFilter").value;
+    const selectedBrand = getCustomSelectValue("brand");
+    const selectedSubBrand = getCustomSelectValue("subBrand");
+    const selectedCategory = getCustomSelectValue("category");
+    const selectedType = getCustomSelectValue("type");
+    const selectedGender = getCustomSelectValue("gender");
     
     const { brandSet, subSet, catSet, typeSet, genSet } = getAvailableOptions();
     
@@ -3176,19 +3861,19 @@ function rebuildDropdowns() {
     console.log("Brands available:", Array.from(brandSet));
 
     // BRAND: Show ALL brands
-    populateSelectWithAllOptions("brandFilter", brandSet, selectedBrand);
+    populateCustomSelectWithOptions("brand", brandSet, selectedBrand);
     
     // CATEGORY
-    populateSelect("catFilter", catSet, selectedCategory);
+    populateCustomSelectWithOptions("category", catSet, selectedCategory);
     
     // TYPE
-    populateSelect("typeFilter", typeSet, selectedType);
+    populateCustomSelectWithOptions("type", typeSet, selectedType);
     
     // GENDER
-    populateSelect("genFilter", genSet, selectedGender);
+    populateCustomSelectWithOptions("gender", genSet, selectedGender);
    
     // SUB-BRAND
-    const subEl = document.getElementById("subBrandFilter");
+    const subEl = document.getElementById("subBrandWrapper");
     
     let shouldShowSubBrand = false;
     if (SUB_BRAND_ENABLED_GLOBALLY && selectedBrand) {
@@ -3198,17 +3883,17 @@ function rebuildDropdowns() {
     }
     
     if (shouldShowSubBrand && subSet.size > 0) {
-        subEl.style.display = "inline-block";
-        populateSelect("subBrandFilter", subSet, selectedSubBrand, "Sub-Brand");
+        subEl.style.display = "block";
+        populateCustomSelectWithOptions("subBrand", subSet, selectedSubBrand);
     } else {
         subEl.style.display = "none";
-        subEl.value = "";
+        document.getElementById("subBrandFilter").value = "";
     }
     
     console.log("=== END REBUILDING ===");
 }
 
-// FIX 5: APPLY FILTERS
+// FIX 5: APPLY FILTERS - UPDATED FOR CUSTOM SELECTORS
 function applyFilters() {
     if (filterTimeout) {
         clearTimeout(filterTimeout);
@@ -3216,11 +3901,11 @@ function applyFilters() {
     
     filterTimeout = setTimeout(() => {
         const searchTerm = document.getElementById("searchInput").value.toLowerCase(),
-              brandFilter = document.getElementById("brandFilter").value,
-              subBrandFilter = document.getElementById("subBrandFilter").value,
-              categoryFilter = document.getElementById("catFilter").value,
-              typeFilter = document.getElementById("typeFilter").value,
-              genderFilter = document.getElementById("genFilter").value;
+              brandFilter = getCustomSelectValue("brand"),
+              subBrandFilter = getCustomSelectValue("subBrand"),
+              categoryFilter = getCustomSelectValue("category"),
+              typeFilter = getCustomSelectValue("type"),
+              genderFilter = getCustomSelectValue("gender");
 
         console.log("=== APPLYING FILTERS ===");
         
@@ -3279,251 +3964,16 @@ function applyFilters() {
 // ===========================================================================
 // --------------------------- END OF FIX -----------------------------------
 // ===========================================================================
-// ============================================
-// CUSTOM DROPDOWN FUNCTIONS (for filters)
-// ============================================
-
-let activeCustomDropdown = null;
-
-/**
- * Toggles a custom dropdown
- * @param type - The dropdown type (brand, category, etc.)
- */
-function toggleCustomDropdown(type) {
-    // Close any open dropdown first
-    closeAllCustomDropdowns();
-    
-    const dropdown = document.getElementById(`${type}-dropdown`);
-    const trigger = document.querySelector(`#${type}-dropdown`).closest('.custom-select-wrapper').querySelector('.custom-select-trigger');
-    const overlay = document.querySelector('.custom-select-overlay');
-    
-    if (dropdown) {
-        activeCustomDropdown = type;
-        dropdown.classList.add('active');
-        trigger.classList.add('active');
-        
-        // Mobile portrait: show overlay and prevent body scroll
-        if (window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches) {
-            if (overlay) {
-                overlay.classList.add('active');
-            }
-            document.body.style.overflow = 'hidden';
-        }
-        // Desktop & landscape: no overlay, allow scrolling
-        else {
-            if (overlay) {
-                overlay.classList.remove('active');
-            }
-            document.body.style.overflow = '';
-        }
-    }
-}
-
-/**
- * Closes a specific custom dropdown
- * @param type - The dropdown type to close
- */
-function closeCustomDropdown(type) {
-    const dropdown = document.getElementById(`${type}-dropdown`);
-    const trigger = document.querySelector(`#${type}-dropdown`).closest('.custom-select-wrapper').querySelector('.custom-select-trigger');
-    const overlay = document.querySelector('.custom-select-overlay');
-    
-    if (dropdown) {
-        dropdown.classList.remove('active');
-        trigger.classList.remove('active');
-        activeCustomDropdown = null;
-    }
-    
-    // Always hide overlay and restore scrolling
-    if (overlay) {
-        overlay.classList.remove('active');
-    }
-    document.body.style.overflow = '';
-}
-
-/**
- * Closes all custom dropdowns
- */
-function closeAllCustomDropdowns() {
-    document.querySelectorAll('.custom-select-dropdown.active').forEach(dropdown => {
-        dropdown.classList.remove('active');
-    });
-    
-    document.querySelectorAll('.custom-select-trigger.active').forEach(trigger => {
-        trigger.classList.remove('active');
-    });
-    
-    const overlay = document.querySelector('.custom-select-overlay');
-    if (overlay) {
-        overlay.classList.remove('active');
-    }
-    
-    activeCustomDropdown = null;
-    document.body.style.overflow = '';
-}
-
-/**
- * Selects an option in a custom dropdown
- * @param type - The dropdown type
- * @param value - The selected value
- * @param label - The display label
- */
-function selectCustomOption(type, value, label) {
-    // Update the hidden input
-    const filterInput = document.getElementById(`${type}Filter`);
-    if (filterInput) {
-        filterInput.value = value;
-    }
-    
-    // Update the trigger display
-    const trigger = document.querySelector(`#${type}-dropdown`).closest('.custom-select-wrapper').querySelector('.custom-select-trigger .select-placeholder');
-    if (trigger) {
-        trigger.textContent = label;
-        trigger.style.color = value ? '#FFD700' : '#FFD700';
-        trigger.style.fontWeight = value ? '600' : '500';
-    }
-    
-    // Remove selected class from all options and add to selected one
-    const options = document.querySelectorAll(`#${type}-options .custom-select-option`);
-    options.forEach(option => {
-        option.classList.remove('selected');
-        if (option.dataset.value === value) {
-            option.classList.add('selected');
-        }
-    });
-    
-    // Close the dropdown (works for both mobile and desktop)
-    closeCustomDropdown(type);
-    
-    // Trigger the appropriate filter change function
-    switch(type) {
-        case 'brand':
-            handleBrandChange();
-            break;
-        case 'subBrand':
-            handleSubBrandChange();
-            break;
-        case 'category':
-            handleCategoryChange();
-            break;
-        case 'type':
-            handleTypeChange();
-            break;
-        case 'gender':
-            handleGenderChange();
-            break;
-    }
-}
-
-/**
- * Populates a custom dropdown with options
- * @param type - The dropdown type
- * @param options - Array of {value: '', label: ''} objects
- * @param currentValue - Currently selected value
- */
-function populateCustomSelect(type, options, currentValue) {
-    const optionsContainer = document.getElementById(`${type}-options`);
-    if (!optionsContainer) return;
-    
-    let html = '';
-    
-    // Add "All" option first
-    const allOption = {
-        value: '',
-        label: type === 'brand' ? 'All Brands' : 
-               type === 'subBrand' ? 'Sub-Brand' : 
-               type === 'category' ? 'All Categories' :
-               type === 'type' ? 'All Product Types' :
-               'All Genders'
-    };
-    
-    html += `<div class="custom-select-option ${currentValue === '' ? 'selected' : ''}" 
-                    data-value="" 
-                    onclick="selectCustomOption('${type}', '', '${allOption.label}')">
-                ${allOption.label}
-            </div>`;
-    
-    // Add other options
-    options.forEach(option => {
-        if (!option.value || option.value.trim() === '') return;
-        
-        const isSelected = option.value === currentValue;
-        html += `<div class="custom-select-option ${isSelected ? 'selected' : ''}" 
-                        data-value="${option.value}" 
-                        onclick="selectCustomOption('${type}', '${option.value}', '${option.label}')">
-                    ${option.label}
-                </div>`;
-    });
-    
-    optionsContainer.innerHTML = html;
-    
-    // Update the trigger placeholder
-    const trigger = document.querySelector(`#${type}-dropdown`).closest('.custom-select-wrapper').querySelector('.custom-select-trigger .select-placeholder');
-    if (trigger) {
-        const selectedOption = currentValue ? 
-            options.find(opt => opt.value === currentValue)?.label || allOption.label : 
-            allOption.label;
-        trigger.textContent = selectedOption;
-        trigger.style.color = currentValue ? '#FFD700' : '#FFD700';
-        trigger.style.fontWeight = currentValue ? '600' : '500';
-    }
-}
-
-/**
- * Gets the current value of a custom dropdown
- * @param type - The dropdown type
- * @returns The current value or empty string
- */
-function getCustomSelectValue(type) {
-    const input = document.getElementById(`${type}Filter`);
-    return input ? input.value : '';
-}
-
-// Close dropdowns when clicking outside (desktop) or on overlay (mobile)
-document.addEventListener('click', function(e) {
-    // Don't close if clicking on a dropdown trigger or option
-    if (e.target.closest('.custom-select-trigger') || 
-        e.target.closest('.custom-select-option') ||
-        e.target.closest('.custom-select-close')) {
-        return;
-    }
-    
-    // Close if clicking outside on desktop
-    if (window.innerWidth > 768 || 
-        (window.innerWidth <= 768 && window.matchMedia("(orientation: landscape)").matches)) {
-        if (activeCustomDropdown && !e.target.closest('.custom-select-dropdown')) {
-            closeAllCustomDropdowns();
-        }
-    }
-    // Mobile portrait: close when clicking overlay
-    else if (window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches) {
-        if (e.target.classList.contains('custom-select-overlay')) {
-            closeAllCustomDropdowns();
-        }
-    }
-});
-
-// Close dropdowns with Escape key
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        if (activeCustomDropdown) {
-            closeAllCustomDropdowns();
-        }
-        if (activeSizePicker) {
-            closeAllSizePickers();
-        }
-    }
-});
 
 // FIX: Proper initial product loading
 function loadInitialProducts() {
     const container = document.getElementById("container");
     const searchTerm = document.getElementById("searchInput").value.toLowerCase(),
-          brandFilter = document.getElementById("brandFilter").value,
-          subBrandFilter = document.getElementById("subBrandFilter").value,
-          categoryFilter = document.getElementById("catFilter").value,
-          typeFilter = document.getElementById("typeFilter").value,
-          genderFilter = document.getElementById("genFilter").value;
+          brandFilter = getCustomSelectValue("brand"),
+          subBrandFilter = getCustomSelectValue("subBrand"),
+          categoryFilter = getCustomSelectValue("category"),
+          typeFilter = getCustomSelectValue("type"),
+          genderFilter = getCustomSelectValue("gender");
     
     let loadedCount = 0;
     
@@ -3589,11 +4039,11 @@ function updateLoadMoreVisibility() {
     if(!ENABLE_BUTTON_LOAD) return;
     
     const searchTerm = document.getElementById("searchInput").value.toLowerCase(),
-          brandFilter = document.getElementById("brandFilter").value,
-          subBrandFilter = document.getElementById("subBrandFilter").value,
-          categoryFilter = document.getElementById("catFilter").value,
-          typeFilter = document.getElementById("typeFilter").value,
-          genderFilter = document.getElementById("genFilter").value;
+          brandFilter = getCustomSelectValue("brand"),
+          subBrandFilter = getCustomSelectValue("subBrand"),
+          categoryFilter = getCustomSelectValue("category"),
+          typeFilter = getCustomSelectValue("type"),
+          genderFilter = getCustomSelectValue("gender");
 
     let hiddenMatchingCount = 0;
     
@@ -3652,11 +4102,11 @@ function loadMoreDynamic(batchSize = LOAD_MORE_BATCH) {
     if (!ENABLE_BUTTON_LOAD) return;
     
     const searchTerm = document.getElementById("searchInput").value.toLowerCase(),
-          brandFilter = document.getElementById("brandFilter").value,
-          subBrandFilter = document.getElementById("subBrandFilter").value,
-          categoryFilter = document.getElementById("catFilter").value,
-          typeFilter = document.getElementById("typeFilter").value,
-          genderFilter = document.getElementById("genFilter").value;
+          brandFilter = getCustomSelectValue("brand"),
+          subBrandFilter = getCustomSelectValue("subBrand"),
+          categoryFilter = getCustomSelectValue("category"),
+          typeFilter = getCustomSelectValue("type"),
+          genderFilter = getCustomSelectValue("gender");
 
     let loadedCount = 0;
     const container = document.getElementById("container");
@@ -3837,11 +4287,11 @@ function resetToInitialView() {
     
     // First, identify which products match current filters
     const searchTerm = document.getElementById("searchInput").value.toLowerCase(),
-          brandFilter = document.getElementById("brandFilter").value,
-          subBrandFilter = document.getElementById("subBrandFilter").value,
-          categoryFilter = document.getElementById("catFilter").value,
-          typeFilter = document.getElementById("typeFilter").value,
-          genderFilter = document.getElementById("genFilter").value;
+          brandFilter = getCustomSelectValue("brand"),
+          subBrandFilter = getCustomSelectValue("subBrand"),
+          categoryFilter = getCustomSelectValue("category"),
+          typeFilter = getCustomSelectValue("type"),
+          genderFilter = getCustomSelectValue("gender");
     
     let keptCount = 0;
     
@@ -3899,11 +4349,11 @@ function resetToInitialView() {
  */
 function checkAndResetIfFiltersCleared() {
     const searchTerm = document.getElementById("searchInput").value.toLowerCase(),
-          brandFilter = document.getElementById("brandFilter").value,
-          subBrandFilter = document.getElementById("subBrandFilter").value,
-          categoryFilter = document.getElementById("catFilter").value,
-          typeFilter = document.getElementById("typeFilter").value,
-          genderFilter = document.getElementById("genFilter").value;
+          brandFilter = getCustomSelectValue("brand"),
+          subBrandFilter = getCustomSelectValue("subBrand"),
+          categoryFilter = getCustomSelectValue("category"),
+          typeFilter = getCustomSelectValue("type"),
+          genderFilter = getCustomSelectValue("gender");
     
     // Check if ALL filters are empty/cleared
     const allFiltersEmpty = !searchTerm && 
@@ -5147,31 +5597,32 @@ function generateInvoiceHTML(orderData) {
         <div class="details-grid">
             <div class="column">
                 <h4>Billed To:</h4>
-                <div>${orderData.name}</div>
-                <div>${orderData.email}</div>
-                <div>${orderData.phone}</div>
-            </div>
-            <div class="column">
-                <h4>Ship To:</h4>
-                <div>${orderData.addr}</div>
-                <div>${orderData.city}, ${orderData.zip}</div>
-                <div>${orderData.country}</div>
+                <div style="font-size: 0.9em;">
+                    <div>${orderData.name}</div>
+                    <div>${orderData.addr}</div>
+                    <div>${orderData.city}, ${orderData.zip}</div>
+                    <div>${orderData.country}</div>
+                    <div style="margin-top: 5px;">${orderData.email}</div>
+                    <div>${orderData.phone}</div>
+                </div>
             </div>
             <div class="column" style="text-align: right;">
                 <h4>Invoice Details:</h4>
-                <div>Date: ${new Date().toLocaleDateString()}</div>
-                <div>Invoice ID: ${orderData.orderId}</div>
-                <div>Payment Method: ${orderData.paymentMethod}</div>
+                <div style="font-size: 0.9em;">
+                    <div><strong>Order ID:</strong> ${orderData.orderId}</div>
+                    <div><strong>Order Date:</strong> ${orderData.orderDate}</div>
+                    <div><strong>Payment Method:</strong> ${orderData.paymentMethod}</div>
+                </div>
             </div>
         </div>
 
         <table>
             <thead>
                 <tr>
-                    <th>Item Description</th>
-                    <th style="text-align: center;">Qty</th>
-                    <th style="text-align: right;">Price</th>
-                    <th style="text-align: right;">Total</th>
+                    <th>Description</th>
+                    <th>Qty</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -5179,97 +5630,51 @@ function generateInvoiceHTML(orderData) {
             </tbody>
         </table>
 
-        ${orderData.isCOD ? `
-        <div style="margin: 15px 0; padding: 10px; background: #f8f9fa; border-left: 4px solid #D4AF37; font-size: 0.85em; color: #666;">
-            <strong>Note for COD Orders:</strong> Product and shipping prices shown above have been adjusted to include the 33% service fee proportionally. The actual amounts you pay are:
-            <ul style="margin: 8px 0; padding-left: 20px;">
-                <li><strong>Due Now (33%):</strong> $${parseFloat(orderData.dueToday).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} service fee</li>
-                <li><strong>Due on Delivery (67%):</strong> $${parseFloat(orderData.dueOnDelivery).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} for products & shipping</li>
-            </ul>
-        </div>
-        ` : ''}
-
         <div class="totals-section">
-            <div class="total-row"><span>Subtotal:</span><span>${orderData.subtotal}</span></div>
-            <div class="total-row"><span>${orderData.shippingMethod || 'Shipping'}:</span><span>${orderData.shipping}</span></div>
-            <div class="total-row"><span>Service Fee (33%):</span><span>${orderData.fee}</span></div>
-            
-            ${orderData.isCOD ? `
-            <div class="total-row" style="color: #c9302c; font-weight: bold; font-size: 0.9em; border-top: 2px solid #c9302c; padding-top: 10px; margin-top: 10px;">
-                <span>Amount Due Now (33% Service Fee):</span>
-                <span>$${parseFloat(orderData.dueToday).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+            <div class="total-row">
+                <span>Subtotal:</span>
+                <span>${orderData.subtotal}</span>
             </div>
-            <div class="total-row" style="color: #28a745; font-weight: bold; font-size: 1.0em;">
-                <span>Balance Due on Delivery:</span>
-                <span>$${parseFloat(orderData.dueOnDelivery).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+            <div class="total-row">
+                <span>Shipping (${orderData.shippingMethod}):</span>
+                <span>${orderData.shipping}</span>
+            </div>
+            <div class="total-row">
+                <span>Service Fee:</span>
+                <span>${orderData.fee}</span>
+            </div>
+            <div class="total-row grand-total">
+                <span>TOTAL:</span>
+                <span>${orderData.total}</span>
+            </div>
+            ${orderData.isCOD ? `
+            <div style="margin-top: 25px; border-top: 1px solid #eee; padding-top: 15px; width: 100%;">
+                <div class="total-row" style="color: #c9302c; font-weight: bold;">
+                    <span>Due Today (33% Service Fee):</span>
+                    <span>$${orderData.dueToday}</span>
+                </div>
+                <div class="total-row" style="color: #28a745; font-weight: bold;">
+                    <span>Due on Delivery:</span>
+                    <span>$${orderData.dueOnDelivery}</span>
+                </div>
+                <div style="font-size: 0.75em; color: #666; margin-top: 10px; font-style: italic;">
+                    Service fee must be paid within 24 hours to confirm your COD order.
+                </div>
             </div>
             ` : ''}
-            
-            <div class="total-row grand-total"><span style="padding-right: 20px;">Grand Total:</span><span>${orderData.total}</span></div>
         </div>
 
         <div class="footer">
-            <p>Thank you for choosing Veloxxa Luxury. Please verify your details above.</p>
-            <p>© 2026 Veloxxa. All Rights Reserved.</p>
+            <div>Thank you for your business!</div>
+            <div style="margin-top: 10px;">${orderData.businessName} | ${orderData.businessEmail} | ${orderData.businessAddress}</div>
+            <div style="margin-top: 10px; font-size: 0.7em; color: #aaa;">
+                This is an automated invoice generated for order ${orderData.orderId}
+            </div>
         </div>
     </div>
 </body>
 </html>`;
 }
-
-// Initialize form submission
-function initFormspree() {
-    const btn = document.querySelector('.complete-btn');
-    if (btn) {
-        btn.setAttribute('onclick', 'submitOrderToFormspree()');
-    } else {
-        setTimeout(initFormspree, 500);
-    }
-}
-
-// Initialize form submission on load
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initFormspree);
-} else {
-    initFormspree();
-}
-
-// Add this debugging function
-function debugFilterState() {
-    console.log("=== DEBUG FILTER STATE ===");
-    console.log("Search term:", document.getElementById("searchInput").value);
-    console.log("Brand filter:", document.getElementById("brandFilter").value);
-    console.log("Category filter:", document.getElementById("catFilter").value);
-    console.log("Type filter:", document.getElementById("typeFilter").value);
-    console.log("Gender filter:", document.getElementById("genFilter").value);
-    
-    // Count products by brand in allProductsData
-    const brandCounts = {};
-    allProductsData.forEach(p => {
-        const brand = p.source || p.brand || 'Unknown';
-        brandCounts[brand] = (brandCounts[brand] || 0) + 1;
-    });
-    console.log("Total products by brand:", brandCounts);
-    
-    // Count loaded products by brand
-    const loadedBrandCounts = {};
-    allProductsData.forEach(p => {
-        if (loadedProductIds.has(p.id)) {
-            const brand = p.source || p.brand || 'Unknown';
-            loadedBrandCounts[brand] = (loadedBrandCounts[brand] || 0) + 1;
-        }
-    });
-    console.log("Loaded products by brand:", loadedBrandCounts);
-    
-    // Check what's visible
-    const visibleBrandCounts = {};
-    document.querySelectorAll('.product-card:not([style*="display: none"])').forEach(card => {
-        const brand = card.dataset.source || card.dataset.brand || 'Unknown';
-        visibleBrandCounts[brand] = (visibleBrandCounts[brand] || 0) + 1;
-    });
-    console.log("Visible products by brand:", visibleBrandCounts);
-    console.log("=== END DEBUG ===");
-}
-
 </script>
-</body></html>
+</body>
+</html>
