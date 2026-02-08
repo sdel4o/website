@@ -143,114 +143,63 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         min-height: 40px;
     }
 
+    /* CHANGE THIS: Use desktop-like dropdown instead of bottom sheet */
     .custom-select-dropdown {
-        /* MOBILE-ONLY STYLES */
-        position: fixed;
-        bottom: 0;
+        position: absolute;
+        top: 100%;
         left: 0;
         right: 0;
-        top: auto;
         width: 100%;
-        max-height: 70vh;
-        border-radius: 16px 16px 0 0;
-        box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
-        margin: 0;
-        transform: translateY(100%);
-        opacity: 1;
-        visibility: visible;
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 10002;
+        max-height: 250px;
+        background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
+        border: 2px solid #D4AF37;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        z-index: 1001;
+        margin-top: 5px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     .custom-select-dropdown.active {
+        opacity: 1;
+        visibility: visible;
         transform: translateY(0);
     }
     
+    /* Remove mobile-only elements */
     .custom-select-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 16px 20px;
-        border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-        font-weight: 600;
-        font-size: 1em;
-        color: #FFD700;
-        position: sticky;
-        top: 0;
-        background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
-        z-index: 2;
-        border-radius: 14px 14px 0 0;
+        display: none !important;
     }
     
     .custom-select-close {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: none;
-        border: none;
-        font-size: 1.2em;
-        color: #FFD700;
-        cursor: pointer;
-        padding: 0;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        transition: background 0.2s ease;
-    }
-    
-    .custom-select-close:hover {
-        background: rgba(212, 175, 55, 0.2);
+        display: none !important;
     }
     
     .custom-select-options {
-        padding: 10px 0;
-        max-height: calc(70vh - 70px);
-        display: flex;
+        padding: 8px 0;
+        max-height: 250px;
+        overflow-y: auto;
+    }
+    
+    .custom-select-option {
+        padding: 12px 20px;
+        text-align: left;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    
+    /* Remove overlay for mobile too */
+    .custom-select-overlay {
+        display: none !important;
+    }
+    
+    /* Keep the options visible in DOM */
+    .custom-select-options {
+        display: block;
         flex-direction: column;
         gap: 0;
-    }
-    
-    .custom-select-option {
-        padding: 14px 20px;
-        text-align: left;
-        border: none;
-        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        margin: 0;
-    }
-    
-    /* MOBILE OVERLAY */
-    .custom-select-overlay {
-        display: block;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0,0,0,0.7);
-        z-index: 10001;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-        backdrop-filter: blur(3px);
-    }
-    
-    .custom-select-overlay.active {
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    /* Improve touch targets */
-    .custom-select-option {
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-    }
-    
-    /* Performance optimizations */
-    .custom-select-dropdown {
-        -webkit-overflow-scrolling: touch;
-        will-change: transform;
-        contain: layout style paint;
     }
 }
 
@@ -307,6 +256,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         display: none !important;
     }
 }
+
 
 /* ============ SIZE PICKER STYLES - DESKTOP FIRST APPROACH ============ */
 .size-picker {
