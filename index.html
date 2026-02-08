@@ -982,12 +982,16 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     
     /* FIX 4: Filter grid - Keep 2 columns */
     .filter-top-row {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 8px !important;
-        width: 100% !important;
-        margin: 0 0 8px 0 !important;
-        box-sizing: border-box !important;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    position: relative; /* <-- ADD THIS */
+    z-index: 1000; /* <-- AND THIS */
+    }
+    .custom-select-wrapper.active {
+    grid-row: span 2; /* <-- Makes the active filter take 2 rows */
+    height: auto;
+    min-height: 300px; /* Reserve space for dropdown */
     }
     
     /* FIX 5: Filter selects - Smaller */
@@ -5645,5 +5649,6 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
