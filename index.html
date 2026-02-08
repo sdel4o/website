@@ -1013,7 +1013,19 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         align-items: center !important;
         justify-content: space-between !important;
     }
-    
+    /* 1. Remove grid for active filter's column */
+    .custom-select-wrapper.active {
+    grid-column: 1 / -1 !important; /* Span all columns */
+    width: 100% !important;
+    position: relative;
+    z-index: 10099;
+    }
+
+/* 2. Hide other filters when one is active */
+    .filter-top-row:has(.custom-select-wrapper.active) .custom-select-wrapper:not(.active) {
+    opacity: 0.3;
+    pointer-events: none;
+    }
     #subBrandFilter[style*="inline-block"] + * + * + * + #genFilter {
         grid-column: 1 !important;
         justify-self: start !important;
@@ -5649,6 +5661,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
