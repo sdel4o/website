@@ -169,9 +169,9 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         scrollbar-width: thin;
     }
-    
-    .size-picker-dropdown::-webkit-scrollbar {
-        width: 5px; /* Even thinner on mobile */
+    .custom-select-wrapper:has(.custom-select-dropdown.active) {
+    height: auto !important;
+    min-height: 300px !important; /* Reserve space for dropdown */
     }
 
     .custom-select-dropdown.active {
@@ -5643,3 +5643,4 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
