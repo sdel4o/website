@@ -2661,7 +2661,7 @@ function toggleCustomDropdown(type) {
     
     // Close any other open dropdown first
     closeAllCustomDropdowns();
-    
+       
     if (dropdown) {
         activeCustomDropdown = type;
         dropdown.classList.add('active');
@@ -2669,11 +2669,19 @@ function toggleCustomDropdown(type) {
         
         // Add active-wrapper class for z-index fix
         dropdown.closest('.custom-select-wrapper').classList.add('active-wrapper');
+
+     // Force scrollbar visibility
+        setTimeout(() => {
+            dropdown.style.overflowY = 'scroll';
+            dropdown.style.scrollbarWidth = 'thin';
+        }, 10);
         
         // Mobile portrait: show overlay and prevent body scroll
         if (window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches) {
             if (overlay) {
                 overlay.classList.add('active');
+                dropdown.style.overflowY = 'scroll';
+                dropdown.style.scrollbarWidth = 'thin';
             }
             document.body.style.overflow = 'hidden';
         }
@@ -5680,6 +5688,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
