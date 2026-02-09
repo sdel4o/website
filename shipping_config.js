@@ -100,5 +100,3 @@ const SHIPPING_CONFIG = {
         }
     ]
 };
-
-
