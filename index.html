@@ -4606,7 +4606,7 @@ function renderCheckout() {
                 const weightMet = totalWeight <= SHIPPING_CONFIG.FREE_MAX_WEIGHT;
                 
                 standardNote = `<div style="font-size: 0.7em; color: #888; margin-top: 5px; font-style: italic;">
-                    Note: Each pair of shoes is considered ~4lbs for calculation.
+                    Note: Each pair of shoes is considered ~1.8lbs for calculation.
                 </div>`;
                 
                 if (priceMet && weightMet) {
@@ -5681,6 +5681,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
