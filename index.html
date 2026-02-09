@@ -148,7 +148,10 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         font-size: 0.85em !important;
         min-height: 40px;
     }
-
+    .custom-select-wrapper:has(.custom-select-dropdown.active) {
+        z-index: 1010 !important;
+    }
+    
     /* CHANGE THIS: Use desktop-like dropdown instead of bottom sheet */
     .custom-select-dropdown {
         position: absolute;
@@ -161,7 +164,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         border: 2px solid #D4AF37;
         border-radius: 12px;
         box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        z-index: 1004;
+        z-index: 1011;
         margin-top: 5px;
         opacity: 0;
         visibility: hidden;
@@ -5661,6 +5664,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
