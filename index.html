@@ -4615,7 +4615,7 @@ function renderCheckout() {
                     isDisabled = true;
                     cost = 0;
                     standardNote += `<div style="color: #ff4d4d; font-size: 0.8em; margin-top: 5px; font-weight: 600;">
-                        Locked: Requires ${formatCurrency(SHIPPING_CONFIG.FREE_SHIPPING_THRESHOLD)}+ and under ${SHIPPING_CONFIG.FREE_MAX_WEIGHT}lbs. Excluding shipping.(Current: ${formatCurrency(subtotal)} / ${totalWeight.toFixed(1)}lbs)
+                        Locked: Requires ${formatCurrency(SHIPPING_CONFIG.FREE_SHIPPING_THRESHOLD)}+ and under ${SHIPPING_CONFIG.FREE_MAX_WEIGHT}kg. Excluding shipping cost. (Current: ${formatCurrency(subtotal)} / ${totalWeight.toFixed(1)}kg)
                     </div>`;
                 }
             }
@@ -5681,6 +5681,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
