@@ -982,20 +982,6 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         margin: 0 !important;
         z-index: 101 !important;
     }
-
- /* FIX 4: Filter grid - Keep 2 columns */
-    .filter-top-row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    position: relative; /* <-- ADD THIS */
-    z-index: 1000; /* <-- AND THIS */
-    }
-    .custom-select-wrapper.active {
-    grid-row: span 2; /* <-- Makes the active filter take 2 rows */
-    height: auto;
-    min-height: 300px; /* Reserve space for dropdown */
-    }
     
     /* FIX 5: Filter selects - Smaller */
     .custom-select-trigger {
@@ -2680,8 +2666,6 @@ function toggleCustomDropdown(type) {
         if (window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches) {
             if (overlay) {
                 overlay.classList.add('active');
-                dropdown.style.overflowY = 'scroll';
-                dropdown.style.scrollbarWidth = 'thin';
             }
             document.body.style.overflow = 'hidden';
         }
@@ -5688,6 +5672,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
