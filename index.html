@@ -141,7 +141,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     display: none !important;
 }
 
-/* ============ MOBILE CUSTOM SELECT (Portrait only) ============ */
+/* ============ MOBILE CUSTOM SELECT FILTERS (Portrait only) ============ */
 @media (max-width: 768px) and (orientation: portrait) {
     .custom-select-trigger {
         padding: 10px 14px !important;
@@ -983,23 +983,18 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         z-index: 101 !important;
     }
 
-   .custom-select-dropdown {
-        /* Add these to ensure scrollbars are visible on mobile */
-        -webkit-overflow-scrolling: touch !important;
-        scrollbar-width: thin !important;
-        overflow-y: scroll !important;
-        overscroll-behavior: contain !important;
+ /* FIX 4: Filter grid - Keep 2 columns */
+    .filter-top-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    position: relative; /* <-- ADD THIS */
+    z-index: 1000; /* <-- AND THIS */
     }
-    
-    /* Force scrollbar visibility on mobile WebKit */
-    .custom-select-dropdown::-webkit-scrollbar {
-        -webkit-appearance: none !important;
-        width: 8px !important;
-    }
-    
-    .custom-select-dropdown::-webkit-scrollbar-thumb {
-        background-color: #D4AF37 !important;
-        border-radius: 4px !important;
+    .custom-select-wrapper.active {
+    grid-row: span 2; /* <-- Makes the active filter take 2 rows */
+    height: auto;
+    min-height: 300px; /* Reserve space for dropdown */
     }
     
     /* FIX 5: Filter selects - Smaller */
@@ -5685,6 +5680,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
