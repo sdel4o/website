@@ -2902,6 +2902,7 @@ function getCustomSelectValue(type) {
 }
 
 // Close dropdowns when clicking outside (desktop) or on overlay (mobile)
+// Close dropdowns when clicking outside
 document.addEventListener('click', function(e) {
     // Don't close if clicking on a dropdown trigger or option
     if (e.target.closest('.custom-select-trigger') || 
@@ -2910,18 +2911,9 @@ document.addEventListener('click', function(e) {
         return;
     }
     
-    // Close if clicking outside on desktop
-    if (window.innerWidth > 768 || 
-        (window.innerWidth <= 768 && window.matchMedia("(orientation: landscape)").matches)) {
-        if (activeCustomDropdown && !e.target.closest('.custom-select-dropdown')) {
-            closeAllCustomDropdowns();
-        }
-    }
-    // Mobile portrait: close when clicking overlay
-    else if (window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches) {
-        if (e.target.classList.contains('custom-select-overlay')) {
-            closeAllCustomDropdowns();
-        }
+    // Close if clicking outside the dropdown (works for all devices)
+    if (activeCustomDropdown && !e.target.closest('.custom-select-dropdown')) {
+        closeAllCustomDropdowns();
     }
 });
 
@@ -5664,6 +5656,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
