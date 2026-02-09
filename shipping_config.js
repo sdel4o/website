@@ -49,30 +49,34 @@ const SHIPPING_CONFIG = {
         "Greece"
     ],
     "FREE_SHIPPING_THRESHOLD": 1000.0,
-    "FREE_MAX_WEIGHT": 10.0,
+    "FREE_MAX_WEIGHT": 6.8,
     "EXPRESS_TIERS": [
         {
-            "max_w": 2,
+            "max_w": 2.2,
+            "price": 89.99
+        },
+        {
+            "max_w": 4.5,
+            "price": 179.99
+        },
+        {
+            "max_w": 6.8,
             "price": 279.99
         },
         {
-            "max_w": 6,
-            "price": 579.99
+            "max_w": 9.0,
+            "price": 379.99
         },
         {
-            "max_w": 15,
-            "price": 879.99
-        },
-        {
-            "max_w": 40,
-            "price": 1299.99
+            "max_w": 18.0,
+            "price": 599.99
         }
     ],
     "SHIPPING_METHODS": [
         {
             "id": "standard",
-            "name": "Standard Shipping",
-            "desc": "Delivery estimate: 20\u201335 business days",
+            "name": "Free Standard Shipping",
+            "desc": "Delivery estimate: 20\u201335 business days. Customs clearance & duties included.",
             "price": 0.0,
             "is_free_eligible": true,
             "use_weight_tiers": false
@@ -80,7 +84,7 @@ const SHIPPING_CONFIG = {
         {
             "id": "express",
             "name": "Express Shipping",
-            "desc": "Delivery estimate: 5\u201310 business days. Tracking number provided.",
+            "desc": "Delivery estimate: 5\u201310 business days. Customs clearance & duties included.",
             "price": 279.99,
             "is_free_eligible": false,
             "use_weight_tiers": true
@@ -88,10 +92,11 @@ const SHIPPING_CONFIG = {
         {
             "id": "luxury",
             "name": "Luxury Delivery",
-            "desc": "Delivery estimate: 1\u20132 business days. Tracking number provided.",
+            "desc": "Delivery estimate: 1\u20132 business days. Customs clearance & duties included. (50kg max)",
             "price": 2599.99,
             "is_free_eligible": false,
-            "use_weight_tiers": false
+            "use_weight_tiers": false,
+            "max_w": 50.0
         }
     ]
 };
