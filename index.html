@@ -2915,7 +2915,6 @@ function getCustomSelectValue(type) {
 }
 
 // Close dropdowns when clicking outside (desktop) or on overlay (mobile)
-// Close dropdowns when clicking outside
 document.addEventListener('click', function(e) {
     // Don't close if clicking on a dropdown trigger or option
     if (e.target.closest('.custom-select-trigger') || 
@@ -2927,6 +2926,18 @@ document.addEventListener('click', function(e) {
     // Close if clicking outside the dropdown (works for all devices)
     if (activeCustomDropdown && !e.target.closest('.custom-select-dropdown')) {
         closeAllCustomDropdowns();
+    }
+    
+        // Don't close if clicking on a size picker trigger or option
+    if (e.target.closest('.size-picker-trigger') || 
+        e.target.closest('.size-option') ||
+        e.target.closest('.size-picker-close')) {
+        return;
+    }
+    
+    // Close if clicking outside the size picker (works for all devices)
+    if (activeSizePicker && !e.target.closest('.size-picker-dropdown')) {
+        closeAllSizePickers();
     }
 });
 
@@ -5669,6 +5680,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
