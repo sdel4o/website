@@ -2644,18 +2644,31 @@ let activeCustomDropdown = null;
  * Toggles a custom dropdown
  * @param type - The dropdown type (brand, category, etc.)
  */
+/**
+ * Toggles a custom dropdown
+ * @param type - The dropdown type (brand, category, etc.)
+ */
 function toggleCustomDropdown(type) {
-    // Close any open dropdown first
-    closeAllCustomDropdowns();
-    
     const dropdown = document.getElementById(`${type}-dropdown`);
-    const trigger = document.querySelector(`#${type}-dropdown`).closest('.custom-select-wrapper').querySelector('.custom-select-trigger');
+    const trigger = dropdown.closest('.custom-select-wrapper').querySelector('.custom-select-trigger');
     const overlay = document.querySelector('.custom-select-overlay');
+    
+    // If this dropdown is already open, close it
+    if (activeCustomDropdown === type) {
+        closeCustomDropdown(type);
+        return;
+    }
+    
+    // Close any other open dropdown first
+    closeAllCustomDropdowns();
     
     if (dropdown) {
         activeCustomDropdown = type;
         dropdown.classList.add('active');
         trigger.classList.add('active');
+        
+        // Add active-wrapper class for z-index fix
+        dropdown.closest('.custom-select-wrapper').classList.add('active-wrapper');
         
         // Mobile portrait: show overlay and prevent body scroll
         if (window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches) {
@@ -5656,6 +5669,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
