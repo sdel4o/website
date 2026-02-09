@@ -76,7 +76,7 @@ const SHIPPING_CONFIG = {
         {
             "id": "standard",
             "name": "Free Standard Shipping",
-            "desc": "Delivery estimate: 20\u201335 business days. Customs clearance & duties included.",
+            "desc": "Delivery estimate: 20\u201335 business days. \nCustoms clearance & duties included.",
             "price": 0.0,
             "is_free_eligible": true,
             "use_weight_tiers": false
@@ -84,7 +84,7 @@ const SHIPPING_CONFIG = {
         {
             "id": "express",
             "name": "Express Shipping",
-            "desc": "Delivery estimate: 5\u201310 business days. Customs clearance & duties included.",
+            "desc": "Delivery estimate: 5\u201310 business days. \nCustoms clearance & duties included.",
             "price": 279.99,
             "is_free_eligible": false,
             "use_weight_tiers": true
@@ -92,7 +92,7 @@ const SHIPPING_CONFIG = {
         {
             "id": "luxury",
             "name": "Luxury Delivery",
-            "desc": "Delivery estimate: 1\u20132 business days. Customs clearance & duties included. (50kg max)",
+            "desc": "Delivery estimate: 1\u20132 business days. \nCustoms clearance & duties included. (50kg max)",
             "price": 2599.99,
             "is_free_eligible": false,
             "use_weight_tiers": false,
@@ -100,3 +100,4 @@ const SHIPPING_CONFIG = {
         }
     ]
 };
+
