@@ -179,8 +179,31 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         visibility: hidden;
         transform: translateY(-10px);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Mobile scrollbar - always visible */
         scrollbar-width: thin;
+        scrollbar-color: #D4AF37 #2d2d2d;
     }
+
+    /* Mobile webkit scrollbar - always visible and touch-friendly */
+    .custom-select-dropdown::-webkit-scrollbar {
+        width: 10px; /* Slightly wider for easier touch */
+    }
+    
+    .custom-select-dropdown::-webkit-scrollbar-track {
+        background: #2d2d2d;
+        border-radius: 10px;
+    }
+    
+    .custom-select-dropdown::-webkit-scrollbar-thumb {
+        background: #D4AF37;
+        border-radius: 10px;
+        min-height: 40px; /* Minimum touch target size */
+    }
+    
+    .custom-select-dropdown::-webkit-scrollbar-thumb:active {
+        background: #FFD700;
+    }
+    
 /* OR adjust the specific dropdown height/position */
     .custom-select-dropdown {
     /* Add these properties: */
@@ -5681,6 +5704,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
