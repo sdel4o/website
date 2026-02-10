@@ -631,6 +631,69 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
 
 /* ============ UPDATED FILTER CONTROLS - Desktop Layout / Desktop CSS ============ */
 
+    /* ============ DESKTOP TOP ROW LAYOUT ============ */
+.desktop-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+/* Desktop layout */
+@media (min-width: 769px) {
+    .desktop-top-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+    
+    .gender-tabs-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 40px;
+        margin: 0;
+        padding: 0;
+        width: auto;
+    }
+    
+    .filter-group {
+        width: 50%;
+        max-width: 400px;
+        margin: 0;
+    }
+    
+    #searchInput {
+        width: 100%;
+        margin: 0;
+    }
+    
+    .cart-summary-btn {
+        position: absolute;
+        right: 25px;
+        top: 15px;
+    }
+}
+
+/* Mobile layout - stack vertically */
+@media (max-width: 768px) {
+    .desktop-top-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .gender-tabs-container {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .filter-group {
+        width: 100%;
+    }
+}
+
 /* Controls container should match catalog width */
 .controls {
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); 
@@ -958,7 +1021,41 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     color: #FFD700;
     border: 1px solid #D4AF37;
 }
-
+/* ============ DESKTOP LAYOUT FOR GENDER TABS ============ */
+@media (min-width: 769px) {
+    .gender-tabs-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 40px;
+        margin-bottom: 0;
+        margin-right: auto;
+        width: auto;
+    }
+    
+    .controls {
+        position: relative;
+        padding-top: 15px;
+    }
+    
+    /* Search bar aligned right on desktop */
+    #searchInput {
+        position: absolute;
+        right: 20px;
+        top: 15px;
+        width: 50%;
+        max-width: 400px;
+        margin: 0;
+    }
+    
+    /* Cart button position adjustment */
+    .cart-summary-btn {
+        position: absolute;
+        right: 25px;
+        top: 75px; /* Moved down to make room for search bar */
+    }
+}
+    
 /* ============ SIMPLE MOBILE OPTIMIZATION - Mobile CSS ============ */
 /* ============ MOBILE OPTIMIZATION (Portrait Phones Only) ============ */
 @media (max-width: 768px) and (orientation: portrait) {
@@ -2026,103 +2123,106 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
 <h1>🛍️ Master Product Catalog</h1>
 
 <div class="controls">
-    <!-- Gender Tabs INSIDE the controls container -->
-    <div class="gender-tabs-container">
-        <button class="gender-tab" id="forHimTab" onclick="setGenderFilter('Men')">For Him</button>
-        <button class="gender-tab active" id="forHerTab" onclick="setGenderFilter('Women')">For Her</button>
-    </div>
-    
-    <!-- Search Bar -->
-    <div class="filter-group">
-        <input type="text" id="searchInput" oninput="debouncedApplyFilters()" placeholder="🔍 Search products...">
-    </div>
-    
-<!-- Top Row: All Filters (CUSTOM DROPDOWN STYLING) -->
-<div class="filter-top-row">
-    <!-- Custom Brand Dropdown -->
-    <div class="custom-select-wrapper">
-        <div class="custom-select-trigger" onclick="toggleCustomDropdown('brand')">
-            <span class="select-placeholder">All Brands</span>
-            <span class="select-arrow">▼</span>
+    <!-- Desktop: Gender Tabs and Search Bar on same line -->
+    <div class="desktop-top-row">
+        <!-- Gender Tabs -->
+        <div class="gender-tabs-container">
+            <button class="gender-tab" id="forHimTab" onclick="setGenderFilter('Men')">For Him</button>
+            <button class="gender-tab active" id="forHerTab" onclick="setGenderFilter('Women')">For Her</button>
         </div>
-        <div class="custom-select-dropdown" id="brand-dropdown">
-            <div class="custom-select-header">
-                <span>Select Brand</span>
-                <button class="custom-select-close" onclick="closeCustomDropdown('brand')">✕</button>
+        
+        <!-- Search Bar -->
+        <div class="filter-group">
+            <input type="text" id="searchInput" oninput="debouncedApplyFilters()" placeholder="🔍 Search products...">
+        </div>
+    </div>
+    
+    <!-- Top Row: All Filters (CUSTOM DROPDOWN STYLING) -->
+    <div class="filter-top-row">
+        <!-- Custom Brand Dropdown -->
+        <div class="custom-select-wrapper">
+            <div class="custom-select-trigger" onclick="toggleCustomDropdown('brand')">
+                <span class="select-placeholder">All Brands</span>
+                <span class="select-arrow">▼</span>
             </div>
-            <div class="custom-select-options" id="brand-options">
-                <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('brand', '', 'All Brands')">
-                    All Brands
+            <div class="custom-select-dropdown" id="brand-dropdown">
+                <div class="custom-select-header">
+                    <span>Select Brand</span>
+                    <button class="custom-select-close" onclick="closeCustomDropdown('brand')">✕</button>
+                </div>
+                <div class="custom-select-options" id="brand-options">
+                    <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('brand', '', 'All Brands')">
+                        All Brands
+                    </div>
                 </div>
             </div>
+            <input type="hidden" id="brandFilter" value="">
         </div>
-        <input type="hidden" id="brandFilter" value="">
-    </div>
-    
-    <!-- Custom Sub-Brand Dropdown -->
-    <div class="custom-select-wrapper" id="subBrandWrapper" style="display: none;">
-        <div class="custom-select-trigger" onclick="toggleCustomDropdown('subBrand')">
-            <span class="select-placeholder">Sub-Brand</span>
-            <span class="select-arrow">▼</span>
-        </div>
-        <div class="custom-select-dropdown" id="subBrand-dropdown">
-            <div class="custom-select-header">
-                <span>Select Sub-Brand</span>
-                <button class="custom-select-close" onclick="closeCustomDropdown('subBrand')">✕</button>
+        
+        <!-- Custom Sub-Brand Dropdown -->
+        <div class="custom-select-wrapper" id="subBrandWrapper" style="display: none;">
+            <div class="custom-select-trigger" onclick="toggleCustomDropdown('subBrand')">
+                <span class="select-placeholder">Sub-Brand</span>
+                <span class="select-arrow">▼</span>
             </div>
-            <div class="custom-select-options" id="subBrand-options">
-                <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('subBrand', '', 'Sub-Brand')">
-                    Sub-Brand
+            <div class="custom-select-dropdown" id="subBrand-dropdown">
+                <div class="custom-select-header">
+                    <span>Select Sub-Brand</span>
+                    <button class="custom-select-close" onclick="closeCustomDropdown('subBrand')">✕</button>
+                </div>
+                <div class="custom-select-options" id="subBrand-options">
+                    <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('subBrand', '', 'Sub-Brand')">
+                        Sub-Brand
+                    </div>
                 </div>
             </div>
+            <input type="hidden" id="subBrandFilter" value="">
         </div>
-        <input type="hidden" id="subBrandFilter" value="">
-    </div>
-    
-    <!-- Custom Category Dropdown -->
-    <div class="custom-select-wrapper">
-        <div class="custom-select-trigger" onclick="toggleCustomDropdown('category')">
-            <span class="select-placeholder">All Categories</span>
-            <span class="select-arrow">▼</span>
-        </div>
-        <div class="custom-select-dropdown" id="category-dropdown">
-            <div class="custom-select-header">
-                <span>Select Category</span>
-                <button class="custom-select-close" onclick="closeCustomDropdown('category')">✕</button>
+        
+        <!-- Custom Category Dropdown -->
+        <div class="custom-select-wrapper">
+            <div class="custom-select-trigger" onclick="toggleCustomDropdown('category')">
+                <span class="select-placeholder">All Categories</span>
+                <span class="select-arrow">▼</span>
             </div>
-            <div class="custom-select-options" id="category-options">
-                <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('category', '', 'All Categories')">
-                    All Categories
+            <div class="custom-select-dropdown" id="category-dropdown">
+                <div class="custom-select-header">
+                    <span>Select Category</span>
+                    <button class="custom-select-close" onclick="closeCustomDropdown('category')">✕</button>
+                </div>
+                <div class="custom-select-options" id="category-options">
+                    <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('category', '', 'All Categories')">
+                        All Categories
+                    </div>
                 </div>
             </div>
+            <input type="hidden" id="catFilter" value="">
         </div>
-        <input type="hidden" id="catFilter" value="">
-    </div>
-    
-    <!-- Custom Type Dropdown -->
-    <div class="custom-select-wrapper">
-        <div class="custom-select-trigger" onclick="toggleCustomDropdown('type')">
-            <span class="select-placeholder">All Product Types</span>
-            <span class="select-arrow">▼</span>
-        </div>
-        <div class="custom-select-dropdown" id="type-dropdown">
-            <div class="custom-select-header">
-                <span>Select Product Type</span>
-                <button class="custom-select-close" onclick="closeCustomDropdown('type')">✕</button>
+        
+        <!-- Custom Type Dropdown -->
+        <div class="custom-select-wrapper">
+            <div class="custom-select-trigger" onclick="toggleCustomDropdown('type')">
+                <span class="select-placeholder">All Product Types</span>
+                <span class="select-arrow">▼</span>
             </div>
-            <div class="custom-select-options" id="type-options">
-                <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('type', '', 'All Product Types')">
-                    All Product Types
+            <div class="custom-select-dropdown" id="type-dropdown">
+                <div class="custom-select-header">
+                    <span>Select Product Type</span>
+                    <button class="custom-select-close" onclick="closeCustomDropdown('type')">✕</button>
+                </div>
+                <div class="custom-select-options" id="type-options">
+                    <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('type', '', 'All Product Types')">
+                        All Product Types
+                    </div>
                 </div>
             </div>
+            <input type="hidden" id="typeFilter" value="">
         </div>
-        <input type="hidden" id="typeFilter" value="">
     </div>
-</div>
 
-<!-- Custom dropdown overlay (mobile) -->
-<div class="custom-select-overlay" onclick="closeAllCustomDropdowns()"></div>
-    
+    <!-- Custom dropdown overlay (mobile) -->
+    <div class="custom-select-overlay" onclick="closeAllCustomDropdowns()"></div>
+        
     <!-- Bottom Row: Clear Filters and Sort buttons -->
     <div class="filter-bottom-row">
         <!-- Clear Filters Button -->
@@ -2579,6 +2679,10 @@ const debouncedApplyFilters = debounce(applyFilters, 300);
 
 let activeCustomDropdown = null;
 
+/**
+ * Toggles a custom dropdown
+ * @param type - The dropdown type (brand, category, etc.)
+ */
 /**
  * Toggles a custom dropdown
  * @param type - The dropdown type (brand, category, etc.)
@@ -5554,5 +5658,6 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
