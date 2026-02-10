@@ -1,5 +1,3 @@
-<document>
-<document_content>
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><title>Master Catalog & Checkout</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, minimum-scale=0.8, user-scalable=yes">
@@ -9,554 +7,341 @@
 /* ============ GLOBAL STYLES ============ */
 body { font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0px 20px; }
 h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; margin-bottom: 20px; font-weight: 600; }
-/* ============ GENDER TABS STYLES ============ */
-.gender-tabs {
-display: flex;
-gap: 40px;
-align-items: center;
-position: relative;
-}
-.gender-tab {
-background: none;
-border: none;
-color: #999;
-font-family: 'Montserrat', sans-serif;
-font-size: 1.1em;
-font-weight: 500;
-cursor: pointer;
-padding: 0 0 12px 0;
-position: relative;
-transition: all 0.3s ease;
--webkit-tap-highlight-color: transparent;
-}
-.gender-tab:hover {
-color: #FFD700;
-}
-.gender-tab.active {
-color: #FFD700;
-font-weight: 600;
-}
-.gender-tab.active::after {
-content: '';
-position: absolute;
-bottom: 0;
-left: 0;
-right: 0;
-height: 3px;
-background: linear-gradient(90deg, #D4AF37 0%, #FFD700 100%);
-border-radius: 2px;
-animation: slideIn 0.3s ease-out;
-}
-@keyframes slideIn {
-from {
-transform: scaleX(0);
-opacity: 0;
-}
-to {
-transform: scaleX(1);
-opacity: 1;
-}
-}
+
 /* ============ CUSTOM FILTER SELECTOR STYLES ============ */
 .custom-select-wrapper {
-position: relative;
-width: 100%;
-z-index: 1000;
-justify-self: center !important;
+    position: relative;
+    width: 100%;
+    z-index: 1000;
+    justify-self: center !important;
 }
+
 .select-placeholder {
-text-align: center !important;
-display: block !important;
-margin: 0 auto !important;
+    text-align: center !important;
+    display: block !important;
+    margin: 0 auto !important;
 }
+
 .custom-select-trigger {
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 12px 18px;
-border: 2px solid #D4AF37;
-border-radius: 30px;
-background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
-color: #FFD700;
-font-family: 'Montserrat', sans-serif;
-font-size: 0.9em;
-font-weight: 500;
-cursor: pointer;
-transition: all 0.3s ease;
-min-height: 44px;
-box-sizing: border-box;
--webkit-tap-highlight-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    border: 2px solid #D4AF37;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
+    color: #FFD700;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 44px;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
+
 .custom-select-trigger:hover {
-border-color: #FFD700;
-box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+    border-color: #FFD700;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
 }
+
 .custom-select-trigger.active {
-border-color: #FFD700;
-box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+    border-color: #FFD700;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
 }
+
 .select-placeholder {
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
 }
+
 .select-arrow {
-font-size: 0.8em;
-margin-left: 10px;
-color: #D4AF37;
-transition: transform 0.3s ease;
-flex-shrink: 0;
+    font-size: 0.8em;
+    margin-left: 10px;
+    color: #D4AF37;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
 }
+
 .custom-select-trigger.active .select-arrow {
-transform: rotate(180deg);
+    transform: rotate(180deg);
 }
+
 /* DESKTOP CUSTOM SELECT DROPDOWN (default for all devices) */
-.custom-select-dropdown {
-position: absolute;
-top: 100%;
-left: 0;
-right: 0;
-width: 100%;
-max-height: 300px;
-background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
-border: 2px solid #D4AF37;
-border-radius: 12px;
-box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-z-index: 1001;
-margin-top: 5px;
-opacity: 0;
-visibility: hidden;
-transform: translateY(-10px);
-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-overflow-y: auto;
-overflow-x: hidden;
-scrollbar-width: thin;
-}
-/* Webkit browsers (Chrome, Safari, Edge) scrollbar styling /
-.custom-select-dropdown::-webkit-scrollbar {
-width: 8px; / Width of the scrollbar */
-}
-.custom-select-dropdown.active {
-opacity: 1;
-visibility: visible;
-transform: translateY(0);
-}
-.custom-select-header {
-display: none; /* Hidden for desktop */
-}
-.custom-select-close {
-display: none; /* Hidden for desktop */
-}
-.custom-select-option {
-padding: 8px 20px;
-text-align: left;
-border: none;
-border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-cursor: pointer;
-font-size: 0.85em;
-font-weight: 500;
-transition: all 0.2s ease;
-background: transparent;
-color: #FFD700;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-}
-.custom-select-option:last-child {
-border-bottom: none;
-}
-.custom-select-option:hover {
-background: rgba(212, 175, 55, 0.15);
-color: #FFD700;
-}
-.custom-select-option.selected {
-background: #D4AF37;
-color: #000;
-font-weight: 600;
-}
-/* NO OVERLAY FOR DESKTOP */
-.custom-select-overlay {
-display: none !important;
-}
-/* ============ MOBILE CUSTOM SELECT FILTERS (Portrait only) ============ */
-@media (max-width: 768px) and (orientation: portrait) {
-.custom-select-trigger {
-display: flex !important;
-padding: 10px 14px !important;
-font-size: 0.85em !important;
-min-height: 40px;
-justify-content: space-between !important;
-align-items: center !important;
-}
-.custom-select-wrapper:has(.custom-select-dropdown.active) {
-z-index: 1010 !important;
-}
-/* CHANGE THIS: Use desktop-like dropdown instead of bottom sheet */
 .custom-select-dropdown {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     width: 100%;
-    max-height: 250px;
+    max-height: 300px;
     background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
     border: 2px solid #D4AF37;
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-    z-index: 1011;
+    z-index: 1001;
     margin-top: 5px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    /* Mobile scrollbar - always visible */
-    scrollbar-width: thin;
-    scrollbar-color: #D4AF37 #2d2d2d;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin; 
 }
 
-/* Mobile webkit scrollbar - always visible and touch-friendly */
+/* Webkit browsers (Chrome, Safari, Edge) scrollbar styling */
 .custom-select-dropdown::-webkit-scrollbar {
-    width: 10px; /* Slightly wider for easier touch */
+    width: 8px; /* Width of the scrollbar */
 }
 
-.custom-select-dropdown::-webkit-scrollbar-track {
-    background: #2d2d2d;
-    border-radius: 10px;
-}
-
-.custom-select-dropdown::-webkit-scrollbar-thumb {
-    background: #D4AF37;
-    border-radius: 10px;
-    min-height: 40px; /* Minimum touch target size */
-}
-
-.custom-select-dropdown::-webkit-scrollbar-thumb:active {
-    background: #FFD700;
-}
-/* OR adjust the specific dropdown height/position /
-.custom-select-dropdown {
-/ Add these properties: /
-margin-bottom: 20px !important; / Creates space below dropdown /
-z-index: 10099 !important; / Much higher z-index */
-}
 .custom-select-dropdown.active {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
-/* Remove mobile-only elements */
 .custom-select-header {
-    display: none !important;
+    display: none; /* Hidden for desktop */
 }
 
 .custom-select-close {
+    display: none; /* Hidden for desktop */
+}
+
+.custom-select-option {
+    padding: 8px 20px;
+    text-align: left;
+    border: none;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    background: transparent;
+    color: #FFD700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.custom-select-option:last-child {
+    border-bottom: none;
+}
+
+.custom-select-option:hover {
+    background: rgba(212, 175, 55, 0.15);
+    color: #FFD700;
+}
+
+.custom-select-option.selected {
+    background: #D4AF37;
+    color: #000;
+    font-weight: 600;
+}
+
+/* NO OVERLAY FOR DESKTOP */
+.custom-select-overlay {
     display: none !important;
 }
 
-.custom-select-options {
-    padding: 8px 0;
-    max-height: 250px;
+/* ============ MOBILE CUSTOM SELECT (Portrait only) ============ */
+@media (max-width: 768px) and (orientation: portrait) {
+    .custom-select-trigger {
+        padding: 10px 14px !important;
+        font-size: 0.85em !important;
+        min-height: 40px;
+    }
+
+    .custom-select-wrapper:has(.custom-select-dropdown.active) {
+        z-index: 1010 !important;
+    }
+
+    /* CHANGE THIS: Use desktop-like dropdown instead of bottom sheet */
+    .custom-select-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-height: 250px;
+        background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
+        border: 2px solid #D4AF37;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        z-index: 1011 !important;
+        margin-top: 5px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        scrollbar-width: thin;
+    }
+    
+    .size-picker-dropdown::-webkit-scrollbar {
+        width: 5px; /* Even thinner on mobile */
+    }
+
+    .custom-select-dropdown.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    /* Remove mobile-only elements */
+    .custom-select-header {
+        display: none !important;
+    }
+    
+    .custom-select-close {
+        display: none !important;
+    }
+    
+    .custom-select-options {
+        padding: 8px 0;
+        max-height: 250px;
+        overflow-y: auto;
+    }
+    
+    .custom-select-option {
+        padding: 12px 20px;
+        text-align: left;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    
+    /* Remove overlay for mobile too */
+    .custom-select-overlay {
+        display: none !important;
+    }
+    
+    /* Keep the options visible in DOM */
+    .custom-select-options {
+        display: block;
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+/* ============ LANDSCAPE MOBILE ============ */
+@media (max-width: 768px) and (orientation: landscape) {
+    /* Use desktop styles for landscape (no overlay, no bottom sheet) */
+    .custom-select-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: auto;
+        width: 100%;
+        max-height: 200px;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        margin-top: 5px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        scrollbar-width: thin; 
+        z-index: 10021 !important;
+    }
+
+    .custom-select-dropdown.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    .custom-select-header {
+        display: none;
+    }
+    
+    .custom-select-close {
+        display: none;
+    }
+    
+    .custom-select-options {
+        flex-direction: column;
+        gap: 0;
+        display: flex;
+    }
+    
+    .custom-select-option {
+        padding: 10px 16px;
+        text-align: left;
+        border: none;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        margin: 0;
+    }
+    
+    .custom-select-overlay {
+        display: none !important;
+    }
+}
+
+
+/* ============ SIZE PICKER STYLES - DESKTOP FIRST APPROACH ============ */
+.size-picker {
+    position: relative;
+    width: 100%;
+    max-width: 95px;
+}
+
+.size-picker-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    font-size: 0.80em;
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #555;
+    min-width: 60px;
+    transition: border-color 0.2s ease;
+}
+
+.size-picker-trigger:hover {
+    border-color: #aaa;
+}
+
+.size-placeholder {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.8em;
+}
+
+.size-arrow {
+    font-size: 0.8em;
+    margin-left: 5px;
+    color: #777;
+}
+
+/* DESKTOP SIZE PICKER DROPDOWN (default for all devices) */
+.size-picker-dropdown {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: auto;
+    top: auto;
+    width: 120px;
+    max-height: 300px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    z-index: 10000;
+    margin-bottom: 5px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    display: block; /* Always visible in DOM */
     overflow-y: auto;
 }
 
-.custom-select-option {
-    padding: 12px 20px;
-    text-align: left;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-}
-
-/* Remove overlay for mobile too */
-.custom-select-overlay {
-    display: none !important;
-}
-
-/* Keep the options visible in DOM */
-.custom-select-options {
-    display: block;
-    flex-direction: column;
-    gap: 0;
-}
-}
-/* ============ LANDSCAPE MOBILE ============ /
-@media (max-width: 768px) and (orientation: landscape) {
-/ Use desktop styles for landscape (no overlay, no bottom sheet) */
-.custom-select-dropdown {
-position: absolute;
-top: 100%;
-left: 0;
-right: auto;
-width: 100%;
-max-height: 200px;
-border-radius: 12px;
-box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-margin-top: 5px;
-opacity: 0;
-visibility: hidden;
-transform: translateY(-10px);
-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-scrollbar-width: thin;
-z-index: 10021 !important;
-}
-.size-picker-dropdown::-webkit-scrollbar {
-    width: 5px; /* Even thinner on mobile */
-}
-
-.custom-select-dropdown.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.custom-select-header {
-    display: none;
-}
-
-.custom-select-close {
-    display: none;
-}
-
-.custom-select-options {
-    flex-direction: column;
-    gap: 0;
-    display: flex;
-}
-
-.custom-select-option {
-    padding: 10px 16px;
-    text-align: left;
-    border: none;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-    margin: 0;
-}
-
-.custom-select-overlay {
-    display: none !important;
-}
-}
-/* ============ SIZE PICKER STYLES - DESKTOP FIRST APPROACH ============ */
-.size-picker {
-position: relative;
-width: 100%;
-max-width: 95px;
-}
-.size-picker-trigger {
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 4px 10px;
-border: 1px solid #ddd;
-border-radius: 4px;
-background: white;
-cursor: pointer;
-font-size: 0.80em;
-font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-color: #555;
-min-width: 60px;
-transition: border-color 0.2s ease;
-}
-.size-picker-trigger:hover {
-border-color: #aaa;
-}
-.size-placeholder {
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-font-size: 0.8em;
-}
-.size-arrow {
-font-size: 0.8em;
-margin-left: 5px;
-color: #777;
-}
-/* DESKTOP SIZE PICKER DROPDOWN (default for all devices) /
-.size-picker-dropdown {
-position: absolute;
-bottom: 100%;
-left: 0;
-right: auto;
-top: auto;
-width: 120px;
-max-height: 300px;
-background: white;
-border-radius: 8px;
-box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-z-index: 10000;
-margin-bottom: 5px;
-opacity: 0;
-visibility: hidden;
-transform: translateY(-10px);
-transition: all 0.2s ease;
-display: block; / Always visible in DOM */
-overflow-y: auto;
-}
-.size-picker-dropdown.active {
-opacity: 1;
-visibility: visible;
-transform: translateY(0);
-}
-.size-picker-header {
-display: none; /* Hidden for desktop */
-}
-.size-picker-close {
-display: none; /* Hidden for desktop */
-}
-.size-picker-options {
-padding: 8px 0;
-display: flex;
-flex-direction: column;
-gap: 0;
-max-height: 300px;
-overflow-y: auto;
-}
-.size-option {
-padding: 10px 16px;
-text-align: left;
-border: none;
-border-bottom: 1px solid #f5f5f5;
-cursor: pointer;
-font-size: 0.85em;
-font-weight: 500;
-transition: all 0.2s ease;
-background: white;
-}
-.size-option:last-child {
-border-bottom: none;
-}
-.size-option:hover {
-background: #f8f9fa;
-}
-.size-option.selected {
-background: #000;
-color: white;
-border-color: #000;
-font-weight: 600;
-}
-/* NO OVERLAY FOR DESKTOP */
-.size-overlay {
-display: none !important;
-}
-/* ============ MOBILE SIZE PICKER (Portrait only) ============ /
-@media (max-width: 768px) and (orientation: portrait) {
-.size-picker-trigger {
-font-size: 0.8em !important;
-padding: 5px 6px !important; / determines width of size picker box /
-min-width: 60px !important;
-box-sizing: border-box !important;  / Add this line */
-}
-.size-picker-dropdown {
-    /* MOBILE-ONLY STYLES */
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: auto;
-    width: 100%;
-    max-height: 70vh;
-    border-radius: 16px 16px 0 0;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
-    margin: 0;
-    transform: translateY(100%);
-    opacity: 1;
-    visibility: visible;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.size-picker-dropdown.active {
-    transform: translateY(0);
-}
-
-.size-picker-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 20px;
-    border-bottom: 1px solid #eee;
-    font-weight: 600;
-    font-size: 1em;
-    color: #333;
-    position: sticky;
-    top: 0;
-    background: white;
-    z-index: 2;
-}
-
-.size-picker-close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    font-size: 1.2em;
-    color: #777;
-    cursor: pointer;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-}
-
-.size-picker-close:hover {
-    background: #f5f5f5;
-}
-
-.size-picker-options {
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 2px;
-    padding: 10px 0;
-    max-height: calc(70vh - 70px);
-    display: grid;
-}
-
-.size-option {
-    padding: 12px 8px;
-    text-align: center;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    margin: 0 10px;
-    border-bottom: 1px solid #eee;
-}
-
-/* MOBILE OVERLAY */
-.size-overlay {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 9998;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.size-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-}
-/* ============ LANDSCAPE MOBILE SIZE PICKER ============ /
-@media (max-width: 768px) and (orientation: landscape) {
-/ Use desktop styles for landscape (no overlay, no bottom sheet) */
-.size-picker-dropdown {
-position: absolute;
-bottom: 100%;
-left: 0;
-right: auto;
-top: auto;
-width: 120px;
-max-height: 200px;
-border-radius: 8px;
-box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-margin-bottom: 5px;
-opacity: 0;
-visibility: hidden;
-transform: translateY(-10px);
-transition: all 0.2s ease;
-}
 .size-picker-dropdown.active {
     opacity: 1;
     visibility: visible;
@@ -564,17 +349,20 @@ transition: all 0.2s ease;
 }
 
 .size-picker-header {
-    display: none;
+    display: none; /* Hidden for desktop */
 }
 
 .size-picker-close {
-    display: none;
+    display: none; /* Hidden for desktop */
 }
 
 .size-picker-options {
+    padding: 8px 0;
+    display: flex;
     flex-direction: column;
     gap: 0;
-    display: flex;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .size-option {
@@ -582,1026 +370,1376 @@ transition: all 0.2s ease;
     text-align: left;
     border: none;
     border-bottom: 1px solid #f5f5f5;
-    margin: 0;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    background: white;
 }
 
+.size-option:last-child {
+    border-bottom: none;
+}
+
+.size-option:hover {
+    background: #f8f9fa;
+}
+
+.size-option.selected {
+    background: #000;
+    color: white;
+    border-color: #000;
+    font-weight: 600;
+}
+
+/* NO OVERLAY FOR DESKTOP */
 .size-overlay {
     display: none !important;
 }
+
+/* ============ MOBILE SIZE PICKER (Portrait only) ============ */
+@media (max-width: 768px) and (orientation: portrait) {
+    .size-picker-trigger {
+        font-size: 0.8em !important;
+        padding: 5px 6px !important; /* determines width of size picker box */
+        min-width: 60px !important;
+        box-sizing: border-box !important;  /* Add this line */
+    }
+
+    .size-picker-dropdown {
+        /* MOBILE-ONLY STYLES */
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto;
+        width: 100%;
+        max-height: 70vh;
+        border-radius: 16px 16px 0 0;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+        margin: 0;
+        transform: translateY(100%);
+        opacity: 1;
+        visibility: visible;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .size-picker-dropdown.active {
+        transform: translateY(0);
+    }
+    
+    .size-picker-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 20px;
+        border-bottom: 1px solid #eee;
+        font-weight: 600;
+        font-size: 1em;
+        color: #333;
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 2;
+    }
+    
+    .size-picker-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        font-size: 1.2em;
+        color: #777;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+    
+    .size-picker-close:hover {
+        background: #f5f5f5;
+    }
+    
+    .size-picker-options {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 2px;
+        padding: 10px 0;
+        max-height: calc(70vh - 70px);
+        display: grid;
+    }
+    
+    .size-option {
+        padding: 12px 8px;
+        text-align: center;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        margin: 0 10px;
+        border-bottom: 1px solid #eee;
+    }
+    
+    /* MOBILE OVERLAY */
+    .size-overlay {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 9998;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    .size-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
 }
-/* ============ UPDATED FILTER CONTROLS - Desktop Layout ============ */
+
+/* ============ LANDSCAPE MOBILE SIZE PICKER ============ */
+@media (max-width: 768px) and (orientation: landscape) {
+    /* Use desktop styles for landscape (no overlay, no bottom sheet) */
+    .size-picker-dropdown {
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        right: auto;
+        top: auto;
+        width: 120px;
+        max-height: 200px;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        margin-bottom: 5px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.2s ease;
+    }
+    
+    .size-picker-dropdown.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    .size-picker-header {
+        display: none;
+    }
+    
+    .size-picker-close {
+        display: none;
+    }
+    
+    .size-picker-options {
+        flex-direction: column;
+        gap: 0;
+        display: flex;
+    }
+    
+    .size-option {
+        padding: 10px 16px;
+        text-align: left;
+        border: none;
+        border-bottom: 1px solid #f5f5f5;
+        margin: 0;
+    }
+    
+    .size-overlay {
+        display: none !important;
+    }
+}
+
+/* ============ UPDATED FILTER CONTROLS - Desktop Layout / Desktop CSS ============ */
+
+/* Controls container should match catalog width */
 .controls {
-background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-padding: 15px 20px;
-border-radius: 12px;
-margin: 0 auto 20px;
-box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-border: 1.8px solid #D4AF37;
-position: relative;
-z-index: 100;
-display: flex;
-flex-direction: column;
-gap: 15px;
-width: 100%;
-max-width: 1600px;
-box-sizing: border-box;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); 
+    padding: 15px 20px;
+    border-radius: 12px; 
+    margin: 0 auto 20px; /* Center it */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border: 1.8px solid #D4AF37;
+    position: relative;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%; /* Match catalog width */
+    max-width: 1600px; /* Higher limit for large screens */
+    box-sizing: border-box;
 }
-/* Top header row: Gender tabs LEFT + Search bar RIGHT */
-.header-row {
-display: flex;
-justify-content: space-between;
-align-items: center;
-gap: 20px;
-}
-/* Search bar - 50% width, right side */
+
+/* Search bar - FROM OLD CODE */
 #searchInput {
-width: 50%;
-padding: 14px 20px;
-border: 2px solid #D4AF37;
-border-radius: 30px;
-background: #000;
-color: #FFD700;
-font-family: 'Montserrat', sans-serif;
-font-size: 1em;
-font-weight: 500;
-transition: all 0.3s ease;
-box-sizing: border-box;
+    width: 100%;
+    padding: 14px 20px;
+    border: 2px solid #D4AF37;
+    border-radius: 30px;
+    background: #000;
+    color: #FFD700;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    margin-bottom: 8px;
 }
+
 #searchInput:focus {
-outline: none;
-box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
-border-color: #FFD700;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+    border-color: #FFD700;
 }
+
 #searchInput::placeholder {
-color: #999;
+    color: #999;
 }
-/* Filter dropdowns row */
+
+/* Top row - All filters in one dynamic grid */
 .filter-top-row {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 10x;
 }
-/* Bottom row: Clear Filters LEFT + Sort RIGHT */
+
+/* Bottom row - Sort button only (view selector removed) */
 .filter-bottom-row {
-display: flex;
-justify-content: space-between;
-align-items: center;
-gap: 10px;
-padding-top: 15px;
-border-top: 1px solid rgba(212, 175, 55, 0.3);
+    display: flex;
+    justify-content: flex-end; /* Sort button to the right */
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
 }
-.clear-button-container,
+
+/* Sort button in bottom row */
 .sort-button-container {
-flex-shrink: 0;
+    flex-shrink: 0;
 }
-/* Filter Buttons */
+
+/* Filter Buttons - FROM NEW CODE */
 .filter-btn {
-width: 100%;
-padding: 12px 18px;
-border: 2px solid #D4AF37;
-border-radius: 30px;
-background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
-color: #FFD700;
-font-family: 'Montserrat', sans-serif;
-font-size: 0.9em;
-font-weight: 600;
-cursor: pointer;
-transition: all 0.3s ease;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 8px;
+    width: 100%;
+    padding: 12px 18px;
+    border: 2px solid #D4AF37;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
+    color: #FFD700;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
-.filter-btn:hover {
-background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
-color: #000;
-border-color: #FFD700;
-transform: translateY(-2px);
-box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4);
-}
-/* Cart Button */
+
+/* Cart Button - FROM OLD CODE (size and position) */
 .cart-summary-btn {
-position: absolute;
-right: 25px;
-top: 15px;
-background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
-color: #FFD700;
-border: 2px solid #D4AF37;
-padding: 12px 25px;
-border-radius: 30px;
-cursor: pointer;
-display: flex;
-align-items: center;
-gap: 10px;
-font-family: 'Montserrat', sans-serif;
-font-weight: 600;
-font-size: 0.9em;
-text-decoration: none;
-transition: all 0.3s ease;
-box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    position: absolute;
+    right: 25px;
+    top: 15px;
+    background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
+    color: #FFD700;
+    border: 2px solid #D4AF37;
+    padding: 12px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.9em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
+
 .cart-summary-btn:hover {
-background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
-color: #000;
-border-color: #FFD700;
-transform: translateY(-2px);
-box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4);
+    background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+    color: #000;
+    border-color: #FFD700;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4);
 }
+
 .cart-icon {
-font-size: 1.2em;
+    font-size: 1.2em;
 }
+
 .cart-text {
-display: inline;
+    display: inline;
 }
+
 .cart-count {
-background: #D4AF37;
-color: #000;
-border-radius: 50%;
-width: 24px;
-height: 24px;
-display: flex;
-align-items: center;
-justify-content: center;
-font-weight: bold;
-font-size: 0.8em;
+    background: #D4AF37;
+    color: #000;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8em;
 }
+
 /* ============ CART NOTIFICATION STYLES ============ */
 .cart-notification {
-position: fixed;
-top: 20px;
-right: 20px;
-background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
-color: #FFD700;
-border: 2px solid #D4AF37;
-padding: 15px 25px;
-border-radius: 30px;
-box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-font-family: 'Montserrat', sans-serif;
-font-weight: 600;
-font-size: 0.9em;
-z-index: 10000;
-opacity: 0;
-transform: translateY(-20px);
-transition: opacity 0.3s ease, transform 0.3s ease;
-display: flex;
-align-items: center;
-gap: 10px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
+    color: #FFD700;
+    border: 2px solid #D4AF37;
+    padding: 15px 25px;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.9em;
+    z-index: 10000;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
+
 .cart-notification.show {
-opacity: 1;
-transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
 }
+
 .cart-notification.hide {
-opacity: 0;
-transform: translateY(-20px);
+    opacity: 0;
+    transform: translateY(-20px);
 }
+
 .cart-notification-icon {
-font-size: 1.2em;
+    font-size: 1.2em;
 }
+
 /* Mobile responsive notification */
 @media (max-width: 768px) {
-.cart-notification {
-top: 10px;
-right: 10px;
-left: 10px;
-text-align: center;
-padding: 12px 20px;
+    .cart-notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        text-align: center;
+        padding: 12px 20px;
+    }
 }
-}
+
 /* ============ ELEGANT ALERT STYLES ============ */
 .elegant-alert-overlay {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(0, 0, 0, 0.7);
-display: flex;
-justify-content: center;
-align-items: center;
-z-index: 10000;
-backdrop-filter: blur(8px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    backdrop-filter: blur(8px);
 }
+
 .elegant-alert-box {
-background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-border: 2px solid #D4AF37;
-border-radius: 20px;
-padding: 5px;
-max-width: 400px;
-width: 90%;
-text-align: center;
-box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-animation: slideIn 0.3s ease-out;
-margin: 0 auto;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border: 2px solid #D4AF37;
+    border-radius: 20px;
+    padding: 5px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    animation: slideIn 0.3s ease-out;
+    margin: 0 auto;
 }
+
 @keyframes slideIn {
-from { transform: translateY(-30px); opacity: 0; }
-to { transform: translateY(0); opacity: 1; }
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
+
 .elegant-alert-icon {
-font-size: 60px;
-margin-bottom: 10px;
-color: #D4AF37;
-text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+    font-size: 60px;
+    margin-bottom: 10px;
+    color: #D4AF37;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
 }
+
 .elegant-alert-title {
-font-family: 'Montserrat', sans-serif;
-font-size: 1.4em;
-font-weight: 600;
-color: #FFD700;
-margin-bottom: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #FFD700;
+    margin-bottom: 15px;
 }
+
 .elegant-alert-message {
-font-family: 'Montserrat', sans-serif;
-font-size: 0.95em;
-color: #ccc;
-line-height: 1.5;
-margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95em;
+    color: #ccc;
+    line-height: 1.5;
+    margin-bottom: 20px;
 }
+
 .elegant-alert-btn {
-background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
-color: #000;
-border: none;
-padding: 14px 30px;
-border-radius: 30px;
-font-family: 'Montserrat', sans-serif;
-font-size: 0.95em;
-font-weight: 600;
-cursor: pointer;
-transition: all 0.3s ease;
-width: 100%;
-max-width: 250px;
-margin: 0 auto 20px auto;
-display: block;
-text-transform: uppercase;
-letter-spacing: 1px;
+    background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+    color: #000;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto 20px auto;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
+
 .elegant-alert-btn:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
 }
+
 /* Enhanced Error (showerror) Styling */
 .input-error {
-border-color: #ff4d4d !important;
-background-color: #fff5f5 !important;
+    border-color: #ff4d4d !important;
+    background-color: #fff5f5 !important;
 }
+
 .input-error:focus {
-border-color: #ff1a1a !important;
-box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.1) !important;
+    border-color: #ff1a1a !important;
+    box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.1) !important;
 }
+
 .error-message {
-color: #ff4d4d;
-font-size: 12px;
-margin-top: 5px;
-text-align: left;
-font-weight: 500;
+    color: #ff4d4d;
+    font-size: 12px;
+    margin-top: 5px;
+    text-align: left;
+    font-weight: 500;
 }
+
+
 /* ============ MODERN CUSTOM DROPDOWN STYLES ============ */
 .gold-select {
-width: 100%;
-padding: 12px 18px;
-border: 2px solid #D4AF37;
-box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.3);
-border-radius: 30px;
-background: #000;
-color: #FFD700;
-font-family: 'Montserrat', sans-serif;
-font-size: 0.9em;
-font-weight: 500;
-cursor: pointer;
--webkit-appearance: none;
--moz-appearance: none;
-appearance: none;
-background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D4AF37'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
-background-repeat: no-repeat;
-background-position: right 20px center;
-background-size: 20px;
-padding-right: 50px;
-box-sizing: border-box;
+    width: 100%;
+    padding: 12px 18px;
+    border: 2px solid #D4AF37;
+    box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.3);
+    border-radius: 30px;
+    background: #000;
+    color: #FFD700;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D4AF37'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    background-size: 20px;
+    padding-right: 50px;
+    box-sizing: border-box;
 }
+
 .gold-select:focus {
-outline: none;
-border-color: #FFD700;
+    outline: none;
+    border-color: #FFD700;
 }
+
 .gold-select option {
-background: #000;
-color: #FFD700;
-border: 1px solid #D4AF37;
+    background: #000;
+    color: #FFD700;
+    border: 1px solid #D4AF37;
 }
-/* ============ SIMPLE MOBILE OPTIMIZATION - Mobile CSS ============ /
-/ ============ MOBILE OPTIMIZATION (Portrait Phones Only) ============ /
+
+/* ============ SIMPLE MOBILE OPTIMIZATION - Mobile CSS ============ */
+/* ============ MOBILE OPTIMIZATION (Portrait Phones Only) ============ */
 @media (max-width: 768px) and (orientation: portrait) {
-/ Performance optimizations */
-.product-card {
-will-change: transform;
-contain: content;
-}
-.catalog-container {
-    contain: layout style paint;
-}
+    /* Performance optimizations */
+    .product-card {
+        will-change: transform;
+        contain: content;
+    }
+    
+    .catalog-container {
+        contain: layout style paint;
+    }
+    
+    /* Disable hover effects on mobile for better performance */
+    .product-card:hover, .qty-btn:hover, .catalog-qty-btn:hover {
+        transform: none !important;
+        box-shadow: none !important;
+        transition: none !important;
+    }
+    
+    .gold-select, .filter-btn, .cart-summary-btn, .qty-btn, .catalog-qty-btn {
+        -webkit-tap-highlight-color: transparent !important; /* Remove blue tap highlight */
+        touch-action: manipulation !important;
+    }
+    .filter-btn {
+        -webkit-tap-highlight-color: transparent !important;
+        touch-action: manipulation !important;
+    }
 
-/* Disable hover effects on mobile for better performance */
-.product-card:hover, .qty-btn:hover, .catalog-qty-btn:hover {
-    transform: none !important;
-    box-shadow: none !important;
-    transition: none !important;
-}
-
-.gold-select, .filter-btn, .cart-summary-btn, .qty-btn, .catalog-qty-btn {
-    -webkit-tap-highlight-color: transparent !important; /* Remove blue tap highlight */
-    touch-action: manipulation !important;
-}
-.filter-btn {
+    body {
+        zoom: 1 !important;
+        -moz-transform: none !important;
+        transform: none !important;
+        width: 100% !important;
+        min-height: 100vh !important;
+        padding: 0 10px 15px !important;
+        margin: 0 !important;
+        overflow-x: hidden !important;
+        position: static !important;
+        left: 0 !important;
+        font-size: 14px; /* Base font size for mobile */
+    }
+    
+    /* Scale down headings */
+    h1 {
+        font-size: 1.3em !important;
+        line-height: 1.2 !important;
+        margin-top: 15px !important;
+        margin-bottom: 15px !important;
+        padding: 0 5px !important;
+    }
+    
+    /* FIX 1: Controls - Keep original styling but scale down */
+    .controls {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+        padding: 12px !important;
+        border-radius: 10px !important;
+        margin: 0 auto 15px !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+        border: 1.8px solid #D4AF37 !important;
+        position: relative !important;
+        z-index: 100 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        font-size: 0.9em !important;
+    }
+    
+    /* FIX 2: Search Bar - Smaller but proportional */
+    #searchInput {
+        width: 100% !important;
+        margin: 0 0 12px 0 !important;
+        padding: 12px 18px !important;
+        border: 2px solid #D4AF37 !important;
+        border-radius: 30px !important;
+        background: #000 !important;
+        color: #FFD700 !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 0.95em !important;
+        font-weight: 500 !important;
+        box-sizing: border-box !important;
+        display: block !important;
+    }
+    
+    /* FIX 3: Cart Button - Keep original position */
+    .cart-summary-btn {
+        position: absolute !important;
+        right: 25px !important;
+        top: 12px !important;
+        background: linear-gradient(135deg, #000 0%, #2d2d2d 100%) !important;
+        color: #FFD700 !important;
+        border: 2px solid #D4AF37 !important;
+        padding: 8px 18px !important;
+        border-radius: 30px !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: 600 !important;
+        font-size: 0.85em !important;
+        text-decoration: none !important;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important;
+        margin: 0 !important;
+        z-index: 101 !important;
+    }
+    
+    /* FIX 4: Filter grid - Keep 2 columns */
+    .filter-top-row {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+        width: 100% !important;
+        margin: 0 0 8px 0 !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* FIX 5: Filter selects - Smaller */
+    .custom-select-trigger {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 10px 12px !important;
+        margin: 0 !important;
+        border: 2px solid #D4AF37 !important;
+        border-radius: 30px !important;
+        background: linear-gradient(135deg, #000 0%, #2d2d2d 100%) !important;
+        color: #FFD700 !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 0.85em !important;
+        font-weight: 500 !important;
+        cursor: pointer !important;
+        min-height: 40px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+    }
+    
+    #subBrandFilter[style*="inline-block"] + * + * + * + #genFilter {
+        grid-column: 1 !important;
+        justify-self: start !important;
+    }
+    
+    /* FIX 7: Sort button row */
+    .filter-bottom-row {
+        width: 100% !important;
+        margin: 8px 0 0 0 !important;
+        padding-top: 8px !important;
+        border-top: 1px solid rgba(212, 175, 55, 0.3) !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+    
+    .sort-button-container {
+        width: 100% !important;
+    }
+    
+    .sort-button-container .filter-btn {
+        width: 100% !important;
+        padding: 10px 16px !important;
+        margin: 0 !important;
+        border: 2px solid #D4AF37 !important;
+        border-radius: 30px !important;
+        background: linear-gradient(135deg, #000 0%, #2d2d2d 100%) !important;
+        color: #FFD700 !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 0.85em !important;
+        font-weight: 600 !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+    }
+    
+    /* FIX 8: Catalog container - Ensure 2 columns fit perfectly */
+    .catalog-container {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        padding: 0 2px !important;
+    }
+    
+    /* FIX 9: Product card - Smaller but proportional */
+    .product-card {
+        padding: 8px !important;
+        border-radius: 8px !important;
+        font-size: 0.9em !important;
+    }
+    
+    .main-image img {
+        height: 180px !important; /* Smaller height to fit 2 cards */
+        object-fit: contain !important;
+    }
+    
+    .product-name {
+        font-size: 0.6em !important;
+        min-height: 2em !important;
+        margin: 6px 0 4px !important;
+        line-height: 1.2 !important;
+    }
+    
+    .product-price {
+        font-size: 0.75em !important;
+    }
+    
+    .thumbnails {
+        grid-template-columns: repeat(6, 1fr) !important;
+        gap: 3px !important;
+    }
+    
+    .thumbnail-img {
+        height: 32px !important;
+    }
+    
+    /* FIX 11: Add button - Smaller */
+    .product-info button {
+        padding: 4px 10px !important;
+        font-size: 0.65em !important;
+    }
+    
+    /* FIX 12: Quantity controls - Smaller */
+    .catalog-qty-controls {
+        gap: 3px !important;
+        padding: 3px !important;
+    }
+    
+    .catalog-qty-btn {
+        padding: 2px 6px !important;
+        font-size: 0.75em !important;
+        min-width: 24px !important;
+        background: #f0f0f0 !important;
+        border: 1px solid #ddd !important;
+        border-radius: 3px !important;
+        font-weight: bold !important;
+        cursor: pointer !important;
+    }
+    .catalog-qty-btn:hover {
+        background: #e5e5e5 !important;
+    }
+    
+    /* FIX 13: Notification - Proper positioning (NO transform) */
+    .cart-notification {
+        top: 80px !important; /* Below cart button */
+        right: 20px !important;
+        left: 20px !important;
+        text-align: center !important;
+        padding: 12px 18px !important;
+        transform: none !important;
+        z-index: 10000 !important;
+        font-size: 0.9em !important;
+    }
+    
+    /* FIX 14: Image modal - Proper positioning (NO transform) */
+    #imageModal[style*="display: block"] {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    #modalImg {
+        max-width: 75% !important;
+        max-height: 70vh !important;
+    }
+    #nextBtn {
+    right: 1% !important; 
+    }
+    #prevBtn {
+    left: 1% !important; 
+    }
+   .modal-arrows {
+    /* fixes mobile touch */
+    z-index: 10007 !important;
     -webkit-tap-highlight-color: transparent !important;
     touch-action: manipulation !important;
-}
-
-body {
-    zoom: 1 !important;
-    -moz-transform: none !important;
-    transform: none !important;
-    width: 100% !important;
-    min-height: 100vh !important;
-    padding: 0 10px 15px !important;
-    margin: 0 !important;
-    overflow-x: hidden !important;
-    position: static !important;
-    left: 0 !important;
-    font-size: 14px; /* Base font size for mobile */
-}
-
-/* Scale down headings */
-h1 {
-    font-size: 1.3em !important;
-    line-height: 1.2 !important;
-    margin-top: 15px !important;
-    margin-bottom: 15px !important;
-    padding: 0 5px !important;
-}
-
-/* MOBILE CONTROLS LAYOUT */
-.controls {
-    padding: 12px !important;
-    gap: 8px !important;
-}
-
-/* Header row becomes column on mobile */
-.header-row {
-    flex-direction: column !important;
-    gap: 8px !important;
-    align-items: stretch !important;
-}
-
-/* Gender tabs - BIGGER, space-between */
-.gender-tabs {
-    justify-content: space-between !important;
-    gap: 0 !important;
-    width: 100% !important;
-    margin-bottom: 0 !important;
-}
-
-.gender-tab {
-    font-size: 1.2em !important;
-    padding: 0 0 10px 0 !important;
-    flex: 1 !important;
-}
-
-.gender-tab:first-child {
-    text-align: left !important;
-}
-
-.gender-tab:last-child {
-    text-align: right !important;
-}
-
-.gender-tab.active::after {
-    height: 3px !important;
-}
-
-/* Search bar - FULL WIDTH */
-#searchInput {
-    width: 100% !important;
-    padding: 12px 90px 12px 18px !important;
-    font-size: 0.95em !important;
-    margin: 0 !important;
-}
-
-/* Cart button - INSIDE search bar on right */
-.cart-summary-btn {
-    position: absolute !important;
-    right: 12px !important;
-    top: 64px !important;
-    padding: 10px 16px !important;
-    font-size: 0.8em !important;
-    gap: 6px !important;
-    z-index: 101 !important;
-}
-
-/* Filter dropdowns */
-.filter-top-row {
-    gap: 8px !important;
-}
-
-.custom-select-trigger {
-    padding: 10px 12px !important;
-    font-size: 0.85em !important;
-    min-height: 40px !important;
-}
-
-/* Bottom row - Clear + Sort side by side */
-.filter-bottom-row {
-    padding-top: 8px !important;
-    gap: 8px !important;
-}
-
-.clear-button-container,
-.sort-button-container {
-    flex: 1 !important;
-}
-
-.clear-button-container .filter-btn,
-.sort-button-container .filter-btn {
-    width: 100% !important;
-    padding: 10px 12px !important;
-    font-size: 0.8em !important;
-}
-
-/* Catalog container */
-.catalog-container {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px !important;
-    padding: 0 2px !important;
-}
-
-/* Product card */
-.product-card {
-    padding: 8px !important;
-    border-radius: 8px !important;
-    font-size: 0.9em !important;
-}
-
-.main-image img {
-    height: 180px !important;
-    object-fit: contain !important;
-}
-
-.product-name {
-    font-size: 0.6em !important;
-    min-height: 2em !important;
-    margin: 6px 0 4px !important;
-    line-height: 1.2 !important;
-}
-
-.product-price {
-    font-size: 0.75em !important;
-}
-
-.thumbnails {
-    grid-template-columns: repeat(6, 1fr) !important;
-    gap: 3px !important;
-}
-
-.thumbnail-img {
-    height: 32px !important;
-}
-
-.product-info button {
-    padding: 4px 10px !important;
-    font-size: 0.65em !important;
-}
-
-.catalog-qty-controls {
-    gap: 3px !important;
-    padding: 3px !important;
-}
-
-.catalog-qty-btn {
-    padding: 2px 6px !important;
-    font-size: 0.75em !important;
-    min-width: 24px !important;
-    background: #f0f0f0 !important;
-    border: 1px solid #ddd !important;
-    border-radius: 3px !important;
-    font-weight: bold !important;
     cursor: pointer !important;
+    user-select: none !important;
+    outline: none !important;
+    position: relative;
+    }
+    /* FIX 15: Elegant alert - Proper positioning */
+    .elegant-alert-overlay {
+        transform: none !important;
+        width: 100% !important;
+        left: 0 !important;
+        padding: 0 20px !important;
+        box-sizing: border-box !important;
+    }
+    
+    .elegant-alert-box {
+        max-width: 90% !important;
+        padding: 20px !important;
+    }
+    
+    /* FIX 16: Checkout modal - Proper positioning */
+    #checkoutModal {
+        transform: none !important;
+        width: 100% !important;
+        left: 0 !important;
+    }
+    
+    .checkout-modal-content {
+        width: 95% !important;
+        margin: 5% auto !important;
+    }
 }
+    /* FIX 16: Checkout modal - Proper positioning */
+    #checkoutModal {
+        transform: none !important;
+        width: 100% !important;
+        left: 0 !important;
+    }
+    
+    .checkout-modal-content {
+        width: 95% !important;
+        margin: 5% auto !important;
+    }
+    
+    /* ===== ADD THIS NEW FIX 17 SECTION HERE ===== */
+    /* FIX 17: Checkout quantity controls - Match catalog styling */
+    .qty-controls {
+        gap: 3px !important;
+    }
+    
+    .qty-btn {
+        padding: 2px 6px !important;
+        font-size: 0.75em !important;
+        min-width: 24px !important;
+        background: #f0f0f0 !important;
+        border: 1px solid #ddd !important;
+        border-radius: 3px !important;
+        font-weight: bold !important;
+        cursor: pointer !important;
+    }
+    
+    .qty-btn:hover {
+        background: #e5e5e5 !important;
+    }
+    
+    .cart-item .item-meta {
+        font-size: 0.7em !important;
+    }
+    
+    .cart-item img {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    
+    .cart-item {
+        padding: 10px 0 !important;
+    }
+    /* ===== END OF NEW FIX 17 ===== */
 
-.catalog-qty-btn:hover {
-    background: #e5e5e5 !important;
-}
-
-.cart-notification {
-    top: 80px !important;
-    right: 20px !important;
-    left: 20px !important;
-    text-align: center !important;
-    padding: 12px 18px !important;
-    transform: none !important;
-    z-index: 10000 !important;
-    font-size: 0.9em !important;
-}
-
-#imageModal[style*="display: block"] {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-#modalImg {
-    max-width: 75% !important;
-    max-height: 70vh !important;
-}
-#nextBtn {
-right: 1% !important; 
-}
-#prevBtn {
-left: 1% !important; 
-}
-.modal-arrows {
-z-index: 10007 !important;
--webkit-tap-highlight-color: transparent !important;
-touch-action: manipulation !important;
-cursor: pointer !important;
-user-select: none !important;
-outline: none !important;
-position: relative;
-}
-.elegant-alert-overlay {
-    transform: none !important;
-    width: 100% !important;
-    left: 0 !important;
-    padding: 0 20px !important;
-    box-sizing: border-box !important;
-}
-
-.elegant-alert-box {
-    max-width: 90% !important;
-    padding: 20px !important;
-}
-
-#checkoutModal {
-    transform: none !important;
-    width: 100% !important;
-    left: 0 !important;
-}
-
-.checkout-modal-content {
-    width: 95% !important;
-    margin: 5% auto !important;
-}
-
-.qty-controls {
-    gap: 3px !important;
-}
-
-.qty-btn {
-    padding: 2px 6px !important;
-    font-size: 0.75em !important;
-    min-width: 24px !important;
-    background: #f0f0f0 !important;
-    border: 1px solid #ddd !important;
-    border-radius: 3px !important;
-    font-weight: bold !important;
-    cursor: pointer !important;
-}
-
-.qty-btn:hover {
-    background: #e5e5e5 !important;
-}
-
-.cart-item .item-meta {
-    font-size: 0.7em !important;
-}
-
-.cart-item img {
-    width: 50px !important;
-    height: 50px !important;
-}
-
-.cart-item {
-    padding: 10px 0 !important;
-}
-}
 /* Small phones */
 @media (max-width: 375px) and (orientation: portrait) {
-.product-card:hover, .qty-btn:hover, .catalog-qty-btn:hover {
-transform: none !important;
-box-shadow: none !important;
-}
-.gold-select, .filter-btn, .cart-summary-btn, .qty-btn, .catalog-qty-btn {
-touch-action: manipulation !important;
-}
-body {
-padding: 0 8px 15px !important;
-font-size: 13px !important;
-}
-h1 {
-    font-size: 1.2em !important;
-    margin-top: 12px !important;
+    .product-card:hover, .qty-btn:hover, .catalog-qty-btn:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    .gold-select, .filter-btn, .cart-summary-btn, .qty-btn, .catalog-qty-btn {
+        touch-action: manipulation !important;
+    }
+    body {
+        padding: 0 8px 15px !important;
+        font-size: 13px !important;
+    }
+    
+    h1 {
+        font-size: 1.2em !important;
+        margin-top: 12px !important;
+    }
+    
+    .controls {
+        padding: 10px !important;
+    }
+    
+    .cart-summary-btn {
+        right: 10px !important;
+        top: 10px !important;
+        padding: 7px 15px !important;
+        font-size: 0.8em !important;
+    }
+    
+    #searchInput {
+        padding: 10px 15px !important;
+        font-size: 0.9em !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .custom-select-trigger {
+        padding: 8px 10px !important;
+        font-size: 0.8em !important;
+    }
+    
+    .sort-button-container .filter-btn {
+        padding: 8px 14px !important;
+        font-size: 0.8em !important;
+    }
+    
+    .catalog-container {
+        gap: 8px !important;
+    }
+    
+    .main-image img {
+        height: 160px !important;
+    }
+    
+    .cart-notification {
+        top: 70px !important;
+        right: 15px !important;
+        left: 15px !important;
+        padding: 10px 15px !important;
+        font-size: 0.85em !important;
+    }
+    
+    /* ===== ADDED THIS TO SMALL PHONES SECTION ===== */
+    .catalog-qty-btn {
+        padding: 1px 5px !important;
+        font-size: 0.7em !important;
+        min-width: 22px !important;
+    }
+    
+    .qty-btn {
+        padding: 1px 5px !important;
+        font-size: 0.7em !important;
+        min-width: 22px !important;
+    }
+    
+    .cart-item img {
+        width: 45px !important;
+        height: 45px !important;
+    }
+    /* ===== END OF ADDITION ===== */
 }
 
-.controls {
-    padding: 10px !important;
-}
-
-.cart-summary-btn {
-    right: 10px !important;
-    top: 62px !important;
-    padding: 8px 14px !important;
-    font-size: 0.75em !important;
-}
-
-#searchInput {
-    padding: 10px 85px 10px 15px !important;
-    font-size: 0.9em !important;
-}
-
-.gender-tab {
-    font-size: 1.1em !important;
-}
-
-.custom-select-trigger {
-    padding: 8px 10px !important;
-    font-size: 0.8em !important;
-}
-
-.clear-button-container .filter-btn,
-.sort-button-container .filter-btn {
-    padding: 8px 10px !important;
-    font-size: 0.75em !important;
-}
-
-.catalog-container {
-    gap: 8px !important;
-}
-
-.main-image img {
-    height: 160px !important;
-}
-
-.cart-notification {
-    top: 70px !important;
-    right: 15px !important;
-    left: 15px !important;
-    padding: 10px 15px !important;
-    font-size: 0.85em !important;
-}
-
-.catalog-qty-btn {
-    padding: 1px 5px !important;
-    font-size: 0.7em !important;
-    min-width: 22px !important;
-}
-
-.qty-btn {
-    padding: 1px 5px !important;
-    font-size: 0.7em !important;
-    min-width: 22px !important;
-}
-
-.cart-item img {
-    width: 45px !important;
-    height: 45px !important;
-}
-}
 /* ============ MOBILE LANDSCAPE ============ */
 @media (max-width: 768px) and (orientation: landscape) {
-body {
-zoom: 1 !important;
-transform: none !important;
-width: 100% !important;
-padding: 0 10px !important;
-margin: 0 !important;
-overflow-x: hidden !important;
-box-sizing: border-box !important;
-}
-h1 {
-    font-size: 1.4em !important;
-    margin-top: 10px !important;
-    margin-bottom: 10px !important;
-    padding: 0 5px !important;
+    /* Keep desktop-like layout in landscape */
+    body {
+        zoom: 1 !important;
+        transform: none !important;
+        width: 100% !important;
+        padding: 0 10px !important;
+        margin: 0 !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+    }
+    
+    h1 {
+        font-size: 1.4em !important;
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+        padding: 0 5px !important;
+    }
+    
+    /* Controls - FULL WIDTH in landscape */
+    .controls {
+        padding: 10px 15px !important;
+        margin: 0 0 10px 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        position: relative !important;
+        border-radius: 10px !important;
+    }
+    
+    /* Search bar - Full width */
+    #searchInput {
+        width: 100% !important;
+        margin: 0 0 8px 0 !important;
+        padding: 10px 15px !important;
+        font-size: 0.9em !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Filter grid - FILL LANDSCAPE SCREEN */
+    .filter-top-row {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 8px !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Filter selects - Fill grid cells */
+    .custom-select-trigger {
+        width: 100% !important;
+        padding: 8px 12px !important;
+        font-size: 0.8em !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        border-radius: 25px !important;
+    }
+    
+    /* Fix sub-brand filter if present */
+    #subBrandWrapper[style*="inline-block"] {
+        grid-column: span 1 !important;
+    }
+    
+    /* Catalog container - Fill width */
+    .catalog-container {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 10px !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Product cards - Adjust for landscape */
+    .product-card {
+        padding: 8px !important;
+        border-radius: 8px !important;
+    }
+    
+    .main-image img {
+        height: 180px !important;
+    }
+    
+    /* Cart button - Adjust position */
+    .cart-summary-btn {
+        position: absolute !important;
+        right: 20px !important;
+        top: 5px !important; /* Changed from 10px to 8px - MOVED UP */
+        padding: 5px 14px !important; /* Reduced from 8px(vertical) 16px(horizontal) - NARROWER VERTICALLY */
+        font-size: 0.8em !important;
+    }
+    
+    /* Sort button row - Full width */
+    .filter-bottom-row {
+        width: 100% !important;
+        margin: 8px 0 0 0 !important;
+        padding-top: 8px !important;
+        border-top: 1px solid rgba(212, 175, 55, 0.3) !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+        box-sizing: border-box !important;
+    }
+    
+    .sort-button-container {
+        width: auto !important;
+    }
+    
+    .sort-button-container .filter-btn {
+        padding: 8px 16px !important;
+        font-size: 0.8em !important;
+        width: auto !important;
+    }
+    
+    /* Hide mobile filters completely in landscape */
+    .mobile-filter-triggers {
+        display: none !important;
+    }
+    
+    /* Size picker - Adjust for landscape */
+    .size-picker {
+        max-width: 70px !important;
+    }
+    
+    .size-picker-trigger {
+        font-size: 0.75em !important;
+        padding: 4px 8px !important;
+    }
+    
+    /* Product info - Adjust for landscape */
+    .product-name {
+        font-size: 0.65em !important;
+        min-height: 2.2em !important;
+        margin: 6px 0 4px 0 !important; /* Added 4px bottom padding */
+        line-height: 1.3 !important;
+        padding-bottom: 2px !important; /* Added bottom padding */
+    }
+    
+    .product-price {
+        font-size: 0.8em !important;
+    }
+    
+    /* Thumbnails - Adjust for landscape */
+    .thumbnails {
+        grid-template-columns: repeat(6, 1fr) !important;
+        gap: 3px !important;
+        margin-top: 5px !important;
+    }
+    
+    .thumbnail-img {
+        height: 35px !important;
+    }
+    
+    /* Ensure everything is properly box-sized */
+    * {
+        box-sizing: border-box !important;
+    }
 }
 
-.controls {
-    padding: 10px 15px !important;
-    margin: 0 0 10px 0 !important;
-    max-width: 100% !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    position: relative !important;
-    border-radius: 10px !important;
-}
-
-.header-row {
-    gap: 10px !important;
-}
-
-.gender-tabs {
-    gap: 30px !important;
-}
-
-.gender-tab {
-    font-size: 0.9em !important;
-}
-
-#searchInput {
-    width: 50% !important;
-    padding: 10px 15px !important;
-    font-size: 0.9em !important;
-}
-
-.filter-top-row {
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 8px !important;
-}
-
-.custom-select-trigger {
-    padding: 8px 12px !important;
-    font-size: 0.8em !important;
-}
-
-.catalog-container {
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 10px !important;
-}
-
-.product-card {
-    padding: 8px !important;
-    border-radius: 8px !important;
-}
-
-.main-image img {
-    height: 180px !important;
-}
-
-.cart-summary-btn {
-    right: 20px !important;
-    top: 8px !important;
-    padding: 6px 14px !important;
-    font-size: 0.8em !important;
-}
-
-.filter-bottom-row {
-    padding-top: 8px !important;
-}
-
-.clear-button-container .filter-btn,
-.sort-button-container .filter-btn {
-    padding: 8px 16px !important;
-    font-size: 0.8em !important;
-}
-
-.product-name {
-    font-size: 0.65em !important;
-    min-height: 2.2em !important;
-    margin: 6px 0 4px 0 !important;
-    line-height: 1.3 !important;
-    padding-bottom: 2px !important;
-}
-
-.product-price {
-    font-size: 0.8em !important;
-}
-
-.thumbnails {
-    grid-template-columns: repeat(6, 1fr) !important;
-    gap: 3px !important;
-    margin-top: 5px !important;
-}
-
-.thumbnail-img {
-    height: 35px !important;
-}
-}
 /* ============ CATALOG STYLES ============ */
 input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1px solid #ddd; font-family: inherit; }
+
+/* CATALOG CONTAINER - MAIN STYLES */
 .catalog-container {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 20px;
-width: 100%;
-max-width: 1600px;
-margin: 0 auto;
-box-sizing: border-box;
-padding: 0 5px;
-background: transparent;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    /* REMOVE max-width: 1200px; */
+    width: 100%; /* Use percentage instead to Match catalog width */
+    max-width: 1600px; /* Higher limit for large screens */
+    margin: 0 auto; /* Center it */
+    box-sizing: border-box;
+    padding: 0 5px;
 }
+
+/* PRODUCT CARD SIZING */
 .product-card {
-background: white;
-padding: 12px;
-border-radius: 10px;
-display: flex;
-flex-direction: column;
-position: relative;
-width: 100%;
-box-sizing: border-box;
-transition: transform 0.2s ease;
+    background: white;
+    padding: 12px; /* Increased padding for better spacing */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    transition: transform 0.2s ease;
 }
+
 .product-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
+
+/* Ensure images don't overflow */
 .main-image img {
-width: 100%;
-height: 280px;
-object-fit: contain;
-cursor: pointer;
-max-width: 100%;
+    width: 100%;
+    height: 280px;
+    object-fit: contain;
+    cursor: pointer;
+    max-width: 100%;
 }
+
+/* Size dropdown styling (old - kept for fallback) */
 .size-select {
-font-size: 0.70em;
-font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-color: #555;
-padding: 4px;
-border: 1px solid #ddd;
-border-radius: 4px;
-background: white;
-width: 80%;
-max-width: 120px;
+    font-size: 0.70em;
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #555;
+    padding: 4px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    width: 80%;
+    max-width: 120px;
 }
+
+/* Catalog quantity controls */
 .catalog-qty-controls {
-display: inline-flex;
-align-items: center;
-gap: 5px;
-background: #f0f0f0;
-padding: 2x 4px;
-border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #f0f0f0;
+    padding: 2x 4px;
+    border-radius: 6px;
 }
+
 .catalog-qty-btn {
-background: #f0f0f0;
-border: 1px solid #ddd;
-padding: 2px 8px;
-cursor: pointer;
-border-radius: 3px;
-font-weight: bold;
-font-size: 0.8em;
-min-width: 28px;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 2px 8px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 0.8em;
+    min-width: 28px;
 }
+
 .catalog-qty-btn:hover {
-background: #e5e5e5;
+    background: #e5e5e5;
 }
+
 .catalog-qty-input {
-width: 40px;
-font-size: 0.8em;
-text-align: center;
-border: 1px solid #ddd;
-border-radius: 3px;
-padding: 2px;
-background: white;
+    width: 40px;
+    font-size: 0.8em;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 2px;
+    background: white;
 }
+
+/* Ensure desktop always shows proper columns - INCLUDES LANDSCAPE */
 @media (min-width: 769px), (orientation: landscape) {
-.catalog-container {
-grid-template-columns: repeat(4, 1fr) !important;
+    .catalog-container {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
 }
-}
+
 .folder-tag { position: absolute; top: 5px; right: 5px; background: #333; color: white; padding: 2px 6px; font-size: 10px; border-radius: 3px; opacity: 0.7; z-index: 5; }
+
+/* Prevent right-click, dragging, or saving images */
 .main-image img, .thumbnail-img {
--webkit-user-drag: none;
--khtml-user-drag: none;
--moz-user-drag: none;
--o-user-drag: none;
-user-drag: none;
-pointer-events: auto;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    pointer-events: auto;
 }
+
 .product-name { font-size: 0.65em; margin: 10px 0 -10px; font-weight: 600; min-height: 2.5em; color: #333; text-transform: capitalize; }
 .product-price { font-size: 0.85em; }
 .thumbnails { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; margin-top: auto; }
 .thumbnail-img { width: 100%; height: 40px; object-fit: cover; border: 1px solid #eee; border-radius: 4px; cursor: pointer; }
+
 /* ============ IMAGE MODAL STYLES ============ */
 #imageModal { display:none; position:fixed; z-index:1001; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.9); overflow:auto; text-align: center; }
 #modalImg {
-margin: auto;
-display: inline-block;
-max-width: 90%;
-max-height: 90%;
-padding: 40px 0;
-transition: transform 0.2s ease;
-cursor: zoom-in;
+    margin: auto;
+    display: inline-block;
+    max-width: 90%;
+    max-height: 90%;
+    padding: 40px 0;
+    transition: transform 0.2s ease;
+    cursor: zoom-in;
 }
 #modalImg.zoomed {
-max-width: none;
-max-height: none;
-transform: scale(1.5);
+    max-width: none;
+    max-height: none;
+    transform: scale(1.5);
 }
+
 .modal-arrows {
-position: fixed;
-top: 50%;
-transform: translateY(-50%);
-background: transparent;
-color: white;
-border: none;
-font-size: 40px;
-padding: 15px;
-cursor: pointer;
-z-index: 1002;
-text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
-opacity: 0.7;
-transition: opacity 0.3s ease;
-touch-action: manipulation;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 40px;
+    padding: 15px;
+    cursor: pointer;
+    z-index: 1002;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    touch-action: manipulation;
 }
+
 .modal-arrows:hover {
-opacity: 1;
-background: transparent;
+    opacity: 1;
+    background: transparent;
 }
+
 #prevBtn {
-left: 25%;
+    left: 25%;
 }
+
 #nextBtn {
-right: 25%;
+    right: 25%;
 }
+
 /* ============ CHECKOUT MODAL STYLES ============ */
-#checkoutModal {
-display: none;
-position: fixed;
-z-index: 1002;
-left: 0;
-top: 0;
-width: 100%;
-height: 100%;
-background-color: rgba(0,0,0,0.7);
-overflow-y: auto;
+#checkoutModal { 
+    display: none;
+    position: fixed;
+    z-index: 1002;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    overflow-y: auto;
 }
 .checkout-modal-content {
-background-color: #fefefe;
-margin: 2% auto;
-padding: 0;
-width: 80%;
-max-width: 1000px;
-border-radius: 12px;
-box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-position: relative;
+    background-color: #fefefe;
+    margin: 2% auto;
+    padding: 0;
+    width: 80%;
+    max-width: 1000px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    position: relative;
 }
-.close-checkout {
-position: absolute;
-right: 20px;
-top: 15px;
-color: #aaa;
-font-size: 28px;
-font-weight: bold;
-cursor: pointer;
-z-index: 1003;
+.close-checkout { 
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1003;
 }
 .close-checkout:hover { color: #000; }
+
 #checkoutModal {
-overflow-y: auto !important;
--webkit-overflow-scrolling: touch !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
 }
+
 /* ============ CHECKOUT LAYOUT STYLES ============ */
-.header-bar {
-background: white;
-width: 100%;
-padding: 20px 0;
-text-align: center;
-box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-margin-bottom: 20px;
+.header-bar { 
+    background: white; 
+    width: 100%; 
+    padding: 20px 0; 
+    text-align: center; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
 }
 .logo { max-width: 100px; border: none; }
+
 .page-wrapper { padding: 0 20px 40px; }
-.checkout-master {
-display: flex;
-gap: 30px;
-align-items: flex-start;
+
+.checkout-master { 
+    display: flex; 
+    gap: 30px; 
+    align-items: flex-start; 
 }
-.checkout-left {
-flex: 1.1;
-background: white;
-padding: 35px;
-border-radius: 12px;
-box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+
+.checkout-left { 
+    flex: 1.1; 
+    background: white; 
+    padding: 35px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
 }
-.checkout-right {
-flex: 1;
-background: white;
-padding: 30px;
-border-radius: 12px;
-box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-position: sticky;
-top: 20px;
+
+.checkout-right { 
+    flex: 1; 
+    background: white; 
+    padding: 30px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 20px;
 }
+
 .cart-item { display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #f0f0f0; padding: 15px 0; }
 .cart-item img { width: 65px; height: 65px; object-fit: contain; border-radius: 6px; background: #fafafa; border: 1px solid #eee; }
 .item-info { flex: 1; min-width: 0; overflow: hidden;}
 .item-title { font-weight: 600; font-size: 0.85em; margin-bottom: 2px; width: 100%; max-width: 100%;}
 .item-meta { font-size: 0.75em; color: #777; }
+
 .qty-controls { display: flex; align-items: center; gap: 10px; }
 .qty-btn { background: #f0f0f0; border: 1px solid #ddd; padding: 0px 8px; cursor: pointer; border-radius: 3px; font-weight: bold; font-size: 0.8em; }
 .qty-btn:hover { background: #e5e5e5; }
+
 .form-row { display: flex; gap: 15px; margin-bottom: 15px; }
 .form-group { flex: 1; display: flex; flex-direction: column; }
 .form-group label { font-size: 0.75em; font-weight: bold; margin-bottom: 6px; color: #555; }
 .checkout-input, .checkout-select { padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; font-size: 0.9em; width: 100%; box-sizing: border-box; }
 .checkout-input:focus { border-color: #000; outline: none; }
-.checkbox-line {
-display: flex;
-align-items: center;
-gap: 10px;
-margin-top: 10px;
-font-size: 0.85em;
-font-weight: normal;
+
+.checkbox-line { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    margin-top: 10px; 
+    font-size: 0.85em; 
+    font-weight: normal; 
 }
 .checkbox-line input { width: auto; margin: 0; }
+
 .divider { border-top: 1px solid #eee; margin: 30px 0 15px; padding-top: 15px; font-weight: bold; font-size: 1em; text-transform: uppercase; letter-spacing: 0.5px; }
+
 .shipping-method-row {
-display: flex; align-items: center; padding: 15px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; padding: 15px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s;
 }
 .shipping-method-row:hover { border-color: #000; }
 .shipping-method-row.selected { border-color: #0058ff; background: #f0f4ff; }
@@ -1610,10 +1748,11 @@ display: flex; align-items: center; padding: 15px; border: 1px solid #ddd; borde
 .shipping-name { font-size: 0.9em; font-weight: 600; }
 .shipping-desc { font-size: 0.75em; color: #777; }
 .shipping-cost { font-weight: 600; font-size: 0.9em; }
+
 .payment-container { border: 1px solid #ddd; border-radius: 8px; overflow: hidden; margin-top: 15px; }
-.payment-row {
-display: flex; align-items: center; padding: 15px; background: #fff; cursor: pointer;
-border-bottom: 1px solid #eee; transition: background 0.2s;
+.payment-row { 
+    display: flex; align-items: center; padding: 15px; background: #fff; cursor: pointer; 
+    border-bottom: 1px solid #eee; transition: background 0.2s;
 }
 .payment-row:last-child { border-bottom: none; }
 .payment-row:hover { background: #f9f9f9; }
@@ -1621,129 +1760,131 @@ border-bottom: 1px solid #eee; transition: background 0.2s;
 .payment-label { flex: 1; font-weight: 600; font-size: 0.9em; }
 .payment-icons { display: flex; gap: 5px; }
 .payment-icons img { height: 18px; }
-.billing-section {
-background: #fcfcfc; padding: 0 25px;
-max-height: 0; overflow: hidden;
-transition: max-height 0.3s ease-out, padding 0.3s ease;
+
+.billing-section { 
+    background: #fcfcfc; padding: 0 25px; 
+    max-height: 0; overflow: hidden; 
+    transition: max-height 0.3s ease-out, padding 0.3s ease;
 }
-.billing-section.active {
-max-height: 800px; padding: 15x 25px; border-top: 1px solid #efefef;
+.billing-section.active { 
+    max-height: 800px; padding: 15x 25px; border-top: 1px solid #efefef; 
 }
+
 .bubble-container { display: flex; gap: 10px; margin-bottom: 10px; }
-.bubble {
-flex: 1; text-align: center; padding: 10px; border: 1px solid #ddd;
-border-radius: 20px; font-size: 0.8em; font-weight: 600; cursor: pointer;
-background: white; transition: all 0.2s;
+.bubble { 
+    flex: 1; text-align: center; padding: 10px; border: 1px solid #ddd; 
+    border-radius: 20px; font-size: 0.8em; font-weight: 600; cursor: pointer; 
+    background: white; transition: all 0.2s;
 }
 .bubble.selected { background: #000; color: #fff; border-color: #000; }
-.crypto-option {
-border: 1px solid #ddd; padding: 12px; border-radius: 6px; margin-bottom: 10px;
-cursor: pointer; background: white; font-size: 0.9em; font-weight: 600;
-display: flex; justify-content: flex-start; align-items: center;
+
+.crypto-option { 
+    border: 1px solid #ddd; padding: 12px; border-radius: 6px; margin-bottom: 10px; 
+    cursor: pointer; background: white; font-size: 0.9em; font-weight: 600;
+    display: flex; justify-content: flex-start; align-items: center;
 }
 .crypto-option:hover { border-color: #000; }
-.crypto-address-inline {
-font-family: monospace; font-size: 0.8em; color: #0058ff;
-background: #f0f4ff; padding: 4px 8px; border-radius: 4px;
-display: none; word-break: break-all; margin-left: 15px;
-font-weight: normal;
+.crypto-address-inline { 
+    font-family: monospace; font-size: 0.8em; color: #0058ff; 
+    background: #f0f4ff; padding: 4px 8px; border-radius: 4px; 
+    display: none; word-break: break-all; margin-left: 15px;
+    font-weight: normal;
 }
+
 .info-trigger {
-display: inline-flex;
-align-items: center;
-justify-content: center;
-width: 16px;
-height: 16px;
-background: #ddd;
-border-radius: 50%;
-font-size: 10px;
-cursor: pointer;
-margin-left: 5px;
-color: #555;
-vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    background: #ddd;
+    border-radius: 50%;
+    font-size: 10px;
+    cursor: pointer;
+    margin-left: 5px;
+    color: #555;
+    vertical-align: middle;
 }
 .info-trigger:hover { background: #ccc; }
+
 .summary-row { display: flex; justify-content: space-between; margin: 12px 0; font-size: 0.95em; }
 .total-box { border-top: 2px solid #000; margin-top: 20px; padding-top: 15px; font-weight: bold; font-size: 1.25em; display: flex; justify-content: space-between; }
-.complete-btn {
-width: 100%;
-background: #0058ff;
-color: white;
-padding: 18px;
-border: none;
-border-radius: 8px;
-font-weight: bold;
-font-size: 1em;
-cursor: pointer;
-margin-top: 25px;
-transition: background 0.2s;
+
+.complete-btn { 
+    width: 100%; 
+    background: #0058ff; 
+    color: white; 
+    padding: 18px; 
+    border: none; 
+    border-radius: 8px; 
+    font-weight: bold; 
+    font-size: 1em; 
+    cursor: pointer; 
+    margin-top: 25px; 
+    transition: background 0.2s; 
 }
 .complete-btn:hover { background: #0047cc; }
+
 .disabled-method { opacity: 0.6; cursor: not-allowed; background: #f9f9f9 !important; }
+
 /* LOAD MORE BUTTON */
 #loadMoreBtn {
-padding: 14px 30px;
-border: 2px solid #D4AF37;
-border-radius: 30px;
-background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
-color: #FFD700;
-font-family: 'Montserrat', sans-serif;
-font-size: 0.95em;
-font-weight: 600;
-cursor: pointer;
-transition: all 0.3s ease;
-display: none;
-margin: 30px auto;
-text-align: center;
-box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    padding: 14px 30px;
+    border: 2px solid #D4AF37;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
+    color: #FFD700;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: none;
+    margin: 30px auto;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
+
 #loadMoreBtn:hover {
-background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
-color: #000;
-border-color: #FFD700;
-transform: translateY(-2px);
-box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4);
+    background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+    color: #000;
+    border-color: #FFD700;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4);
 }
+
+/* Mobile responsive LOAD MORE BUTTON */
 @media (max-width: 768px) {
-#loadMoreBtn {
-padding: 12px 25px;
-font-size: 0.9em;
-margin: 20px auto;
-width: 80%;
-max-width: 250px;
+    #loadMoreBtn {
+        padding: 12px 25px;
+        font-size: 0.9em;
+        margin: 20px auto;
+        width: 80%;
+        max-width: 250px;
+    }
 }
-}
+
 @media (max-width: 950px) {
-.checkout-master { flex-direction: column; }
-.checkout-right { order: -1; margin-bottom: 20px; position: static; width: 100%; box-sizing: border-box; }
-.checkout-left { width: 100%; box-sizing: border-box; }
-.crypto-option { flex-direction: column; align-items: flex-start; gap: 5px; }
-.crypto-address-inline { margin-left: 0; width: 100%; box-sizing: border-box; }
+    .checkout-master { flex-direction: column; }
+    .checkout-right { order: -1; margin-bottom: 20px; position: static; width: 100%; box-sizing: border-box; }
+    .checkout-left { width: 100%; box-sizing: border-box; }
+    .crypto-option { flex-direction: column; align-items: flex-start; gap: 5px; }
+    .crypto-address-inline { margin-left: 0; width: 100%; box-sizing: border-box; }
 }
+
 </style>
 </head>
 <body>
+
+<!-- ============ MAIN CATALOG SECTION ============ -->
 <h1>🛍️ Master Product Catalog</h1>
 <div class="controls">
-    <!-- Header Row: Gender Tabs (LEFT) + Search Bar (RIGHT) -->
-    <div class="header-row">
-        <!-- Gender Tabs -->
-        <div class="gender-tabs">
-            <button class="gender-tab" data-gender="Men" onclick="selectGenderTab('Men')">
-                For Him
-            </button>
-            <button class="gender-tab active" data-gender="Women" onclick="selectGenderTab('Women')">
-                For Her
-            </button>
-        </div>
     <!-- Search Bar -->
-    <input type="text" id="searchInput" oninput="debouncedApplyFilters()" placeholder="🔍 Search products...">
-</div>
-
-<!-- Hidden gender filter input -->
-<input type="hidden" id="genFilter" value="Women">
-
-<!-- Filter Top Row: Brand, Sub-Brand, Category, Type -->
+    <div class="filter-group">
+        <input type="text" id="searchInput" oninput="debouncedApplyFilters()" placeholder="🔍 Search products...">
+    </div>
+    
+<!-- Top Row: All Filters (CUSTOM DROPDOWN STYLING) -->
 <div class="filter-top-row">
     <!-- Custom Brand Dropdown -->
     <div class="custom-select-wrapper">
@@ -1824,191 +1965,239 @@ max-width: 250px;
         </div>
         <input type="hidden" id="typeFilter" value="">
     </div>
-</div>
-
-<!-- Bottom Row: Clear Filters (LEFT) + Sort (RIGHT) -->
-<div class="filter-bottom-row">
-    <!-- Clear Filters Button -->
-    <div class="clear-button-container">
-        <button class="filter-btn" onclick="clearAllFilters()">
-            Clear Filters
-        </button>
-    </div>
     
-    <!-- Sort Button -->
-    <div class="sort-button-container">
-        <button class="filter-btn" onclick="sortByPrice()">
-            <span class="btn-icon">💰</span> Sort by Price
-        </button>
+    <!-- Custom Gender Dropdown -->
+    <div class="custom-select-wrapper">
+        <div class="custom-select-trigger" onclick="toggleCustomDropdown('gender')">
+            <span class="select-placeholder">All Genders</span>
+            <span class="select-arrow">▼</span>
+        </div>
+        <div class="custom-select-dropdown" id="gender-dropdown">
+            <div class="custom-select-header">
+                <span>Select Gender</span>
+                <button class="custom-select-close" onclick="closeCustomDropdown('gender')">✕</button>
+            </div>
+            <div class="custom-select-options" id="gender-options">
+                <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('gender', '', 'All Genders')">
+                    All Genders
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="genFilter" value="">
     </div>
 </div>
 
-<!-- Cart Button -->
-<button class="cart-summary-btn" onclick="openCheckoutModal()">
-    <span class="cart-icon">🛒</span>
-    <span class="cart-text">Cart</span>
-    <span class="cart-count" id="cartCount">0</span>
-</button>
-</div>
 <!-- Custom dropdown overlay (mobile) -->
 <div class="custom-select-overlay" onclick="closeAllCustomDropdowns()"></div>
+    
+    <!-- Bottom Row: Sort Button Only (View selector removed) -->
+    <div class="filter-bottom-row">
+        <!-- Sort Button -->
+        <div class="sort-button-container">
+            <button class="filter-btn" onclick="sortByPrice()">
+                <span class="btn-icon">💰</span> Sort by Price
+            </button>
+        </div>
+    </div>
+    
+    <!-- Cart Button -->
+    <button class="cart-summary-btn" onclick="openCheckoutModal()">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-text">Cart</span>
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+</div>
+
 <!-- Size picker overlay (mobile) -->
 <div class="size-overlay" onclick="closeAllSizePickers()"></div>
+
 <!-- Image Zoom Modal -->
 <div id="imageModal" onclick="handleBackgroundClick(event)">
     <img id="modalImg" onclick="toggleZoom(event)">
     <button class="modal-arrows" id="prevBtn" onclick="changeModalImage(-1)" style="display:none;">&lt;</button>
     <button class="modal-arrows" id="nextBtn" onclick="changeModalImage(1)" style="display:none;">&gt;</button>
 </div>
+
 <!-- Product Catalog Container -->
 <div class="catalog-container" id="container"></div>
+
 <!-- Load More Button -->
 <div style="text-align:center;">
     <button id="loadMoreBtn" onclick="loadMore()">Load More</button>
 </div>
-<!-- CHECKOUT MODAL (keeping it the same as your original) -->
+
+<!-- ============ CHECKOUT MODAL ============ -->
 <div id="checkoutModal">
     <div class="checkout-modal-content">
         <span class="close-checkout" onclick="closeCheckoutModal()">&times;</span>
-    <div class="header-bar">
-        <img src="https://veloxxa.com/cdn/shop/files/logo-removebg-preview.png?v=1763035693&width=120" class="logo" alt="Veloxxa Logo">
-    </div>
-    
-    <div class="page-wrapper">
-        <div class="checkout-master">
-            <div class="checkout-left">
-                <h2 style="margin-top: 0; font-size: 1.4em;">Customer Information</h2>
-                <div class="form-row">
-                    <div class="form-group"><label>First Name *</label><input type="text" id="fname" class="checkout-input" required placeholder="First name"></div>
-                    <div class="form-group"><label>Last Name *</label><input type="text" id="lname" class="checkout-input" required placeholder="Last name"></div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Email *</label>
-                        <input type="email" id="email" class="checkout-input" required placeholder="jane@example.com">
-                        <div class="checkbox-line">
-                            <input type="checkbox" id="news" checked>
-                            <label for="news">Email me news and offers</label>
+        
+        <div class="header-bar">
+            <img src="https://veloxxa.com/cdn/shop/files/logo-removebg-preview.png?v=1763035693&width=120" class="logo" alt="Veloxxa Logo">
+        </div>
+        
+        <div class="page-wrapper">
+            <div class="checkout-master">
+                <!-- LEFT COLUMN: Customer Information & Payment -->
+                <div class="checkout-left">
+                    <h2 style="margin-top: 0; font-size: 1.4em;">Customer Information</h2>
+                    <div class="form-row">
+                        <div class="form-group"><label>First Name *</label><input type="text" id="fname" class="checkout-input" required placeholder="First name"></div>
+                        <div class="form-group"><label>Last Name *</label><input type="text" id="lname" class="checkout-input" required placeholder="Last name"></div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" id="email" class="checkout-input" required placeholder="jane@example.com">
+                            <div class="checkbox-line">
+                                <input type="checkbox" id="news" checked>
+                                <label for="news">Email me news and offers</label>
+                            </div>
+                        </div>
+                        <div class="form-group"><label>Phone Number *</label><input type="tel" id="phone" class="checkout-input" required placeholder="+XX XXX XXX XXXX"></div>
+                    </div>
+
+                    <div class="divider">Shipping Address</div>
+                    <div class="form-group"><label>Street Address *</label><input type="text" id="addr" class="checkout-input" required placeholder="House number and street name"></div>
+                    
+                    <div class="form-row" style="margin-top:15px;">
+                        <div class="form-group">
+                            <label>Country *</label>
+                            <select id="country" class="checkout-select" onchange="toggleCOD()"></select>
+                        </div>
+                        <div class="form-group"><label>City *</label><input type="text" id="city" class="checkout-input" required></div>
+                        <div class="form-group"><label>Zipcode *</label><input type="text" id="zip" class="checkout-input" required></div>
+                    </div>
+
+                    <div class="divider">Shipping Method</div>
+                    <div id="shipping_methods_container"></div>
+
+                    <div class="divider">Payment</div>
+                    <div class="payment-container">
+                        <!-- Credit/Debit Card Section -->
+                        <div class="payment-row" onclick="setPaymentMethod('card')">
+                            <input type="radio" name="pay_choice" id="radio_card">
+                            <div class="payment-label">Credit/Debit Card</div>
+                            <div class="payment-icons">
+                                <img src="https://img.icons8.com/color/48/000000/visa.png">
+                                <img src="https://img.icons8.com/color/48/000000/mastercard.png">
+                                <img src="https://img.icons8.com/color/48/000000/amex.png">
+                                <img src="https://img.icons8.com/color/48/000000/discover.png">
+                                <img src="https://img.icons8.com/color/48/000000/jcb.png">
+                            </div>
+                        </div>
+
+                        <!-- Card Details Input Section -->
+                        <div id="card_section" class="billing-section">
+                            <!--
+                            <div class="form-group"><label>Name on Card</label><input type="text" id="cardName" class="checkout-input" placeholder="Full name on card"></div>
+                            <div class="form-group" style="margin-top: 12px;"><label>Card Number</label><input type="text" class="checkout-input" placeholder="Card number"></div>
+                            <div class="form-row" style="margin-top: 12px;">
+                                <div class="form-group"><label>Expiration Date</label><input type="text" class="checkout-input" placeholder="MM/YY"></div>
+                                <div class="form-group"><label>CVC</label><input type="text" class="checkout-input" placeholder="XXX"></div>
+                            </div>
+                            -->
+                        </div>
+
+                        <!-- Cash on Delivery (COD) Section -->
+                        <div class="payment-row" id="cod_row" style="display:none;" onclick="setPaymentMethod('cod')">
+                            <input type="radio" name="pay_choice" id="radio_cod">
+                            <div class="payment-label">Cash on Delivery (COD)</div>
+                        </div>
+
+                        <!-- COD Deposit Method Section -->
+                        <div id="cod_card_section" class="billing-section">
+                            <p style="font-size: 0.8em; color: #666; margin-bottom: 15px;">A 33% Service Fee is required for COD orders. Please choose a deposit method below.</p>
+                            
+                            <div class="bubble-container">
+                                <div class="bubble" id="bubble_card" onclick="setCODSubMethod('card')">Pay via Card</div>
+                                <div class="bubble" id="bubble_crypto" onclick="setCODSubMethod('crypto')">Pay via Crypto</div>
+                            </div>
+
+                            <!-- COD Card Payment Subsection -->
+                            <div id="cod_sub_card" style="display:none;">
+                                <!--
+                                <div class="form-group"><label>Name on Card</label><input type="text" id="cardNameCOD" class="checkout-input" placeholder="Full name on card"></div>
+                                <div class="form-group" style="margin-top: 12px;"><label>Card Number</label><input type="text" class="checkout-input" placeholder="Card number"></div>
+                                <div class="form-row" style="margin-top: 12px;">
+                                    <div class="form-group"><label>Expiration Date</label><input type="text" class="checkout-input" placeholder="MM/YY"></div>
+                                    <div class="form-group"><label>CVC</label><input type="text" class="checkout-input" placeholder="XXX"></div>
+                                </div>
+                                -->
+                            </div>
+
+                            <!-- COD Crypto Payment Subsection -->
+                            <div id="cod_sub_crypto" style="display:none;">
+                                 <p style="font-size: 0.8em; color: #ff4d4d; font-weight: 600; margin-bottom: 10px;">Service Fee payment must be sent within 24 hours.</p>
+                                 <div class="crypto-option" onclick="showCryptoAddr('usdt_cod')"><img src="https://img.icons8.com/color/24/000000/tether--v1.png" style="width:20px;height:20px;">USDT <span id="addr_usdt_cod" class="crypto-address-inline">Address Currently Unavailable</span></div>
+                                 <div class="crypto-option" onclick="showCryptoAddr('usdc_cod')"><img src="https://img.icons8.com/?size=100&id=1jPxlShNofZt&format=png&color=000000" style="width:20px;height:20px;">USDC <span id="addr_usdc_cod" class="crypto-address-inline">Address Currently Unavailable</span></div>
+                                 <div class="crypto-option" onclick="showCryptoAddr('eth_cod')"><img src="https://img.icons8.com/ios-filled/50/000000/ethereum.png" style="width:20px;height:20px;">Etherium <span id="addr_eth_cod" class="crypto-address-inline">Address Currently Unavailable</span></div>
+                                 <div class="crypto-option" onclick="showCryptoAddr('btc_cod')"><img src="https://img.icons8.com/color/48/000000/bitcoin--v1.png" style="width:20px;height:20px;">Bitcoin <span id="addr_btc_cod" class="crypto-address-inline">Address Currently Unavailable</span></div>
+                            </div>
+                        </div>
+                        <!-- Crypto Payment Section -->
+                        <div class="payment-row" onclick="setPaymentMethod('crypto')">
+                            <input type="radio" name="pay_choice" id="radio_crypto">
+                            <div class="payment-label">Crypto</div>
+                            <div class="payment-icons">
+                                <img src="https://img.icons8.com/color/48/000000/tether.png" alt="USDT">
+                                <img src="https://img.icons8.com/?size=100&id=1jPxlShNofZt&format=png&color=000000" alt="USDC">
+                                <img src="https://img.icons8.com/ios-filled/50/000000/ethereum.png" alt="Ethereum">
+                                <img src="https://img.icons8.com/color/48/000000/bitcoin--v1.png">
+                                <img src="https://img.icons8.com/color/48/000000/cryptocurrency.png" alt="Crypto">
+                            </div>
+                        </div>
+                        <!-- Crypto Details Section -->
+                        <div id="crypto_section" class="billing-section">
+                            <p style="font-size: 0.85em; color: #ff4d4d; margin-bottom: 15px; font-weight: 600;">Crypto payment must be sent within 24 hours.</p>
+                            <div class="crypto-option" onclick="showCryptoAddr('usdt')"><img src="https://img.icons8.com/color/24/000000/tether--v1.png" style="width:20px;height:20px;">USDT <span id="addr_usdt" class="crypto-address-inline">Address Currently Unavailable</span></div>
+                            <div class="crypto-option" onclick="showCryptoAddr('usdc')"><img src="https://img.icons8.com/?size=100&id=1jPxlShNofZt&format=png&color=000000" style="width:20px;height:20px;">USDC <span id="addr_usdc" class="crypto-address-inline">Address Currently Unavailable</span></div>
+                            <div class="crypto-option" onclick="showCryptoAddr('eth')"><img src="https://img.icons8.com/ios-filled/50/000000/ethereum.png" style="width:20px;height:20px;">Etherium <span id="addr_eth" class="crypto-address-inline">Address Currently Unavailable</span></div>
+                            <div class="crypto-option" onclick="showCryptoAddr('btc')"><img src="https://img.icons8.com/color/48/000000/bitcoin--v1.png" style="width:20px;height:20px;">Bitcoin <span id="addr_btc" class="crypto-address-inline">Address Currently Unavailable</span></div>
                         </div>
                     </div>
-                    <div class="form-group"><label>Phone Number *</label><input type="tel" id="phone" class="checkout-input" required placeholder="+XX XXX XXX XXXX"></div>
+
+                    <button class="complete-btn" onclick="submitOrderToFormspree()" style="margin: 25px 15px 15px; width: calc(100% - 30px);">Complete Request</button>
                 </div>
 
-                <div class="divider">Shipping Address</div>
-                <div class="form-group"><label>Street Address *</label><input type="text" id="addr" class="checkout-input" required placeholder="House number and street name"></div>
-                
-                <div class="form-row" style="margin-top:15px;">
-                    <div class="form-group">
-                        <label>Country *</label>
-                        <select id="country" class="checkout-select" onchange="toggleCOD()"></select>
-                    </div>
-                    <div class="form-group"><label>City *</label><input type="text" id="city" class="checkout-input" required></div>
-                    <div class="form-group"><label>Zipcode *</label><input type="text" id="zip" class="checkout-input" required></div>
-                </div>
-
-                <div class="divider">Shipping Method</div>
-                <div id="shipping_methods_container"></div>
-
-                <div class="divider">Payment</div>
-                <div class="payment-container">
-                    <div class="payment-row" onclick="setPaymentMethod('card')">
-                        <input type="radio" name="pay_choice" id="radio_card">
-                        <div class="payment-label">Credit/Debit Card</div>
-                        <div class="payment-icons">
-                            <img src="https://img.icons8.com/color/48/000000/visa.png">
-                            <img src="https://img.icons8.com/color/48/000000/mastercard.png">
-                            <img src="https://img.icons8.com/color/48/000000/amex.png">
-                            <img src="https://img.icons8.com/color/48/000000/discover.png">
-                            <img src="https://img.icons8.com/color/48/000000/jcb.png">
+                <!-- RIGHT COLUMN: Order Summary -->
+                <div class="checkout-right">
+                    <h3 style="margin-top: 0; font-size: 1.1em; border-bottom: 1px solid #eee; padding-bottom: 10px;">Order Summary</h3>
+                    <div id="cartList"></div>
+                    <div style="margin-top: 25px;">
+                        <div class="summary-row" style="font-weight: bold; font-size: 1.0em; border-bottom: 2px solid #000; padding-bottom: 15px; margin-bottom: 15px;"><span>Subtotal</span><span id="subtotalBox">$0.00</span></div>
+                        <div class="summary-row">
+                            <span>
+                                Service Fee (33%) 
+                                <span class="info-trigger" onclick="showServiceInfo()">?</span>
+                            </span>
+                            <span id="serviceFeeBox" style="color: #666;">Included</span>
                         </div>
-                    </div>
-
-                    <div id="card_section" class="billing-section"></div>
-
-                    <div class="payment-row" id="cod_row" style="display:none;" onclick="setPaymentMethod('cod')">
-                        <input type="radio" name="pay_choice" id="radio_cod">
-                        <div class="payment-label">Cash on Delivery (COD)</div>
-                    </div>
-
-                    <div id="cod_card_section" class="billing-section">
-                        <p style="font-size: 0.8em; color: #666; margin-bottom: 15px;">A 33% Service Fee is required for COD orders. Please choose a deposit method below.</p>
+                        <div class="summary-row"><span id="shippingLabel">Shipping</span><span id="shippingBox">$0.00</span></div>
+                        <div class="total-box"><span>Total</span><span id="totalBox">$0.00</span></div>
                         
-                        <div class="bubble-container">
-                            <div class="bubble" id="bubble_card" onclick="setCODSubMethod('card')">Pay via Card</div>
-                            <div class="bubble" id="bubble_crypto" onclick="setCODSubMethod('crypto')">Pay via Crypto</div>
-                        </div>
-
-                        <div id="cod_sub_card" style="display:none;"></div>
-
-                        <div id="cod_sub_crypto" style="display:none;">
-                             <p style="font-size: 0.8em; color: #ff4d4d; font-weight: 600; margin-bottom: 10px;">Service Fee payment must be sent within 24 hours.</p>
-                             <div class="crypto-option" onclick="showCryptoAddr('usdt_cod')"><img src="https://img.icons8.com/color/24/000000/tether--v1.png" style="width:20px;height:20px;">USDT <span id="addr_usdt_cod" class="crypto-address-inline">Address Currently Unavailable</span></div>
-                             <div class="crypto-option" onclick="showCryptoAddr('usdc_cod')"><img src="https://img.icons8.com/?size=100&id=1jPxlShNofZt&format=png&color=000000" style="width:20px;height:20px;">USDC <span id="addr_usdc_cod" class="crypto-address-inline">Address Currently Unavailable</span></div>
-                             <div class="crypto-option" onclick="showCryptoAddr('eth_cod')"><img src="https://img.icons8.com/ios-filled/50/000000/ethereum.png" style="width:20px;height:20px;">Etherium <span id="addr_eth_cod" class="crypto-address-inline">Address Currently Unavailable</span></div>
-                             <div class="crypto-option" onclick="showCryptoAddr('btc_cod')"><img src="https://img.icons8.com/color/48/000000/bitcoin--v1.png" style="width:20px;height:20px;">Bitcoin <span id="addr_btc_cod" class="crypto-address-inline">Address Currently Unavailable</span></div>
-                        </div>
-                    </div>
-                    
-                    <div class="payment-row" onclick="setPaymentMethod('crypto')">
-                        <input type="radio" name="pay_choice" id="radio_crypto">
-                        <div class="payment-label">Crypto</div>
-                        <div class="payment-icons">
-                            <img src="https://img.icons8.com/color/48/000000/tether.png" alt="USDT">
-                            <img src="https://img.icons8.com/?size=100&id=1jPxlShNofZt&format=png&color=000000" alt="USDC">
-                            <img src="https://img.icons8.com/ios-filled/50/000000/ethereum.png" alt="Ethereum">
-                            <img src="https://img.icons8.com/color/48/000000/bitcoin--v1.png">
-                            <img src="https://img.icons8.com/color/48/000000/cryptocurrency.png" alt="Crypto">
+                        <!-- COD Payment Breakdown (shown only when COD is selected) -->
+                        <div id="codBreakdown" style="display: none; margin-top: 20px; padding-top: 15px; border-top: 1px solid #eee;">
+                            <div class="summary-row" style="color: #c9302c; font-weight: bold;">
+                                <span>Due Today (33% Service Fee)</span>
+                                <span id="dueTodayBox">$0.00</span>
+                            </div>
+                            <div class="summary-row" style="color: #28a745; font-weight: bold;">
+                                <span>Due on Delivery</span>
+                                <span id="dueOnDeliveryBox">$0.00</span>
+                            </div>
+                            <div style="font-size: 0.75em; color: #666; margin-top: 10px; font-style: italic;">
+                                Service fee must be paid within 24 hours to confirm your COD order.
+                            </div>
                         </div>
                     </div>
-                    
-                    <div id="crypto_section" class="billing-section">
-                        <p style="font-size: 0.85em; color: #ff4d4d; margin-bottom: 15px; font-weight: 600;">Crypto payment must be sent within 24 hours.</p>
-                        <div class="crypto-option" onclick="showCryptoAddr('usdt')"><img src="https://img.icons8.com/color/24/000000/tether--v1.png" style="width:20px;height:20px;">USDT <span id="addr_usdt" class="crypto-address-inline">Address Currently Unavailable</span></div>
-                        <div class="crypto-option" onclick="showCryptoAddr('usdc')"><img src="https://img.icons8.com/?size=100&id=1jPxlShNofZt&format=png&color=000000" style="width:20px;height:20px;">USDC <span id="addr_usdc" class="crypto-address-inline">Address Currently Unavailable</span></div>
-                        <div class="crypto-option" onclick="showCryptoAddr('eth')"><img src="https://img.icons8.com/ios-filled/50/000000/ethereum.png" style="width:20px;height:20px;">Etherium <span id="addr_eth" class="crypto-address-inline">Address Currently Unavailable</span></div>
-                        <div class="crypto-option" onclick="showCryptoAddr('btc')"><img src="https://img.icons8.com/color/48/000000/bitcoin--v1.png" style="width:20px;height:20px;">Bitcoin <span id="addr_btc" class="crypto-address-inline">Address Currently Unavailable</span></div>
-                    </div>
+                    <p style="text-align: center; margin-top: 25px; color: #888; text-decoration: none; font-size: 0.85em;">Continue shopping to add more items</p>
                 </div>
-
-                <button class="complete-btn" onclick="submitOrderToFormspree()" style="margin: 25px 15px 15px; width: calc(100% - 30px);">Complete Request</button>
-            </div>
-
-            <div class="checkout-right">
-                <h3 style="margin-top: 0; font-size: 1.1em; border-bottom: 1px solid #eee; padding-bottom: 10px;">Order Summary</h3>
-                <div id="cartList"></div>
-                <div style="margin-top: 25px;">
-                    <div class="summary-row" style="font-weight: bold; font-size: 1.0em; border-bottom: 2px solid #000; padding-bottom: 15px; margin-bottom: 15px;"><span>Subtotal</span><span id="subtotalBox">$0.00</span></div>
-                    <div class="summary-row">
-                        <span>
-                            Service Fee (33%) 
-                            <span class="info-trigger" onclick="showServiceInfo()">?</span>
-                        </span>
-                        <span id="serviceFeeBox" style="color: #666;">Included</span>
-                    </div>
-                    <div class="summary-row"><span id="shippingLabel">Shipping</span><span id="shippingBox">$0.00</span></div>
-                    <div class="total-box"><span>Total</span><span id="totalBox">$0.00</span></div>
-                    
-                    <div id="codBreakdown" style="display: none; margin-top: 20px; padding-top: 15px; border-top: 1px solid #eee;">
-                        <div class="summary-row" style="color: #c9302c; font-weight: bold;">
-                            <span>Due Today (33% Service Fee)</span>
-                            <span id="dueTodayBox">$0.00</span>
-                        </div>
-                        <div class="summary-row" style="color: #28a745; font-weight: bold;">
-                            <span>Due on Delivery</span>
-                            <span id="dueOnDeliveryBox">$0.00</span>
-                        </div>
-                        <div style="font-size: 0.75em; color: #666; margin-top: 10px; font-style: italic;">
-                            Service fee must be paid within 24 hours to confirm your COD order.
-                        </div>
-                    </div>
-                </div>
-                <p style="text-align: center; margin-top: 25px; color: #888; text-decoration: none; font-size: 0.85em;">Continue shopping to add more items</p>
             </div>
         </div>
     </div>
 </div>
-</div>
+
 <script>
 // ============================================
 // GLOBAL VARIABLES & CONFIGURATION
@@ -2105,10 +2294,6 @@ let activeCustomDropdown = null;
  * Toggles a custom dropdown
  * @param type - The dropdown type (brand, category, etc.)
  */
-/**
- * Toggles a custom dropdown
- * @param type - The dropdown type (brand, category, etc.)
- */
 function toggleCustomDropdown(type) {
     const dropdown = document.getElementById(`${type}-dropdown`);
     const trigger = dropdown.closest('.custom-select-wrapper').querySelector('.custom-select-trigger');
@@ -2122,7 +2307,7 @@ function toggleCustomDropdown(type) {
     
     // Close any other open dropdown first
     closeAllCustomDropdowns();
-       
+    
     if (dropdown) {
         activeCustomDropdown = type;
         dropdown.classList.add('active');
@@ -2130,12 +2315,6 @@ function toggleCustomDropdown(type) {
         
         // Add active-wrapper class for z-index fix
         dropdown.closest('.custom-select-wrapper').classList.add('active-wrapper');
-
-     // Force scrollbar visibility
-        setTimeout(() => {
-            dropdown.style.overflowY = 'scroll';
-            dropdown.style.scrollbarWidth = 'thin';
-        }, 10);
         
         // Mobile portrait: show overlay and prevent body scroll
         if (window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches) {
@@ -3337,6 +3516,9 @@ function rebuildDropdowns() {
     
     // TYPE
     populateCustomSelectWithOptions("type", typeSet, selectedType);
+    
+    // GENDER
+    populateCustomSelectWithOptions("gender", genSet, selectedGender);
    
     // SUB-BRAND
     const subEl = document.getElementById("subBrandWrapper");
@@ -3410,10 +3592,7 @@ function applyFilters() {
             const matchesSubBrand = !subBrandFilter || tag === subBrandFilter;
             const matchesCategory = !categoryFilter || category === categoryFilter;
             const matchesType = !typeFilter || type === typeFilter;
-            // Handle Unisex products - they appear in both For Him and For Her
-            const matchesGender = !genderFilter || 
-                     gender === genderFilter || 
-                     gender.toLowerCase() === 'unisex';
+            const matchesGender = !genderFilter || gender === genderFilter;
 
             if (matchesSearch && matchesBrand && matchesSubBrand && matchesCategory && matchesType && matchesGender) {
                 card.style.display = "flex";
@@ -3437,68 +3616,32 @@ function applyFilters() {
 // FIX: Proper initial product loading
 function loadInitialProducts() {
     const container = document.getElementById("container");
-    const searchTerm = document.getElementById("searchInput").value.toLowerCase(),
-          brandFilter = getCustomSelectValue("brand"),
-          subBrandFilter = getCustomSelectValue("subBrand"),
-          categoryFilter = getCustomSelectValue("category"),
-          typeFilter = getCustomSelectValue("type"),
-          genderFilter = getCustomSelectValue("gender");
     
-    let loadedCount = 0;
-    
-    // Check if data is loaded
     if (!window.allProductsData || window.allProductsData.length === 0) {
-        console.log("Cannot load products: no data available");
+        console.log("No product data available");
         return;
     }
     
-    console.log(`🔄 Loading initial ${INITIAL_PRODUCT_LOAD} products...`);
+    console.log(`🔄 Loading initial ${INITIAL_PRODUCT_LOAD} products from JSON...`);
     
-    //CLEAR THE CONTAINER FIRST:
+    // Clear container
     container.innerHTML = '';
     loadedProductIds.clear();
     
-    // Load up to INITIAL_PRODUCT_LOAD products that match current filters
-    for (const product of window.allProductsData) {
-        if (loadedCount >= INITIAL_PRODUCT_LOAD) break;
-        
-        const productName = product.name ? product.name.toLowerCase() : '';
-        const sku = product.sku ? product.sku.toLowerCase() : '';
-        const brand = BRAND_NAME_MAP[product.source] || product.source || '';
-        const tag = product.tag || '';
-        const category = product.category || '';
-        const type = product.type || '';
-        const gender = product.gender || '';
-        
-        // Check if product matches ALL current filters
-        const matchesSearch = !searchTerm || 
-            productName.includes(searchTerm) || 
-            (sku && sku.includes(searchTerm));
-        const matchesBrand = !brandFilter || brand === brandFilter;
-        const matchesSubBrand = !subBrandFilter || tag === subBrandFilter;
-        const matchesCategory = !categoryFilter || category === categoryFilter;
-        const matchesType = !typeFilter || type === typeFilter;
-        const matchesGender = !genderFilter || gender === genderFilter;
-
-        if (matchesSearch && matchesBrand && matchesSubBrand && matchesCategory && matchesType && matchesGender) {
-            // Create and append the product card
-            const cardHtml = createProductCard(product);
-            container.insertAdjacentHTML('beforeend', cardHtml);
-            
-            loadedProductIds.add(product.id);
-            loadedCount++;
-        }
-    }
+    // Load first INITIAL_PRODUCT_LOAD products from JSON
+    const initialProducts = window.allProductsData.slice(0, INITIAL_PRODUCT_LOAD);
+    
+    initialProducts.forEach(product => {
+        const cardHtml = createProductCard(product);
+        container.insertAdjacentHTML('beforeend', cardHtml);
+        loadedProductIds.add(product.id);
+    });
     
     // Update allCards array
     allCards = Array.from(container.children);
     initialLoadComplete = true;
     
-    console.log(`✅ Loaded ${loadedCount} initial products`);
-    
-    // Apply filters to show/hide products
-    applyFilters();
-    updateLoadMoreVisibility();
+    console.log(`✅ Loaded ${initialProducts.length} initial products from JSON`);
 }
 
 /**
@@ -3874,12 +4017,12 @@ function updateGenderPosition() {
             // Sub-brand is present (5 filters) - gender aligned left
             genderWrapper.style.gridColumn = "1";
             genderWrapper.style.justifySelf = "start";
-            genderWrapper.style.textAlign = "left";
+            genderWrapper.style.textAlign = "center";
         } else if (!subBrandVisible && visibleFilters.length === 4) {
             // No sub-brand (4 filters) - gender in normal grid position
             genderWrapper.style.gridColumn = "";
             genderWrapper.style.justifySelf = "";
-            genderWrapper.style.textAlign = "left";
+            genderWrapper.style.textAlign = "center";
         }
     }
 }
@@ -4256,94 +4399,7 @@ function formatCurrency(amount) {
         maximumFractionDigits: 2
     });
 }
-/**
- * Selects a gender tab and filters products
- */
-function selectGenderTab(gender) {
-    // Update active tab styling
-    document.querySelectorAll('.gender-tab').forEach(tab => {
-        tab.classList.remove('active');
-        if (tab.dataset.gender === gender) {
-            tab.classList.add('active');
-        }
-    });
-    
-    // Update hidden gender filter
-    document.getElementById("genFilter").value = gender;
-    
-    console.log(`👤 GENDER TAB CHANGED to: ${gender}`);
-    
-    // Load 8 products
-    loadInitialProducts();
-    
-    // Apply filters
-    applyFilters();
-    
-    // Rebuild dropdowns
-    rebuildDropdowns();
-}
 
-/**
- * Clears all filters and resets to default state
- */
-function clearAllFilters() {
-    console.log("🔄 CLEARING ALL FILTERS");
-    
-    // Clear all filter values
-    document.getElementById("brandFilter").value = "";
-    document.getElementById("subBrandFilter").value = "";
-    document.getElementById("catFilter").value = "";
-    document.getElementById("typeFilter").value = "";
-    document.getElementById("searchInput").value = "";
-    
-    // Reset gender to "For Her" (default)
-    document.getElementById("genFilter").value = "Women";
-    document.querySelectorAll('.gender-tab').forEach(tab => {
-        tab.classList.remove('active');
-        if (tab.dataset.gender === 'Women') {
-            tab.classList.add('active');
-        }
-    });
-    
-    // Reset all custom select triggers to default text
-    const brandTrigger = document.querySelector('#brand-dropdown').closest('.custom-select-wrapper').querySelector('.select-placeholder');
-    if (brandTrigger) {
-        brandTrigger.textContent = 'All Brands';
-        brandTrigger.style.color = '#FFD700';
-        brandTrigger.style.fontWeight = '500';
-    }
-    
-    const categoryTrigger = document.querySelector('#category-dropdown').closest('.custom-select-wrapper').querySelector('.select-placeholder');
-    if (categoryTrigger) {
-        categoryTrigger.textContent = 'All Categories';
-        categoryTrigger.style.color = '#FFD700';
-        categoryTrigger.style.fontWeight = '500';
-    }
-    
-    const typeTrigger = document.querySelector('#type-dropdown').closest('.custom-select-wrapper').querySelector('.select-placeholder');
-    if (typeTrigger) {
-        typeTrigger.textContent = 'All Product Types';
-        typeTrigger.style.color = '#FFD700';
-        typeTrigger.style.fontWeight = '500';
-    }
-    
-    const subBrandTrigger = document.querySelector('#subBrand-dropdown')?.closest('.custom-select-wrapper')?.querySelector('.select-placeholder');
-    if (subBrandTrigger) {
-        subBrandTrigger.textContent = 'Sub-Brand';
-        subBrandTrigger.style.color = '#FFD700';
-        subBrandTrigger.style.fontWeight = '500';
-    }
-    
-    // Load initial products
-    loadInitialProducts();
-    
-    // Apply filters
-    applyFilters();
-    
-    // Rebuild dropdowns
-    rebuildDropdowns();
-}
-    
 // ============================================
 // ALERTS JAVA
 // ============================================
@@ -4423,24 +4479,12 @@ window.onload = async () => {
     allCards = Array.from(container.children);
     
     // Load exactly INITIAL_PRODUCT_LOAD products
-    if (allCards.length > INITIAL_PRODUCT_LOAD) {
-        // Remove extra products beyond INITIAL_PRODUCT_LOAD
-        const extraCards = allCards.slice(INITIAL_PRODUCT_LOAD);
-        extraCards.forEach(card => {
-            container.removeChild(card);
-            const productId = card.querySelector('.main-image img')?.id;
-            if (productId) loadedProductIds.delete(productId);
-        });
-        allCards = Array.from(container.children).slice(0, INITIAL_PRODUCT_LOAD);
-    }
-    
-    initialLoadComplete = true;
+    loadInitialProducts();
     
     // Apply filters to show initial products
     applyFilters();
     rebuildDropdowns();
     updateCartUI();
-    document.getElementById("genFilter").value = "Women";
     updateLoadMoreVisibility();
     
     // Initialize checkout
@@ -5235,25 +5279,3 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
