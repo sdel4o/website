@@ -8,6 +8,100 @@
 body { font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0px 20px; }
 h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; margin-bottom: 20px; font-weight: 600; }
 
+    /* ============ GENDER TABS STYLES ============ */
+.gender-tabs {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.gender-tab {
+    background: none;
+    border: none;
+    color: #999;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1em;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0 0 12px 0;
+    position: relative;
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.gender-tab:hover {
+    color: #FFD700;
+}
+
+.gender-tab.active {
+    color: #FFD700;
+    font-weight: 600;
+}
+
+.gender-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #D4AF37 0%, #FFD700 100%);
+    border-radius: 2px;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: scaleX(0);
+        opacity: 0;
+    }
+    to {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+/* Mobile Portrait - Gender Tabs */
+@media (max-width: 768px) and (orientation: portrait) {
+    .gender-tabs {
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 12px;
+        padding: 0 5px;
+    }
+    
+    .gender-tab {
+        font-size: 0.95em;
+        padding: 0 0 10px 0;
+    }
+    
+    .gender-tab:first-child {
+        text-align: left;
+    }
+    
+    .gender-tab:last-child {
+        text-align: right;
+    }
+    
+    .gender-tab.active::after {
+        height: 2.5px;
+    }
+}
+
+/* Mobile Landscape - Gender Tabs */
+@media (max-width: 768px) and (orientation: landscape) {
+    .gender-tabs {
+        gap: 30px;
+        margin-bottom: 10px;
+    }
+    
+    .gender-tab {
+        font-size: 0.9em;
+    }
+}
+    
 /* ============ CUSTOM FILTER SELECTOR STYLES ============ */
 .custom-select-wrapper {
     position: relative;
@@ -1911,6 +2005,16 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
 <!-- ============ MAIN CATALOG SECTION ============ -->
 <h1>🛍️ Master Product Catalog</h1>
 <div class="controls">
+    <!-- Gender Tabs -->
+    <div class="gender-tabs">
+        <button class="gender-tab" data-gender="Men" onclick="selectGenderTab('Men')">
+            For Him
+        </button>
+        <button class="gender-tab active" data-gender="Women" onclick="selectGenderTab('Women')">
+            For Her
+        </button>
+    </div>
+    
     <!-- Search Bar -->
     <div class="filter-group">
         <input type="text" id="searchInput" oninput="debouncedApplyFilters()" placeholder="🔍 Search products...">
@@ -1998,25 +2102,11 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
         <input type="hidden" id="typeFilter" value="">
     </div>
     
-    <!-- Custom Gender Dropdown -->
-    <div class="custom-select-wrapper">
-        <div class="custom-select-trigger" onclick="toggleCustomDropdown('gender')">
-            <span class="select-placeholder">All Genders</span>
-            <span class="select-arrow">▼</span>
-        </div>
-        <div class="custom-select-dropdown" id="gender-dropdown">
-            <div class="custom-select-header">
-                <span>Select Gender</span>
-                <button class="custom-select-close" onclick="closeCustomDropdown('gender')">✕</button>
-            </div>
-            <div class="custom-select-options" id="gender-options">
-                <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('gender', '', 'All Genders')">
-                    All Genders
-                </div>
-            </div>
-        </div>
-        <input type="hidden" id="genFilter" value="">
-    </div>
+<!-- Clear Filters Button -->
+<div class="custom-select-wrapper">
+    <button class="filter-btn" onclick="clearAllFilters()" style="width: 100%;">
+        <span class="btn-icon">🔄</span> Clear Filters
+    </button>
 </div>
 
 <!-- Custom dropdown overlay (mobile) -->
@@ -3894,9 +3984,6 @@ function rebuildDropdowns() {
     
     // TYPE
     populateCustomSelectWithOptions("type", typeSet, selectedType);
-    
-    // GENDER
-    populateCustomSelectWithOptions("gender", genSet, selectedGender);
    
     // SUB-BRAND
     const subEl = document.getElementById("subBrandWrapper");
@@ -3970,7 +4057,10 @@ function applyFilters() {
             const matchesSubBrand = !subBrandFilter || tag === subBrandFilter;
             const matchesCategory = !categoryFilter || category === categoryFilter;
             const matchesType = !typeFilter || type === typeFilter;
-            const matchesGender = !genderFilter || gender === genderFilter;
+            // Handle Unisex products - they appear in both For Him and For Her
+            const matchesGender = !genderFilter || 
+                     gender === genderFilter || 
+                     gender.toLowerCase() === 'unisex';
 
             if (matchesSearch && matchesBrand && matchesSubBrand && matchesCategory && matchesType && matchesGender) {
                 card.style.display = "flex";
@@ -4813,7 +4903,94 @@ function formatCurrency(amount) {
         maximumFractionDigits: 2
     });
 }
+/**
+ * Selects a gender tab and filters products
+ */
+function selectGenderTab(gender) {
+    // Update active tab styling
+    document.querySelectorAll('.gender-tab').forEach(tab => {
+        tab.classList.remove('active');
+        if (tab.dataset.gender === gender) {
+            tab.classList.add('active');
+        }
+    });
+    
+    // Update hidden gender filter
+    document.getElementById("genFilter").value = gender;
+    
+    console.log(`👤 GENDER TAB CHANGED to: ${gender}`);
+    
+    // Load 8 products
+    loadInitialProducts();
+    
+    // Apply filters
+    applyFilters();
+    
+    // Rebuild dropdowns
+    rebuildDropdowns();
+}
 
+/**
+ * Clears all filters and resets to default state
+ */
+function clearAllFilters() {
+    console.log("🔄 CLEARING ALL FILTERS");
+    
+    // Clear all filter values
+    document.getElementById("brandFilter").value = "";
+    document.getElementById("subBrandFilter").value = "";
+    document.getElementById("catFilter").value = "";
+    document.getElementById("typeFilter").value = "";
+    document.getElementById("searchInput").value = "";
+    
+    // Reset gender to "For Her" (default)
+    document.getElementById("genFilter").value = "Women";
+    document.querySelectorAll('.gender-tab').forEach(tab => {
+        tab.classList.remove('active');
+        if (tab.dataset.gender === 'Women') {
+            tab.classList.add('active');
+        }
+    });
+    
+    // Reset all custom select triggers to default text
+    const brandTrigger = document.querySelector('#brand-dropdown').closest('.custom-select-wrapper').querySelector('.select-placeholder');
+    if (brandTrigger) {
+        brandTrigger.textContent = 'All Brands';
+        brandTrigger.style.color = '#FFD700';
+        brandTrigger.style.fontWeight = '500';
+    }
+    
+    const categoryTrigger = document.querySelector('#category-dropdown').closest('.custom-select-wrapper').querySelector('.select-placeholder');
+    if (categoryTrigger) {
+        categoryTrigger.textContent = 'All Categories';
+        categoryTrigger.style.color = '#FFD700';
+        categoryTrigger.style.fontWeight = '500';
+    }
+    
+    const typeTrigger = document.querySelector('#type-dropdown').closest('.custom-select-wrapper').querySelector('.select-placeholder');
+    if (typeTrigger) {
+        typeTrigger.textContent = 'All Product Types';
+        typeTrigger.style.color = '#FFD700';
+        typeTrigger.style.fontWeight = '500';
+    }
+    
+    const subBrandTrigger = document.querySelector('#subBrand-dropdown')?.closest('.custom-select-wrapper')?.querySelector('.select-placeholder');
+    if (subBrandTrigger) {
+        subBrandTrigger.textContent = 'Sub-Brand';
+        subBrandTrigger.style.color = '#FFD700';
+        subBrandTrigger.style.fontWeight = '500';
+    }
+    
+    // Load initial products
+    loadInitialProducts();
+    
+    // Apply filters
+    applyFilters();
+    
+    // Rebuild dropdowns
+    rebuildDropdowns();
+}
+    
 // ============================================
 // ALERTS JAVA
 // ============================================
@@ -4910,6 +5087,7 @@ window.onload = async () => {
     applyFilters();
     rebuildDropdowns();
     updateCartUI();
+    document.getElementById("genFilter").value = "Women";
     updateLoadMoreVisibility();
     
     // Initialize checkout
@@ -5704,6 +5882,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
