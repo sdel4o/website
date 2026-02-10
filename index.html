@@ -3173,10 +3173,10 @@ function handleCategoryChange() {
     // Category only clears Type
     document.getElementById("typeFilter").value = ""; 
     
-    // Load 8 products
+    // Load products WITH CURRENT FILTERS
     loadInitialProducts();
     
-    // Apply filters
+    // Apply filters (will show/hide based on new filters)
     applyFilters(); 
     
     // Rebuild dropdowns
@@ -3616,32 +3616,76 @@ function applyFilters() {
 // FIX: Proper initial product loading
 function loadInitialProducts() {
     const container = document.getElementById("container");
+    const searchTerm = document.getElementById("searchInput").value.toLowerCase(),
+          brandFilter = getCustomSelectValue("brand"),
+          subBrandFilter = getCustomSelectValue("subBrand"),
+          categoryFilter = getCustomSelectValue("category"),
+          typeFilter = getCustomSelectValue("type"),
+          genderFilter = getCustomSelectValue("gender");
     
     if (!window.allProductsData || window.allProductsData.length === 0) {
         console.log("No product data available");
         return;
     }
     
-    console.log(`🔄 Loading initial ${INITIAL_PRODUCT_LOAD} products from JSON...`);
+    console.log(`🔄 Loading initial products...`);
     
-    // Clear container
+    // CLEAR THE CONTAINER FIRST
     container.innerHTML = '';
     loadedProductIds.clear();
     
-    // Load first INITIAL_PRODUCT_LOAD products from JSON
-    const initialProducts = window.allProductsData.slice(0, INITIAL_PRODUCT_LOAD);
+    let matchingProducts = [];
     
-    initialProducts.forEach(product => {
-        const cardHtml = createProductCard(product);
-        container.insertAdjacentHTML('beforeend', cardHtml);
-        loadedProductIds.add(product.id);
-    });
+    // FIRST: Find ALL products that match filters
+    for (const product of window.allProductsData) {
+        const productName = product.name ? product.name.toLowerCase() : '';
+        const sku = product.sku ? product.sku.toLowerCase() : '';
+        const brand = BRAND_NAME_MAP[product.source] || product.source || '';
+        const tag = product.tag || '';
+        const category = product.category || '';
+        const type = product.type || '';
+        const gender = product.gender || '';
+        
+        // Check if product matches ALL current filters
+        const matchesSearch = !searchTerm || 
+            productName.includes(searchTerm) || 
+            (sku && sku.includes(searchTerm));
+        const matchesBrand = !brandFilter || brand === brandFilter;
+        const matchesSubBrand = !subBrandFilter || tag === subBrandFilter;
+        const matchesCategory = !categoryFilter || category === categoryFilter;
+        const matchesType = !typeFilter || type === typeFilter;
+        const matchesGender = !genderFilter || gender === genderFilter;
+
+        if (matchesSearch && matchesBrand && matchesSubBrand && matchesCategory && matchesType && matchesGender) {
+            matchingProducts.push(product);
+        }
+    }
     
-    // Update allCards array
-    allCards = Array.from(container.children);
-    initialLoadComplete = true;
+    console.log(`Found ${matchingProducts.length} matching products`);
     
-    console.log(`✅ Loaded ${initialProducts.length} initial products from JSON`);
+    // CRITICAL FIX: Load whatever we found, even if less than INITIAL_PRODUCT_LOAD
+    const productsToLoad = matchingProducts.slice(0, INITIAL_PRODUCT_LOAD);
+    
+    if (productsToLoad.length === 0) {
+        console.log("⚠️ No products match the current filters!");
+        // Optionally show a message to the user
+        container.innerHTML = '<p style="text-align: center; padding: 20px; color: #666;">No products match the selected filters.</p>';
+    } else {
+        productsToLoad.forEach(product => {
+            const cardHtml = createProductCard(product);
+            container.insertAdjacentHTML('beforeend', cardHtml);
+            loadedProductIds.add(product.id);
+        });
+        
+        // Update allCards array
+        allCards = Array.from(container.children);
+        initialLoadComplete = true;
+        
+        console.log(`✅ Loaded ${productsToLoad.length} initial products (matching filters)`);
+    }
+    
+    // Update Load More button visibility
+    updateLoadMoreVisibility();
 }
 
 /**
@@ -5279,3 +5323,4 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
