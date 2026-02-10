@@ -17,6 +17,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     margin-bottom: 15px;
     position: relative;
     padding-bottom: 8px;
+    width: 100%;
 }
 
 .gender-tab {
@@ -57,6 +58,30 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
 @keyframes slideIn {
     from { transform: scaleX(0.5); opacity: 0; }
     to { transform: scaleX(1); opacity: 1; }
+}
+
+/* Mobile gender tabs */
+@media (max-width: 768px) and (orientation: portrait) {
+    .gender-tabs-container {
+        justify-content: space-between !important;
+        gap: 0 !important;
+        margin-bottom: 10px !important;
+        padding-bottom: 6px !important;
+    }
+    
+    .gender-tab {
+        font-size: 1.2em !important;
+        font-weight: 600 !important;
+        padding: 10px 0 !important;
+    }
+    
+    .gender-tab:first-child {
+        text-align: left;
+    }
+    
+    .gender-tab:last-child {
+        text-align: right;
+    }
 }
 
 /* ============ CUSTOM FILTER SELECTOR STYLES ============ */
@@ -1988,13 +2013,13 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
 <!-- ============ MAIN CATALOG SECTION ============ -->
 <h1>🛍️ Master Product Catalog</h1>
 
-<!-- Gender Tabs -->
-<div class="gender-tabs-container">
-    <button class="gender-tab" id="forHimTab" onclick="setGenderFilter('Men')">For Him</button>
-    <button class="gender-tab active" id="forHerTab" onclick="setGenderFilter('Women')">For Her</button>
-</div>
-
 <div class="controls">
+    <!-- Gender Tabs INSIDE the controls container -->
+    <div class="gender-tabs-container">
+        <button class="gender-tab" id="forHimTab" onclick="setGenderFilter('Men')">For Him</button>
+        <button class="gender-tab active" id="forHerTab" onclick="setGenderFilter('Women')">For Her</button>
+    </div>
+    
     <!-- Search Bar -->
     <div class="filter-group">
         <input type="text" id="searchInput" oninput="debouncedApplyFilters()" placeholder="🔍 Search products...">
@@ -2357,7 +2382,7 @@ let initialLoadComplete = false;
 let currentGenderFilter = "Women"; // Default to "For Her"
 
 // ============================================
-// GENDER FILTER FUNCTIONS
+// GENDER FILTER FUNCTIONS - FIXED
 // ============================================
 
 /**
@@ -2365,6 +2390,8 @@ let currentGenderFilter = "Women"; // Default to "For Her"
  * @param gender - "Men" or "Women"
  */
 function setGenderFilter(gender) {
+    console.log(`🎯 setGenderFilter called with: ${gender}`);
+    
     // Update active tab
     document.getElementById('forHimTab').classList.remove('active');
     document.getElementById('forHerTab').classList.remove('active');
@@ -2377,10 +2404,56 @@ function setGenderFilter(gender) {
         currentGenderFilter = "Women";
     }
     
+    console.log(`✅ Gender filter set to: ${currentGenderFilter}`);
+    
+    // Clear all other filters when gender changes
+    document.getElementById("searchInput").value = "";
+    document.getElementById("brandFilter").value = "";
+    document.getElementById("subBrandFilter").value = "";
+    document.getElementById("catFilter").value = "";
+    document.getElementById("typeFilter").value = "";
+    
+    // Reset dropdown displays
+    const dropdownTypes = ['brand', 'subBrand', 'category', 'type'];
+    dropdownTypes.forEach(type => {
+        const dropdown = document.getElementById(`${type}-dropdown`);
+        if (dropdown) {
+            const trigger = dropdown.closest('.custom-select-wrapper').querySelector('.custom-select-trigger .select-placeholder');
+            if (trigger) {
+                const defaultLabel = type === 'brand' ? 'All Brands' : 
+                                   type === 'subBrand' ? 'Sub-Brand' : 
+                                   type === 'category' ? 'All Categories' :
+                                   'All Product Types';
+                trigger.textContent = defaultLabel;
+                trigger.style.color = '#FFD700';
+                trigger.style.fontWeight = '500';
+            }
+            
+            // Reset selected option in dropdown
+            const options = document.querySelectorAll(`#${type}-options .custom-select-option`);
+            options.forEach(option => {
+                option.classList.remove('selected');
+                if (option.dataset.value === "") {
+                    option.classList.add('selected');
+                }
+            });
+        }
+    });
+    
+    // Hide sub-brand wrapper
+    const subBrandWrapper = document.getElementById("subBrandWrapper");
+    if (subBrandWrapper) {
+        subBrandWrapper.style.display = "none";
+    }
+    
     // Load products with the new gender filter
     loadInitialProducts();
-    applyFilters();
-    rebuildDropdowns();
+    
+    // Apply filters to show/hide products
+    setTimeout(() => {
+        applyFilters();
+        rebuildDropdowns();
+    }, 100);
 }
 
 /**
@@ -5469,3 +5542,4 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
