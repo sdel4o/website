@@ -1012,22 +1012,34 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     }
     
     /* FIX 1: Controls - Keep original styling but scale down */
-    .controls {
-        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
-        padding: 12px !important;
-        border-radius: 10px !important;
-        margin: 0 auto 15px !important;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
-        border: 1.8px solid #D4AF37 !important;
-        position: relative !important;
-        z-index: 100 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 8px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        font-size: 0.9em !important;
-    }
+/* FIX 1: Controls - Keep original styling but scale down */
+.controls {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+    padding: 12px !important;
+    border-radius: 10px !important;
+    margin: 0 auto 15px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+    border: 1.8px solid #D4AF37 !important;
+    position: relative !important;
+    z-index: 100 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    font-size: 0.9em !important;
+}
+
+/* Gender tabs inside controls on mobile */
+.controls .gender-tabs-container {
+    margin-bottom: 8px !important;
+    padding-bottom: 4px !important;
+}
+
+.controls .gender-tab {
+    font-size: 1.1em !important;
+    padding: 8px 0 !important;
+}
     
     /* FIX 2: Search Bar - Smaller but proportional */
     #searchInput {
@@ -2503,7 +2515,7 @@ function clearAllFilters() {
                 trigger.style.fontWeight = '500';
             }
             
-            // Reset selected option
+            // Reset selected option in dropdown
             const options = document.querySelectorAll(`#${type}-options .custom-select-option`);
             options.forEach(option => {
                 option.classList.remove('selected');
@@ -5542,4 +5554,5 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
