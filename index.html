@@ -8,12 +8,11 @@
 body { font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0px 20px; }
 h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; margin-bottom: 20px; font-weight: 600; }
 
-    /* ============ GENDER TABS STYLES ============ */
+/* ============ GENDER TABS STYLES ============ */
 .gender-tabs {
     display: flex;
     gap: 40px;
     align-items: center;
-    margin-bottom: 15px;
     position: relative;
 }
 
@@ -63,7 +62,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     }
 }
 
-/* Mobile Portrait - Gender Tabs */
+    /* Mobile Portrait - Gender Tabs */
 @media (max-width: 768px) and (orientation: portrait) {
     .gender-tabs {
         justify-content: space-between;
@@ -96,11 +95,82 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         gap: 30px;
         margin-bottom: 10px;
     }
+    .controls {
+        gap: 8px !important;
+    }
+       /* Gender tabs + Search bar container */
+    .controls > div:first-child {
+        flex-direction: column !important;
+        gap: 8px !important;
+        align-items: stretch !important;
+    }
+    
+    /* Gender tabs - BIGGER on mobile, space-between */
+    .gender-tabs {
+        justify-content: space-between !important;
+        gap: 0 !important;
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
     
     .gender-tab {
-        font-size: 0.9em;
+        font-size: 1.1em !important;
+        padding: 0 0 10px 0 !important;
+        flex: 1 !important;
+    }
+    
+    .gender-tab:first-child {
+        text-align: left !important;
+    }
+    
+    .gender-tab:last-child {
+        text-align: right !important;
+    }
+    
+    .gender-tab.active::after {
+        height: 3px !important;
+    }
+    
+    /* Search bar - FULL WIDTH on mobile, SAME ROW as cart */
+    #searchInput {
+        width: calc(100% - 90px) !important;
+        padding: 12px 18px !important;
+        font-size: 0.95em !important;
+        margin: 0 !important;
+    }
+    
+    /* Cart button - SAME ROW as search */
+    .cart-summary-btn {
+        position: absolute !important;
+        right: 12px !important;
+        top: 52px !important;
+        padding: 10px 18px !important;
+        font-size: 0.85em !important;
+        z-index: 101 !important;
+    }
+    
+    /* Filter bottom row - Clear + Sort side by side */
+    .filter-bottom-row {
+        display: flex !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+        padding-top: 8px !important;
+    }
+    
+    .clear-button-container,
+    .sort-button-container {
+        flex: 1 !important;
+    }
+    
+    .clear-button-container .filter-btn,
+    .sort-button-container .filter-btn {
+        width: 100% !important;
+        padding: 10px 12px !important;
+        font-size: 0.8em !important;
     }
 }
+    
     
 /* ============ CUSTOM FILTER SELECTOR STYLES ============ */
 .custom-select-wrapper {
@@ -680,26 +750,37 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
 /* ============ UPDATED FILTER CONTROLS - Desktop Layout / Desktop CSS ============ */
 
 /* Controls container should match catalog width */
+/* ============ UPDATED FILTER CONTROLS - Desktop Layout / Desktop CSS ============ */
+
+/* Controls container should match catalog width */
 .controls {
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); 
     padding: 15px 20px;
     border-radius: 12px; 
-    margin: 0 auto 20px; /* Center it */
+    margin: 0 auto 20px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     border: 1.8px solid #D4AF37;
     position: relative;
     z-index: 100;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    width: 100%; /* Match catalog width */
-    max-width: 1600px; /* Higher limit for large screens */
+    gap: 15px;
+    width: 100%;
+    max-width: 1600px;
     box-sizing: border-box;
 }
 
-/* Search bar - FROM OLD CODE */
+/* Desktop: Gender tabs on left, Search on right (same row) */
+.controls > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Search bar - 50% width on desktop, right-aligned */
 #searchInput {
-    width: 100%;
+    width: 50%;
     padding: 14px 20px;
     border: 2px solid #D4AF37;
     border-radius: 30px;
@@ -710,7 +791,6 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     font-weight: 500;
     transition: all 0.3s ease;
     box-sizing: border-box;
-    margin-bottom: 8px;
 }
 
 #searchInput:focus {
@@ -728,23 +808,36 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 10px;
-    margin-bottom: 10x;
 }
 
-/* Bottom row - Sort button only (view selector removed) */
+/* Bottom row - Clear Filters (left) + Sort (right) */
 .filter-bottom-row {
     display: flex;
-    justify-content: flex-end; /* Sort button to the right */
+    justify-content: space-between;
     align-items: center;
     gap: 10px;
-    margin-top: 5px;
-    padding-top: 10px;
+    padding-top: 15px;
     border-top: 1px solid rgba(212, 175, 55, 0.3);
 }
 
+/* Clear button in bottom row */
+.clear-button-container {
+    flex-shrink: 0;
+}
+    
 /* Sort button in bottom row */
 .sort-button-container {
     flex-shrink: 0;
+}
+
+#searchInput:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+    border-color: #FFD700;
+}
+
+#searchInput::placeholder {
+    color: #999;
 }
 
 /* Filter Buttons - FROM NEW CODE */
@@ -1612,6 +1705,7 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
     margin: 0 auto; /* Center it */
     box-sizing: border-box;
     padding: 0 5px;
+    background: transparent; /* ADD THIS LINE */
 }
 
 /* PRODUCT CARD SIZING */
@@ -2005,15 +2099,16 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
 <!-- ============ MAIN CATALOG SECTION ============ -->
 <h1>🛍️ Master Product Catalog</h1>
 <div class="controls">
-    <!-- Gender Tabs -->
-    <div class="gender-tabs">
-        <button class="gender-tab" data-gender="Men" onclick="selectGenderTab('Men')">
-            For Him
-        </button>
-        <button class="gender-tab active" data-gender="Women" onclick="selectGenderTab('Women')">
-            For Her
-        </button>
-    </div>
+<!-- Gender Tabs -->
+<div class="gender-tabs">
+    <button class="gender-tab" data-gender="Men" onclick="selectGenderTab('Men')">
+        For Him
+    </button>
+    <button class="gender-tab active" data-gender="Women" onclick="selectGenderTab('Women')">
+        For Her
+    </button>
+</div>
+<input type="hidden" id="genFilter" value="Women">
     
     <!-- Search Bar -->
     <div class="filter-group">
@@ -2101,26 +2196,26 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
         </div>
         <input type="hidden" id="typeFilter" value="">
     </div>
-    
-<!-- Clear Filters Button -->
-<div class="custom-select-wrapper">
-    <button class="filter-btn" onclick="clearAllFilters()" style="width: 100%;">
-        <span class="btn-icon">🔄</span> Clear Filters
-    </button>
-</div>
 
 <!-- Custom dropdown overlay (mobile) -->
 <div class="custom-select-overlay" onclick="closeAllCustomDropdowns()"></div>
     
-    <!-- Bottom Row: Sort Button Only (View selector removed) -->
-    <div class="filter-bottom-row">
-        <!-- Sort Button -->
-        <div class="sort-button-container">
-            <button class="filter-btn" onclick="sortByPrice()">
-                <span class="btn-icon">💰</span> Sort by Price
-            </button>
-        </div>
+<!-- Bottom Row: Clear Filters (left) + Sort Button (right) -->
+<div class="filter-bottom-row">
+    <!-- Clear Filters Button (LEFT) -->
+    <div class="clear-button-container">
+        <button class="filter-btn" onclick="clearAllFilters()">
+            Clear Filters
+        </button>
     </div>
+    
+    <!-- Sort Button (RIGHT) -->
+    <div class="sort-button-container">
+        <button class="filter-btn" onclick="sortByPrice()">
+            <span class="btn-icon">💰</span> Sort by Price
+        </button>
+    </div>
+</div>
     
     <!-- Cart Button -->
     <button class="cart-summary-btn" onclick="openCheckoutModal()">
@@ -5882,6 +5977,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
