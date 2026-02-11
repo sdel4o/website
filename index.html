@@ -658,7 +658,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     font-weight: 500;
     transition: all 0.3s ease;
     box-sizing: border-box;
-    margin-bottom: 8px;
+    margin: 0 0 5px 0; /* Removed extra margin */
 }
 
 #searchInput:focus {
@@ -679,25 +679,37 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     margin-bottom: 10x;
 }
 
-/* Bottom row - Clear Filters left, Sort button right */
+/* Bottom row - Clear Filters left, Sort button right - PERFECTLY ALIGNED */
 .filter-bottom-row {
     display: flex;
-    justify-content: space-between; /* Clear left, Sort right */
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
     margin-top: 5px;
-    padding-top: 10px;
+    padding-top: 15px;
     border-top: 1px solid rgba(212, 175, 55, 0.3);
+    width: 100%;
+    box-sizing: border-box;
 }
 
-/* Clear Filters button (left) */
+/* Clear Filters button (LEFT) - Remove any default margin/padding */
 .clear-filters-container {
-    flex-shrink: 0;
+    flex: 0 1 auto;
+    margin: 0;
+    padding: 0;
 }
 
-/* Sort button in bottom row (right) */
+/* Sort button (RIGHT) - Remove any default margin/padding */
 .sort-button-container {
-    flex-shrink: 0;
+    flex: 0 1 auto;
+    margin: 0 0 0 auto; /* margin-left: auto only */
+    padding: 0;
+}
+
+/* Make sure the buttons themselves don't add extra spacing */
+.clear-filters-container .filter-btn,
+.sort-button-container .filter-btn {
+    margin: 0;
 }
 
 /* Filter Buttons - FROM NEW CODE */
@@ -722,8 +734,8 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
 /* Cart Button - FROM OLD CODE (size and position) */
 .cart-summary-btn {
     position: absolute;
-    right: 25px;
-    top: 82.5px;
+    right: 30px;
+    top: 78px;
     background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
     color: #FFD700;
     border: 2px solid #D4AF37;
