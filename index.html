@@ -61,6 +61,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         gap: 0;
         margin-bottom: 8px;
         width: 100%;
+        padding: 0 5px;
     }
     
     .gender-tab {
@@ -3696,12 +3697,7 @@ function applyFilters() {
             }
             
             // Check search
-            let matchesSearch = true;
-            if (searchTerm) {
-                const searchWords = searchTerm.toLowerCase().split(' ').filter(word => word.length > 0);
-                const productText = (productName + ' ' + sku).toLowerCase();
-                matchesSearch = searchWords.every(word => productText.includes(word));
-            }
+            const matchesSearch = matchesSearchText(productName + ' ' + sku, searchTerm);
             
             // Check brand (use display name)
             const matchesBrand = !brandFilter || displayName === brandFilter;
@@ -3759,9 +3755,7 @@ function loadInitialProducts() {
         const gender = product.gender || '';
         
         // Check if product matches ALL current filters
-        const matchesSearch = !searchTerm || 
-            productName.includes(searchTerm) || 
-            (sku && sku.includes(searchTerm));
+        const matchesSearch = matchesSearchText(productName + ' ' + sku, searchTerm);
         const matchesBrand = !brandFilter || brand === brandFilter;
         const matchesSubBrand = !subBrandFilter || tag === subBrandFilter;
         const matchesCategory = !categoryFilter || category === categoryFilter;
@@ -3800,6 +3794,23 @@ function loadInitialProducts() {
     
     // Update Load More button visibility
     updateLoadMoreVisibility();
+}
+
+// Simple word matching that ignores special characters
+function matchesSearchText(productText, searchTerm) {
+    if (!searchTerm) return true;
+    
+    // Clean the search term - split into words and clean each word
+    const searchWords = searchTerm.toLowerCase()
+        .split(' ')
+        .filter(word => word.length > 0)
+        .map(word => word.replace(/[^a-z0-9]/g, ''));
+    
+    // Clean the product text once
+    const cleanProductText = productText.toLowerCase().replace(/[^a-z0-9]/g, ' ');
+    
+    // Check if ALL search words appear in the product text (order doesn't matter)
+    return searchWords.every(word => cleanProductText.includes(word));
 }
 
 /**
@@ -3841,9 +3852,7 @@ function updateLoadMoreVisibility() {
             return;
         }
         
-        const matchesSearch = !searchTerm || 
-            productName.includes(searchTerm) || 
-            (sku && sku.includes(searchTerm));
+        const matchesSearch = matchesSearchText(productName + ' ' + sku, searchTerm);
         const matchesBrand = !brandFilter || brand === brandFilter;
         const matchesSubBrand = !subBrandFilter || tag === subBrandFilter;
         const matchesCategory = !categoryFilter || category === categoryFilter;
@@ -3905,9 +3914,7 @@ function loadMoreDynamic(batchSize = LOAD_MORE_BATCH) {
         const gender = product.gender || '';
         
         // Check if product matches ALL current filters
-        const matchesSearch = !searchTerm || 
-            productName.includes(searchTerm) || 
-            (sku && sku.includes(searchTerm));
+        const matchesSearch = matchesSearchText(productName + ' ' + sku, searchTerm);
         const matchesBrand = !brandFilter || brand === brandFilter;
         const matchesSubBrand = !subBrandFilter || tag === subBrandFilter;
         const matchesCategory = !categoryFilter || category === categoryFilter;
@@ -5388,10 +5395,3 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
