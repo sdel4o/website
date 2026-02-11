@@ -1474,7 +1474,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         height: 180px !important;
     }
     
-    /* Cart button landscape - Adjust position */
+    /* Cart button - Adjust position */
     .cart-summary-btn {
         position: absolute !important;
         right: 20px !important;
@@ -2067,7 +2067,7 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
         <!-- Clear Filters Button (LEFT) -->
         <div class="clear-filters-container">
             <button class="filter-btn" onclick="clearAllFilters()">
-                <span class="btn-icon">🗑️</span> Clear Filters
+                <span class="btn-icon">🔄</span> Clear Filters
             </button>
         </div>
         
@@ -2361,7 +2361,31 @@ function setGenderFilter(gender) {
         forHerTab.querySelector('.gender-underline').style.transform = 'scaleX(0)';
     }
     
-    // Apply filters
+    // === CRITICAL: CLEAR ALL FILTERS WHEN SWITCHING GENDER ===
+    // Clear search input
+    document.getElementById('searchInput').value = '';
+    
+    // Clear brand filter
+    selectCustomOption('brand', '', 'All Brands');
+    
+    // Clear sub-brand filter if visible
+    const subBrandWrapper = document.getElementById('subBrandWrapper');
+    if (subBrandWrapper.style.display !== 'none') {
+        selectCustomOption('subBrand', '', 'Sub-Brand');
+    }
+    // Clear category filter
+    selectCustomOption('category', '', 'All Categories');
+    
+    // Clear type filter
+    selectCustomOption('type', '', 'All Product Types');
+    
+    // === REBUILD DROPDOWNS BASED ON NEW GENDER ===
+    rebuildDropdowns();
+    
+    // === LOAD INITIAL PRODUCTS FOR NEW GENDER ===
+    loadInitialProducts();
+    
+    // === APPLY FILTERS ===
     applyFilters();
 }
 
@@ -3371,6 +3395,7 @@ function handleSearch() {
 }
 
 // FIX 2: SIMPLIFIED getAvailableOptions - FIX BRANDS ISSUE
+// FIX 2: SIMPLIFIED getAvailableOptions - FIX BRANDS ISSUE
 function getAvailableOptions() {
     const selectedBrand = getCustomSelectValue("brand");
     const selectedSubBrand = getCustomSelectValue("subBrand");
@@ -3393,7 +3418,8 @@ function getAvailableOptions() {
         subBrand: selectedSubBrand || "(none)",
         category: selectedCategory || "(none)",
         type: selectedType || "(none)",
-        search: searchTerm || "(none)"
+        search: searchTerm || "(none)",
+        gender: activeGenderFilter || "(none)"  // ADDED: Show current gender filter
     });
     
     // DEBUG: Show all data to understand structure
@@ -3405,6 +3431,12 @@ function getAvailableOptions() {
     window.allProductsData.forEach(product => {
         const brand = product.brand || '';
         const source = product.source || '';
+        const gender = product.gender || '';  // ADDED: Get product gender
+        
+        // ADDED: Check gender filter first - ONLY include products that match current gender filter
+        if (!matchesGenderFilter(gender)) {
+            return; // Skip this product if it doesn't match current gender selection
+        }
         
         // SIMPLE: Always add the display brand from BRAND_NAME_MAP
         if (source && BRAND_NAME_MAP[source]) {
@@ -3423,15 +3455,21 @@ function getAvailableOptions() {
     console.log("Brand dropdown options (SIMPLIFIED):", Array.from(brandSet).sort());
     
     // ============================================
-    // CATEGORY - BASED ON SELECTED BRAND
+    // CATEGORY - BASED ON SELECTED BRAND AND GENDER
     // ============================================
     window.allProductsData.forEach(product => {
         const brand = product.brand || '';
         const source = product.source || '';
         const tag = product.tag || '';
         const category = product.category || '';
+        const gender = product.gender || '';  // ADDED: Get product gender
         
         if (!category || category.trim() === '') return;
+        
+        // ADDED: Check gender filter first
+        if (!matchesGenderFilter(gender)) {
+            return; // Skip this product if it doesn't match current gender selection
+        }
         
         let shouldIncludeCategory = true;
         
@@ -3461,7 +3499,7 @@ function getAvailableOptions() {
     });
     
     // ============================================
-    // TYPE - BASED ON BRAND AND CATEGORY
+    // TYPE - BASED ON BRAND, CATEGORY, AND GENDER
     // ============================================
     window.allProductsData.forEach(product => {
         const brand = product.brand || '';
@@ -3469,8 +3507,14 @@ function getAvailableOptions() {
         const tag = product.tag || '';
         const category = product.category || '';
         const type = product.type || '';
+        const gender = product.gender || '';  // ADDED: Get product gender
         
         if (!type || type.trim() === '') return;
+        
+        // ADDED: Check gender filter first
+        if (!matchesGenderFilter(gender)) {
+            return; // Skip this product if it doesn't match current gender selection
+        }
         
         let shouldIncludeType = true;
         
@@ -3505,16 +3549,23 @@ function getAvailableOptions() {
     });
     
     // ============================================
-    // SUB-BRANDS - SIMPLIFIED
+    // SUB-BRANDS - SIMPLIFIED WITH GENDER FILTER
     // ============================================
     if (SUB_BRAND_ENABLED_GLOBALLY) {
         window.allProductsData.forEach(product => {
             const brand = product.brand || '';
             const source = product.source || '';
             const tag = product.tag || '';
+            const gender = product.gender || '';  // ADDED: Get product gender
             
             // Only process products from target folders
             if (TARGET_FOLDERS.includes(source)) {
+                
+                // ADDED: Check gender filter first
+                if (!matchesGenderFilter(gender)) {
+                    return; // Skip this product if it doesn't match current gender selection
+                }
+                
                 // Get display name for this product
                 let productDisplayBrand = '';
                 if (source && BRAND_NAME_MAP[source]) {
@@ -3539,22 +3590,12 @@ function getAvailableOptions() {
         });
     }
     
-    console.log("Available dropdown options:", {
+    console.log("Available dropdown options (filtered by gender):", {
         brands: Array.from(brandSet).sort(),
         subBrands: Array.from(subSet).sort(),
         categories: Array.from(catSet).sort(),
         types: Array.from(typeSet).sort()
     });
-    
-    // DEBUG: Check what brands are being collected
-    console.log("DEBUG - Brands being collected:");
-    const brandDebug = new Set();
-    window.allProductsData.forEach(product => {
-        brandDebug.add(`source="${product.source}", brand="${product.brand}", BRAND_NAME_MAP="${BRAND_NAME_MAP[product.source]}"`);
-    });
-    console.log(Array.from(brandDebug).slice(0, 10));
-    
-    console.log("=== END FILTER ANALYSIS ===");
     
     return { brandSet, subSet, catSet, typeSet };
 }
@@ -5344,12 +5385,3 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
