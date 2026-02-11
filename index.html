@@ -8,16 +8,12 @@
 body { font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0px 20px; }
 h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; margin-bottom: 20px; font-weight: 600; }
 
-/* ============ GENDER TABS STYLES ============ */
+/* ============ FOR HER/FOR HIM BUTTONS ============ */
 .gender-tabs-container {
     display: flex;
+    margin-bottom: 10px;
+    gap: 40px; /* 10 spaces between buttons */
     justify-content: flex-start;
-    align-items: center;
-    gap: 40px;
-    margin-bottom: 15px;
-    position: relative;
-    padding-bottom: 8px;
-    width: 100%;
 }
 
 .gender-tab {
@@ -26,61 +22,57 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     font-family: 'Montserrat', sans-serif;
     font-size: 1.1em;
     font-weight: 500;
-    color: rgba(212, 175, 55, 0.6);
     cursor: pointer;
     padding: 8px 0;
     position: relative;
     transition: all 0.3s ease;
-    white-space: nowrap;
+    color: rgba(255, 215, 0, 0.6); /* muted gold/gray for inactive */
 }
 
 .gender-tab:hover {
-    color: rgba(212, 175, 55, 0.8);
+    color: rgba(255, 215, 0, 0.8); /* slightly brighter on hover */
 }
 
 .gender-tab.active {
-    color: #FFD700;
     font-weight: 600;
+    color: #FFD700; /* bright gold for active */
 }
 
-.gender-tab.active::after {
-    content: '';
+.gender-underline {
     position: absolute;
-    bottom: -8px;
+    bottom: -4px;
     left: 0;
     width: 100%;
     height: 4px;
     background: #FFD700;
     border-radius: 2px;
-    animation: slideIn 0.3s ease-out;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
 }
 
-@keyframes slideIn {
-    from { transform: scaleX(0.5); opacity: 0; }
-    to { transform: scaleX(1); opacity: 1; }
+.gender-tab.active .gender-underline {
+    transform: scaleX(1);
 }
 
-/* Mobile gender tabs */
+/* Mobile portrait: For Her left, For Him right */
 @media (max-width: 768px) and (orientation: portrait) {
     .gender-tabs-container {
-        justify-content: space-between !important;
-        gap: 0 !important;
-        margin-bottom: 10px !important;
-        padding-bottom: 6px !important;
+        justify-content: space-between;
+        gap: 0;
+        margin-bottom: 8px;
     }
     
     .gender-tab {
-        font-size: 1.2em !important;
-        font-weight: 600 !important;
-        padding: 10px 0 !important;
+        font-size: 1em;
+        padding: 6px 0;
     }
-    
-    .gender-tab:first-child {
-        text-align: left;
-    }
-    
-    .gender-tab:last-child {
-        text-align: right;
+}
+
+/* Mobile landscape: same as desktop */
+@media (max-width: 768px) and (orientation: landscape) {
+    .gender-tabs-container {
+        justify-content: flex-start;
+        gap: 40px;
     }
 }
 
@@ -631,69 +623,6 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
 
 /* ============ UPDATED FILTER CONTROLS - Desktop Layout / Desktop CSS ============ */
 
-    /* ============ DESKTOP TOP ROW LAYOUT ============ */
-.desktop-top-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    width: 100%;
-}
-
-/* Desktop layout */
-@media (min-width: 769px) {
-    .desktop-top-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
-    }
-    
-    .gender-tabs-container {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 40px;
-        margin: 0;
-        padding: 0;
-        width: auto;
-    }
-    
-    .filter-group {
-        width: 50%;
-        max-width: 400px;
-        margin: 0;
-    }
-    
-    #searchInput {
-        width: 100%;
-        margin: 0;
-    }
-    
-    .cart-summary-btn {
-        position: absolute;
-        right: 25px;
-        top: 15px;
-    }
-}
-
-/* Mobile layout - stack vertically */
-@media (max-width: 768px) {
-    .desktop-top-row {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .gender-tabs-container {
-        width: 100%;
-        justify-content: space-between;
-    }
-    
-    .filter-group {
-        width: 100%;
-    }
-}
-
 /* Controls container should match catalog width */
 .controls {
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); 
@@ -714,7 +643,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
 
 /* Search bar - FROM OLD CODE */
 #searchInput {
-    width: 50%;
+    width: 100%;
     padding: 14px 20px;
     border: 2px solid #D4AF37;
     border-radius: 30px;
@@ -726,8 +655,6 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     transition: all 0.3s ease;
     box-sizing: border-box;
     margin-bottom: 8px;
-    margin-left: auto;
-    display: block;
 }
 
 #searchInput:focus {
@@ -745,13 +672,13 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 10x;
 }
 
-/* Bottom row - Clear Filters and Sort buttons */
+/* Bottom row - Clear Filters left, Sort button right */
 .filter-bottom-row {
     display: flex;
-    justify-content: space-between; /* Clear filters left, Sort right */
+    justify-content: space-between; /* Clear left, Sort right */
     align-items: center;
     gap: 10px;
     margin-top: 5px;
@@ -759,12 +686,12 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     border-top: 1px solid rgba(212, 175, 55, 0.3);
 }
 
-/* Clear filters button container */
+/* Clear Filters button (left) */
 .clear-filters-container {
     flex-shrink: 0;
 }
 
-/* Sort button container */
+/* Sort button in bottom row (right) */
 .sort-button-container {
     flex-shrink: 0;
 }
@@ -1021,41 +948,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     color: #FFD700;
     border: 1px solid #D4AF37;
 }
-/* ============ DESKTOP LAYOUT FOR GENDER TABS ============ */
-@media (min-width: 769px) {
-    .gender-tabs-container {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 40px;
-        margin-bottom: 0;
-        margin-right: auto;
-        width: auto;
-    }
-    
-    .controls {
-        position: relative;
-        padding-top: 15px;
-    }
-    
-    /* Search bar aligned right on desktop */
-    #searchInput {
-        position: absolute;
-        right: 20px;
-        top: 15px;
-        width: 50%;
-        max-width: 400px;
-        margin: 0;
-    }
-    
-    /* Cart button position adjustment */
-    .cart-summary-btn {
-        position: absolute;
-        right: 25px;
-        top: 75px; /* Moved down to make room for search bar */
-    }
-}
-    
+
 /* ============ SIMPLE MOBILE OPTIMIZATION - Mobile CSS ============ */
 /* ============ MOBILE OPTIMIZATION (Portrait Phones Only) ============ */
 @media (max-width: 768px) and (orientation: portrait) {
@@ -1109,34 +1002,22 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     }
     
     /* FIX 1: Controls - Keep original styling but scale down */
-/* FIX 1: Controls - Keep original styling but scale down */
-.controls {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
-    padding: 12px !important;
-    border-radius: 10px !important;
-    margin: 0 auto 15px !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
-    border: 1.8px solid #D4AF37 !important;
-    position: relative !important;
-    z-index: 100 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 8px !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    font-size: 0.9em !important;
-}
-
-/* Gender tabs inside controls on mobile */
-.controls .gender-tabs-container {
-    margin-bottom: 8px !important;
-    padding-bottom: 4px !important;
-}
-
-.controls .gender-tab {
-    font-size: 1.1em !important;
-    padding: 8px 0 !important;
-}
+    .controls {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+        padding: 12px !important;
+        border-radius: 10px !important;
+        margin: 0 auto 15px !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+        border: 1.8px solid #D4AF37 !important;
+        position: relative !important;
+        z-index: 100 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        font-size: 0.9em !important;
+    }
     
     /* FIX 2: Search Bar - Smaller but proportional */
     #searchInput {
@@ -1219,33 +1100,18 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         padding-top: 8px !important;
         border-top: 1px solid rgba(212, 175, 55, 0.3) !important;
         display: flex !important;
-        justify-content: space-between !important;
-    }
-    
-    .sort-button-container {
-        width: auto !important;
-    }
-    
-    .sort-button-container .filter-btn {
-        width: auto !important;
-        padding: 10px 16px !important;
-        margin: 0 !important;
-        border: 2px solid #D4AF37 !important;
-        border-radius: 30px !important;
-        background: linear-gradient(135deg, #000 0%, #2d2d2d 100%) !important;
-        color: #FFD700 !important;
-        font-family: 'Montserrat', sans-serif !important;
-        font-size: 0.85em !important;
-        font-weight: 600 !important;
-        cursor: pointer !important;
-        display: flex !important;
+        justify-content: space-between !important; /* Clear left, Sort right */
         align-items: center !important;
-        justify-content: center !important;
-        gap: 6px !important;
     }
     
-    .clear-filters-container .filter-btn {
-        width: auto !important;
+    .clear-filters-container,
+    .sort-button-container {
+        width: 48% !important; /* Both buttons take ~half width */
+    }
+    
+    .clear-filters-container .filter-btn,
+    .sort-button-container .filter-btn {
+        width: 100% !important;
         padding: 10px 16px !important;
         margin: 0 !important;
         border: 2px solid #D4AF37 !important;
@@ -1390,28 +1256,6 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         width: 95% !important;
         margin: 5% auto !important;
     }
-    
-    /* Mobile gender tabs */
-    .gender-tabs-container {
-        justify-content: space-between !important;
-        gap: 0 !important;
-        margin-bottom: 10px !important;
-        padding-bottom: 6px !important;
-    }
-    
-    .gender-tab {
-        font-size: 1.2em !important;
-        font-weight: 600 !important;
-        padding: 10px 0 !important;
-    }
-    
-    .gender-tab:first-child {
-        text-align: left;
-    }
-    
-    .gender-tab:last-child {
-        text-align: right;
-    }
 }
     /* FIX 16: Checkout modal - Proper positioning */
     #checkoutModal {
@@ -1501,12 +1345,8 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         font-size: 0.8em !important;
     }
     
+    .clear-filters-container .filter-btn,
     .sort-button-container .filter-btn {
-        padding: 8px 14px !important;
-        font-size: 0.8em !important;
-    }
-    
-    .clear-filters-container .filter-btn {
         padding: 8px 14px !important;
         font-size: 0.8em !important;
     }
@@ -1650,21 +1490,18 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         padding-top: 8px !important;
         border-top: 1px solid rgba(212, 175, 55, 0.3) !important;
         display: flex !important;
-        justify-content: space-between !important;
+        justify-content: space-between !important; /* Clear left, Sort right */
+        align-items: center !important;
         box-sizing: border-box !important;
     }
     
+    .clear-filters-container,
     .sort-button-container {
         width: auto !important;
     }
     
+    .clear-filters-container .filter-btn,
     .sort-button-container .filter-btn {
-        padding: 8px 16px !important;
-        font-size: 0.8em !important;
-        width: auto !important;
-    }
-    
-    .clear-filters-container .filter-btn {
         padding: 8px 16px !important;
         font-size: 0.8em !important;
         width: auto !important;
@@ -1947,7 +1784,7 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
     flex: 1; 
     background: white; 
     padding: 30px; 
-    border-radius: 12px; 
+    border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     position: sticky;
     top: 20px;
@@ -2121,118 +1958,120 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
 
 <!-- ============ MAIN CATALOG SECTION ============ -->
 <h1>🛍️ Master Product Catalog</h1>
-
 <div class="controls">
-    <!-- Desktop: Gender Tabs and Search Bar on same line -->
-    <div class="desktop-top-row">
-        <!-- Gender Tabs -->
-        <div class="gender-tabs-container">
-            <button class="gender-tab" id="forHimTab" onclick="setGenderFilter('Men')">For Him</button>
-            <button class="gender-tab active" id="forHerTab" onclick="setGenderFilter('Women')">For Her</button>
-        </div>
-        
-        <!-- Search Bar -->
-        <div class="filter-group">
-            <input type="text" id="searchInput" oninput="debouncedApplyFilters()" placeholder="🔍 Search products...">
-        </div>
+    <!-- For Her / For Him Buttons -->
+    <div class="gender-tabs-container">
+        <button class="gender-tab active" id="forHerTab" onclick="setGenderFilter('forHer')">
+            For Her
+            <span class="gender-underline" style="transform: scaleX(1);"></span>
+        </button>
+        <button class="gender-tab" id="forHimTab" onclick="setGenderFilter('forHim')">
+            For Him
+            <span class="gender-underline"></span>
+        </button>
     </div>
     
-    <!-- Top Row: All Filters (CUSTOM DROPDOWN STYLING) -->
-    <div class="filter-top-row">
-        <!-- Custom Brand Dropdown -->
-        <div class="custom-select-wrapper">
-            <div class="custom-select-trigger" onclick="toggleCustomDropdown('brand')">
-                <span class="select-placeholder">All Brands</span>
-                <span class="select-arrow">▼</span>
-            </div>
-            <div class="custom-select-dropdown" id="brand-dropdown">
-                <div class="custom-select-header">
-                    <span>Select Brand</span>
-                    <button class="custom-select-close" onclick="closeCustomDropdown('brand')">✕</button>
-                </div>
-                <div class="custom-select-options" id="brand-options">
-                    <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('brand', '', 'All Brands')">
-                        All Brands
-                    </div>
-                </div>
-            </div>
-            <input type="hidden" id="brandFilter" value="">
-        </div>
-        
-        <!-- Custom Sub-Brand Dropdown -->
-        <div class="custom-select-wrapper" id="subBrandWrapper" style="display: none;">
-            <div class="custom-select-trigger" onclick="toggleCustomDropdown('subBrand')">
-                <span class="select-placeholder">Sub-Brand</span>
-                <span class="select-arrow">▼</span>
-            </div>
-            <div class="custom-select-dropdown" id="subBrand-dropdown">
-                <div class="custom-select-header">
-                    <span>Select Sub-Brand</span>
-                    <button class="custom-select-close" onclick="closeCustomDropdown('subBrand')">✕</button>
-                </div>
-                <div class="custom-select-options" id="subBrand-options">
-                    <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('subBrand', '', 'Sub-Brand')">
-                        Sub-Brand
-                    </div>
-                </div>
-            </div>
-            <input type="hidden" id="subBrandFilter" value="">
-        </div>
-        
-        <!-- Custom Category Dropdown -->
-        <div class="custom-select-wrapper">
-            <div class="custom-select-trigger" onclick="toggleCustomDropdown('category')">
-                <span class="select-placeholder">All Categories</span>
-                <span class="select-arrow">▼</span>
-            </div>
-            <div class="custom-select-dropdown" id="category-dropdown">
-                <div class="custom-select-header">
-                    <span>Select Category</span>
-                    <button class="custom-select-close" onclick="closeCustomDropdown('category')">✕</button>
-                </div>
-                <div class="custom-select-options" id="category-options">
-                    <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('category', '', 'All Categories')">
-                        All Categories
-                    </div>
-                </div>
-            </div>
-            <input type="hidden" id="catFilter" value="">
-        </div>
-        
-        <!-- Custom Type Dropdown -->
-        <div class="custom-select-wrapper">
-            <div class="custom-select-trigger" onclick="toggleCustomDropdown('type')">
-                <span class="select-placeholder">All Product Types</span>
-                <span class="select-arrow">▼</span>
-            </div>
-            <div class="custom-select-dropdown" id="type-dropdown">
-                <div class="custom-select-header">
-                    <span>Select Product Type</span>
-                    <button class="custom-select-close" onclick="closeCustomDropdown('type')">✕</button>
-                </div>
-                <div class="custom-select-options" id="type-options">
-                    <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('type', '', 'All Product Types')">
-                        All Product Types
-                    </div>
-                </div>
-            </div>
-            <input type="hidden" id="typeFilter" value="">
-        </div>
+    <!-- Search Bar -->
+    <div class="filter-group">
+        <input type="text" id="searchInput" oninput="debouncedApplyFilters()" placeholder="🔍 Search products...">
     </div>
+    
+<!-- Top Row: All Filters (CUSTOM DROPDOWN STYLING) -->
+<div class="filter-top-row">
+    <!-- Custom Brand Dropdown -->
+    <div class="custom-select-wrapper">
+        <div class="custom-select-trigger" onclick="toggleCustomDropdown('brand')">
+            <span class="select-placeholder">All Brands</span>
+            <span class="select-arrow">▼</span>
+        </div>
+        <div class="custom-select-dropdown" id="brand-dropdown">
+            <div class="custom-select-header">
+                <span>Select Brand</span>
+                <button class="custom-select-close" onclick="closeCustomDropdown('brand')">✕</button>
+            </div>
+            <div class="custom-select-options" id="brand-options">
+                <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('brand', '', 'All Brands')">
+                    All Brands
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="brandFilter" value="">
+    </div>
+    
+    <!-- Custom Sub-Brand Dropdown -->
+    <div class="custom-select-wrapper" id="subBrandWrapper" style="display: none;">
+        <div class="custom-select-trigger" onclick="toggleCustomDropdown('subBrand')">
+            <span class="select-placeholder">Sub-Brand</span>
+            <span class="select-arrow">▼</span>
+        </div>
+        <div class="custom-select-dropdown" id="subBrand-dropdown">
+            <div class="custom-select-header">
+                <span>Select Sub-Brand</span>
+                <button class="custom-select-close" onclick="closeCustomDropdown('subBrand')">✕</button>
+            </div>
+            <div class="custom-select-options" id="subBrand-options">
+                <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('subBrand', '', 'Sub-Brand')">
+                    Sub-Brand
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="subBrandFilter" value="">
+    </div>
+    
+    <!-- Custom Category Dropdown -->
+    <div class="custom-select-wrapper">
+        <div class="custom-select-trigger" onclick="toggleCustomDropdown('category')">
+            <span class="select-placeholder">All Categories</span>
+            <span class="select-arrow">▼</span>
+        </div>
+        <div class="custom-select-dropdown" id="category-dropdown">
+            <div class="custom-select-header">
+                <span>Select Category</span>
+                <button class="custom-select-close" onclick="closeCustomDropdown('category')">✕</button>
+            </div>
+            <div class="custom-select-options" id="category-options">
+                <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('category', '', 'All Categories')">
+                    All Categories
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="catFilter" value="">
+    </div>
+    
+    <!-- Custom Type Dropdown -->
+    <div class="custom-select-wrapper">
+        <div class="custom-select-trigger" onclick="toggleCustomDropdown('type')">
+            <span class="select-placeholder">All Product Types</span>
+            <span class="select-arrow">▼</span>
+        </div>
+        <div class="custom-select-dropdown" id="type-dropdown">
+            <div class="custom-select-header">
+                <span>Select Product Type</span>
+                <button class="custom-select-close" onclick="closeCustomDropdown('type')">✕</button>
+            </div>
+            <div class="custom-select-options" id="type-options">
+                <div class="custom-select-option selected" data-value="" onclick="selectCustomOption('type', '', 'All Product Types')">
+                    All Product Types
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="typeFilter" value="">
+    </div>
+</div>
 
-    <!-- Custom dropdown overlay (mobile) -->
-    <div class="custom-select-overlay" onclick="closeAllCustomDropdowns()"></div>
-        
-    <!-- Bottom Row: Clear Filters and Sort buttons -->
+<!-- Custom dropdown overlay (mobile) -->
+<div class="custom-select-overlay" onclick="closeAllCustomDropdowns()"></div>
+    
+    <!-- Bottom Row: Clear Filters left, Sort button right -->
     <div class="filter-bottom-row">
-        <!-- Clear Filters Button -->
+        <!-- Clear Filters Button (LEFT) -->
         <div class="clear-filters-container">
             <button class="filter-btn" onclick="clearAllFilters()">
                 <span class="btn-icon">🗑️</span> Clear Filters
             </button>
         </div>
         
-        <!-- Sort Button -->
+        <!-- Sort Button (RIGHT) -->
         <div class="sort-button-container">
             <button class="filter-btn" onclick="sortByPrice()">
                 <span class="btn-icon">💰</span> Sort by Price
@@ -2481,6 +2320,9 @@ const BRAND_NAME_MAP = {
     "Jomashop": "Jomashop",
 };
 
+// GENDER FILTER SETTINGS
+let activeGenderFilter = "forHer"; // Default to "For Her" as requested
+
 let allCards = [];
 let cart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY)) || [];
 let asc = true;
@@ -2491,154 +2333,107 @@ let filterTimeout;
 let cachedDropdowns = {};
 let activeSizePicker = null;
 let initialLoadComplete = false;
-let currentGenderFilter = "Women"; // Default to "For Her"
 
 // ============================================
-// GENDER FILTER FUNCTIONS - FIXED
+// NEW: FOR HER/FOR HIM FUNCTIONALITY
 // ============================================
 
 /**
- * Sets the gender filter based on tab selection
- * @param gender - "Men" or "Women"
+ * Sets the gender filter (For Her or For Him)
+ * @param gender - "forHer" or "forHim"
  */
 function setGenderFilter(gender) {
-    console.log(`🎯 setGenderFilter called with: ${gender}`);
+    activeGenderFilter = gender;
     
-    // Update active tab
-    document.getElementById('forHimTab').classList.remove('active');
-    document.getElementById('forHerTab').classList.remove('active');
+    // Update tab UI
+    const forHerTab = document.getElementById('forHerTab');
+    const forHimTab = document.getElementById('forHimTab');
     
-    if (gender === 'Men') {
-        document.getElementById('forHimTab').classList.add('active');
-        currentGenderFilter = "Men";
+    if (gender === 'forHer') {
+        forHerTab.classList.add('active');
+        forHimTab.classList.remove('active');
+        forHerTab.querySelector('.gender-underline').style.transform = 'scaleX(1)';
+        forHimTab.querySelector('.gender-underline').style.transform = 'scaleX(0)';
     } else {
-        document.getElementById('forHerTab').classList.add('active');
-        currentGenderFilter = "Women";
+        forHimTab.classList.add('active');
+        forHerTab.classList.remove('active');
+        forHimTab.querySelector('.gender-underline').style.transform = 'scaleX(1)';
+        forHerTab.querySelector('.gender-underline').style.transform = 'scaleX(0)';
     }
     
-    console.log(`✅ Gender filter set to: ${currentGenderFilter}`);
-    
-    // Clear all other filters when gender changes
-    document.getElementById("searchInput").value = "";
-    document.getElementById("brandFilter").value = "";
-    document.getElementById("subBrandFilter").value = "";
-    document.getElementById("catFilter").value = "";
-    document.getElementById("typeFilter").value = "";
-    
-    // Reset dropdown displays
-    const dropdownTypes = ['brand', 'subBrand', 'category', 'type'];
-    dropdownTypes.forEach(type => {
-        const dropdown = document.getElementById(`${type}-dropdown`);
-        if (dropdown) {
-            const trigger = dropdown.closest('.custom-select-wrapper').querySelector('.custom-select-trigger .select-placeholder');
-            if (trigger) {
-                const defaultLabel = type === 'brand' ? 'All Brands' : 
-                                   type === 'subBrand' ? 'Sub-Brand' : 
-                                   type === 'category' ? 'All Categories' :
-                                   'All Product Types';
-                trigger.textContent = defaultLabel;
-                trigger.style.color = '#FFD700';
-                trigger.style.fontWeight = '500';
-            }
-            
-            // Reset selected option in dropdown
-            const options = document.querySelectorAll(`#${type}-options .custom-select-option`);
-            options.forEach(option => {
-                option.classList.remove('selected');
-                if (option.dataset.value === "") {
-                    option.classList.add('selected');
-                }
-            });
-        }
-    });
-    
-    // Hide sub-brand wrapper
-    const subBrandWrapper = document.getElementById("subBrandWrapper");
-    if (subBrandWrapper) {
-        subBrandWrapper.style.display = "none";
-    }
-    
-    // Load products with the new gender filter
-    loadInitialProducts();
-    
-    // Apply filters to show/hide products
-    setTimeout(() => {
-        applyFilters();
-        rebuildDropdowns();
-    }, 100);
+    // Apply filters
+    applyFilters();
 }
 
 /**
- * Gets the current gender filter value
+ * Checks if a product matches the active gender filter
+ * @param gender - The product's gender value
+ * @returns boolean - True if product should be shown
  */
-function getGenderFilterValue() {
-    return currentGenderFilter;
+function matchesGenderFilter(gender) {
+    if (!gender || typeof gender !== 'string') {
+        return false;
+    }
+    
+    const genderLower = gender.toLowerCase().trim();
+    
+    // Check for unisex/both first (these show in both filters)
+    if (genderLower.includes('unisex') || genderLower.includes('both')) {
+        return true;
+    }
+    
+    // "For Her" shows Women + Female
+    if (activeGenderFilter === 'forHer') {
+        const matches = genderLower.includes('women') || genderLower.includes('female');
+        return matches;
+    }
+    // "For Him" shows Men + Male (and explicitly NOT Women/Female)
+    else if (activeGenderFilter === 'forHim') {
+        const matches = (genderLower.includes('men') || genderLower.includes('male')) 
+                        && !genderLower.includes('women') 
+                        && !genderLower.includes('female');
+        return matches;
+    }
+    return false;
 }
 
 // ============================================
-// CLEAR FILTERS FUNCTION
+// NEW: CLEAR FILTERS FUNCTION
 // ============================================
 
 /**
- * Clears all filters
+ * Clears all filters except For Her/For Him setting
  */
 function clearAllFilters() {
+    console.log('🔄 Clearing all filters...');
+    
     // Clear search input
-    document.getElementById("searchInput").value = "";
+    document.getElementById('searchInput').value = '';
     
-    // Clear all custom dropdowns
-    const dropdownTypes = ['brand', 'subBrand', 'category', 'type'];
-    dropdownTypes.forEach(type => {
-        const inputId = type === 'brand' ? 'brandFilter' :
-                       type === 'subBrand' ? 'subBrandFilter' :
-                       type === 'category' ? 'catFilter' :
-                       type === 'type' ? 'typeFilter' : '';
-        
-        if (inputId) {
-            const filterInput = document.getElementById(inputId);
-            if (filterInput) {
-                filterInput.value = "";
-            }
-        }
-        
-        // Reset dropdown display
-        const dropdown = document.getElementById(`${type}-dropdown`);
-        if (dropdown) {
-            const trigger = dropdown.closest('.custom-select-wrapper').querySelector('.custom-select-trigger .select-placeholder');
-            if (trigger) {
-                const defaultLabel = type === 'brand' ? 'All Brands' : 
-                                   type === 'subBrand' ? 'Sub-Brand' : 
-                                   type === 'category' ? 'All Categories' :
-                                   'All Product Types';
-                trigger.textContent = defaultLabel;
-                trigger.style.color = '#FFD700';
-                trigger.style.fontWeight = '500';
-            }
-            
-            // Reset selected option in dropdown
-            const options = document.querySelectorAll(`#${type}-options .custom-select-option`);
-            options.forEach(option => {
-                option.classList.remove('selected');
-                if (option.dataset.value === "") {
-                    option.classList.add('selected');
-                }
-            });
-        }
-    });
+    // Clear brand filter
+    selectCustomOption('brand', '', 'All Brands');
     
-    // Hide sub-brand wrapper
-    const subBrandWrapper = document.getElementById("subBrandWrapper");
-    if (subBrandWrapper) {
-        subBrandWrapper.style.display = "none";
+    // Clear sub-brand filter if visible
+    const subBrandWrapper = document.getElementById('subBrandWrapper');
+    if (subBrandWrapper.style.display !== 'none') {
+        selectCustomOption('subBrand', '', 'Sub-Brand');
     }
     
-    // Reset gender to default (For Her)
-    setGenderFilter("Women");
+    // Clear category filter
+    selectCustomOption('category', '', 'All Categories');
     
-    // Reload products
+    // Clear type filter
+    selectCustomOption('type', '', 'All Product Types');
+    
+    // Note: DO NOT clear gender filter (For Her/For Him setting)
+    
+    // Load initial products
     loadInitialProducts();
+    
+    // Apply filters
     applyFilters();
-    rebuildDropdowns();
+    
+    console.log('✅ All filters cleared (except For Her/For Him)');
 }
 
 // ============================================
@@ -2679,10 +2474,6 @@ const debouncedApplyFilters = debounce(applyFilters, 300);
 
 let activeCustomDropdown = null;
 
-/**
- * Toggles a custom dropdown
- * @param type - The dropdown type (brand, category, etc.)
- */
 /**
  * Toggles a custom dropdown
  * @param type - The dropdown type (brand, category, etc.)
@@ -2775,12 +2566,6 @@ function closeAllCustomDropdowns() {
  * @param value - The selected value
  * @param label - The display label
  */
-/**
- * Selects an option in a custom dropdown
- * @param type - The dropdown type
- * @param value - The selected value
- * @param label - The display label
- */
 function selectCustomOption(type, value, label) {
     console.log(`🔄 selectCustomOption called: type=${type}, value=${value}, label=${label}`);
     
@@ -2788,7 +2573,7 @@ function selectCustomOption(type, value, label) {
     const inputIdMap = {
         'brand': 'brandFilter',
         'subBrand': 'subBrandFilter',
-        'category': 'catFilter',      // FIXED: was 'categoryFilter'
+        'category': 'catFilter',
         'type': 'typeFilter'
     };
     
@@ -2805,7 +2590,6 @@ function selectCustomOption(type, value, label) {
         filterInput.value = value;
     } else {
         console.error(`❌ ${inputId} input not found! Looking for #${inputId}`);
-        // Debug: show all filter inputs
         const allFilters = Array.from(document.querySelectorAll('input[id$="Filter"]')).map(i => i.id);
         console.log("Available filter inputs:", allFilters);
     }
@@ -2840,7 +2624,7 @@ function selectCustomOption(type, value, label) {
         }
     });
     
-    // Close the dropdown (works for both mobile and desktop)
+    // Close the dropdown
     closeCustomDropdown(type);
     
     console.log(`📞 Calling ${type} filter change handler...`);
@@ -2922,17 +2706,12 @@ function populateCustomSelect(type, options, currentValue) {
  * @param type - The dropdown type
  * @returns The current value or empty string
  */
-/**
- * Gets the current value of a custom dropdown
- * @param type - The dropdown type
- * @returns The current value or empty string
- */
 function getCustomSelectValue(type) {
     // Map dropdown types to their correct input IDs
     const inputIdMap = {
         'brand': 'brandFilter',
         'subBrand': 'subBrandFilter',
-        'category': 'catFilter',      // FIXED
+        'category': 'catFilter',
         'type': 'typeFilter'
     };
     
@@ -2960,7 +2739,7 @@ document.addEventListener('click', function(e) {
         closeAllCustomDropdowns();
     }
     
-        // Don't close if clicking on a size picker trigger or option
+    // Don't close if clicking on a size picker trigger or option
     if (e.target.closest('.size-picker-trigger') || 
         e.target.closest('.size-option') ||
         e.target.closest('.size-picker-close')) {
@@ -3508,12 +3287,6 @@ function sortByPrice() {
     applyFilters();
 }
 
-
-// ===========================================================================
-// --------------------------- FIXED BRAND DROPDOWN --------------------------
-// ===========================================================================
-
-// FIX 1: CORRECT FILTER CLEAR LOGIC
 function handleBrandChange() {
     const selectedBrand = getCustomSelectValue("brand");
     
@@ -3603,7 +3376,6 @@ function getAvailableOptions() {
     const selectedSubBrand = getCustomSelectValue("subBrand");
     const selectedCategory = getCustomSelectValue("category");
     const selectedType = getCustomSelectValue("type");
-    const currentGender = getGenderFilterValue();
     const searchTerm = document.getElementById("searchInput").value.toLowerCase();
     
     const brandSet = new Set();
@@ -3621,7 +3393,6 @@ function getAvailableOptions() {
         subBrand: selectedSubBrand || "(none)",
         category: selectedCategory || "(none)",
         type: selectedType || "(none)",
-        gender: currentGender || "(none)",
         search: searchTerm || "(none)"
     });
     
@@ -3634,12 +3405,6 @@ function getAvailableOptions() {
     window.allProductsData.forEach(product => {
         const brand = product.brand || '';
         const source = product.source || '';
-        const gender = product.gender || '';
-        
-        // Check if product matches current gender filter
-        const genderMatches = gender === currentGender || gender === "Unisex";
-        
-        if (!genderMatches) return;
         
         // SIMPLE: Always add the display brand from BRAND_NAME_MAP
         if (source && BRAND_NAME_MAP[source]) {
@@ -3665,13 +3430,8 @@ function getAvailableOptions() {
         const source = product.source || '';
         const tag = product.tag || '';
         const category = product.category || '';
-        const gender = product.gender || '';
         
         if (!category || category.trim() === '') return;
-        
-        // Check gender
-        const genderMatches = gender === currentGender || gender === "Unisex";
-        if (!genderMatches) return;
         
         let shouldIncludeCategory = true;
         
@@ -3709,13 +3469,8 @@ function getAvailableOptions() {
         const tag = product.tag || '';
         const category = product.category || '';
         const type = product.type || '';
-        const gender = product.gender || '';
         
         if (!type || type.trim() === '') return;
-        
-        // Check gender
-        const genderMatches = gender === currentGender || gender === "Unisex";
-        if (!genderMatches) return;
         
         let shouldIncludeType = true;
         
@@ -3757,11 +3512,6 @@ function getAvailableOptions() {
             const brand = product.brand || '';
             const source = product.source || '';
             const tag = product.tag || '';
-            const gender = product.gender || '';
-            
-            // Check gender
-            const genderMatches = gender === currentGender || gender === "Unisex";
-            if (!genderMatches) return;
             
             // Only process products from target folders
             if (TARGET_FOLDERS.includes(source)) {
@@ -3809,7 +3559,7 @@ function getAvailableOptions() {
     return { brandSet, subSet, catSet, typeSet };
 }
 
-// FIX 3: UPDATED DROPDOWN POPULATION FOR CUSTOM SELECTORS
+// UPDATED DROPDOWN POPULATION FOR CUSTOM SELECTORS
 function populateCustomSelectWithOptions(type, set, currentVal) {
     const options = Array.from(set)
         .filter(val => val && val.trim() !== '')
@@ -3822,61 +3572,6 @@ function populateCustomSelectWithOptions(type, set, currentVal) {
     populateCustomSelect(type, options, currentVal);
 }
 
-function populateSelectWithAllOptions(id, set, currentVal) {
-    const el = document.getElementById(id);
-    
-    // Save the first option (the "All..." option from HTML)
-    const firstOption = el.querySelector('option[value=""]');
-    const firstOptionHtml = firstOption ? firstOption.outerHTML : `<option value="">Select</option>`;
-    
-    let html = firstOptionHtml; // Keep HTML's first option
-    
-    // Add dynamic options
-    Array.from(set)
-        .filter(val => val && val.trim() !== '')
-        .sort((a, b) => a.localeCompare(b))
-        .forEach(val => {
-            const selected = val === currentVal ? 'selected' : '';
-            html += `<option value="${val}" ${selected}>${val}</option>`;
-        });
-    
-    el.innerHTML = html;
-}
-
-function populateSelect(id, set, currentVal) {
-    const el = document.getElementById(id);
-    
-    if (id === "brandFilter") {
-        return; // Brand uses populateSelectWithAllOptions
-    }
-    
-    const cacheKey = `${id}-${Array.from(set).sort().join(',')}-${currentVal}`;
-    
-    if (cachedDropdowns[cacheKey]) {
-        el.innerHTML = cachedDropdowns[cacheKey];
-        return;
-    }
-    
-    // Save the first option (the "All..." option from HTML)
-    const firstOption = el.querySelector('option[value=""]');
-    const firstOptionHtml = firstOption ? firstOption.outerHTML : `<option value="">Select</option>`;
-    
-    let html = firstOptionHtml; // Keep HTML's first option
-    
-    // Add dynamic options
-    Array.from(set)
-        .filter(val => val && val.trim() !== '')
-        .sort((a, b) => a.localeCompare(b))
-        .forEach(val => {
-            const selected = val === currentVal ? 'selected' : '';
-            html += `<option value="${val}" ${selected}>${val}</option>`;
-        });
-    
-    el.innerHTML = html;
-    cachedDropdowns[cacheKey] = html;
-}
-
-// FIX 4: REBUILD DROPDOWNS - UPDATED FOR CUSTOM SELECTORS
 function rebuildDropdowns() {
     const selectedBrand = getCustomSelectValue("brand");
     const selectedSubBrand = getCustomSelectValue("subBrand");
@@ -3918,7 +3613,7 @@ function rebuildDropdowns() {
     console.log("=== END REBUILDING ===");
 }
 
-// FIX 5: APPLY FILTERS - UPDATED FOR GENDER TABS
+// UPDATED APPLY FILTERS - INCLUDES GENDER FILTER
 function applyFilters() {
     if (filterTimeout) {
         clearTimeout(filterTimeout);
@@ -3929,10 +3624,10 @@ function applyFilters() {
               brandFilter = getCustomSelectValue("brand"),
               subBrandFilter = getCustomSelectValue("subBrand"),
               categoryFilter = getCustomSelectValue("category"),
-              typeFilter = getCustomSelectValue("type"),
-              genderFilter = getGenderFilterValue();
+              typeFilter = getCustomSelectValue("type");
 
         console.log("=== APPLYING FILTERS ===");
+        console.log("Active gender filter:", activeGenderFilter);
         
         let visibleCount = 0;
         
@@ -3956,9 +3651,6 @@ function applyFilters() {
                 displayName = source;
             }
             
-            // Check gender - include Unisex in both Men and Women
-            const matchesGender = gender === genderFilter || gender === "Unisex";
-            
             // Check search
             let matchesSearch = true;
             if (searchTerm) {
@@ -3972,8 +3664,11 @@ function applyFilters() {
             const matchesSubBrand = !subBrandFilter || tag === subBrandFilter;
             const matchesCategory = !categoryFilter || category === categoryFilter;
             const matchesType = !typeFilter || type === typeFilter;
+            
+            // NEW: Check gender filter using new For Her/For Him logic
+            const matchesGender = matchesGenderFilter(gender);
 
-            if (matchesGender && matchesSearch && matchesBrand && matchesSubBrand && matchesCategory && matchesType) {
+            if (matchesSearch && matchesBrand && matchesSubBrand && matchesCategory && matchesType && matchesGender) {
                 card.style.display = "flex";
                 visibleCount++;
             } else {
@@ -3987,19 +3682,14 @@ function applyFilters() {
     }, 300);
 }
 
-// ===========================================================================
-// --------------------------- END OF FIX -----------------------------------
-// ===========================================================================
-
-// FIX: Proper initial product loading
+// FIX: Proper initial product loading with gender filter
 function loadInitialProducts() {
     const container = document.getElementById("container");
     const searchTerm = document.getElementById("searchInput").value.toLowerCase(),
           brandFilter = getCustomSelectValue("brand"),
           subBrandFilter = getCustomSelectValue("subBrand"),
           categoryFilter = getCustomSelectValue("category"),
-          typeFilter = getCustomSelectValue("type"),
-          genderFilter = getGenderFilterValue();
+          typeFilter = getCustomSelectValue("type");
     
     if (!window.allProductsData || window.allProductsData.length === 0) {
         console.log("No product data available");
@@ -4024,9 +3714,6 @@ function loadInitialProducts() {
         const type = product.type || '';
         const gender = product.gender || '';
         
-        // Check gender - include Unisex in both Men and Women
-        const matchesGender = gender === genderFilter || gender === "Unisex";
-        
         // Check if product matches ALL current filters
         const matchesSearch = !searchTerm || 
             productName.includes(searchTerm) || 
@@ -4035,8 +3722,11 @@ function loadInitialProducts() {
         const matchesSubBrand = !subBrandFilter || tag === subBrandFilter;
         const matchesCategory = !categoryFilter || category === categoryFilter;
         const matchesType = !typeFilter || type === typeFilter;
+        
+        // NEW: Check gender filter
+        const matchesGender = matchesGenderFilter(gender);
 
-        if (matchesGender && matchesSearch && matchesBrand && matchesSubBrand && matchesCategory && matchesType) {
+        if (matchesSearch && matchesBrand && matchesSubBrand && matchesCategory && matchesType && matchesGender) {
             matchingProducts.push(product);
         }
     }
@@ -4078,8 +3768,7 @@ function updateLoadMoreVisibility() {
           brandFilter = getCustomSelectValue("brand"),
           subBrandFilter = getCustomSelectValue("subBrand"),
           categoryFilter = getCustomSelectValue("category"),
-          typeFilter = getCustomSelectValue("type"),
-          genderFilter = getGenderFilterValue();
+          typeFilter = getCustomSelectValue("type");
 
     let hiddenMatchingCount = 0;
     
@@ -4103,9 +3792,8 @@ function updateLoadMoreVisibility() {
         const type = product.type || '';
         const gender = product.gender || '';
         
-        // Check gender FIRST - include Unisex in both Men and Women
-        const genderMatches = gender === genderFilter || gender === "Unisex";
-        if (!genderMatches) {
+        // Check gender FIRST
+        if (!matchesGenderFilter(gender)) {
             return;
         }
         
@@ -4142,8 +3830,7 @@ function loadMoreDynamic(batchSize = LOAD_MORE_BATCH) {
           brandFilter = getCustomSelectValue("brand"),
           subBrandFilter = getCustomSelectValue("subBrand"),
           categoryFilter = getCustomSelectValue("category"),
-          typeFilter = getCustomSelectValue("type"),
-          genderFilter = getGenderFilterValue();
+          typeFilter = getCustomSelectValue("type");
 
     let loadedCount = 0;
     const container = document.getElementById("container");
@@ -4173,9 +3860,6 @@ function loadMoreDynamic(batchSize = LOAD_MORE_BATCH) {
         const type = product.type || '';
         const gender = product.gender || '';
         
-        // Check gender - include Unisex in both Men and Women
-        const matchesGender = gender === genderFilter || gender === "Unisex";
-        
         // Check if product matches ALL current filters
         const matchesSearch = !searchTerm || 
             productName.includes(searchTerm) || 
@@ -4184,8 +3868,11 @@ function loadMoreDynamic(batchSize = LOAD_MORE_BATCH) {
         const matchesSubBrand = !subBrandFilter || tag === subBrandFilter;
         const matchesCategory = !categoryFilter || category === categoryFilter;
         const matchesType = !typeFilter || type === typeFilter;
+        
+        // NEW: Check gender filter
+        const matchesGender = matchesGenderFilter(gender);
 
-        if (matchesGender && matchesSearch && matchesBrand && matchesSubBrand && matchesCategory && matchesType) {
+        if (matchesSearch && matchesBrand && matchesSubBrand && matchesCategory && matchesType && matchesGender) {
             // Create and append the product card
             const cardHtml = createProductCard(product);
             container.insertAdjacentHTML('beforeend', cardHtml);
@@ -4231,7 +3918,7 @@ function checkScrollAndLoad() {
 const throttledScrollCheck = throttle(checkScrollAndLoad, 200);
 
 function createProductCard(product) {
-    const productId = product.id || `prod-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const productId = product.id || ('prod-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9));
     const p_sizes = product.sizes || "N/A";
     
     // Apply brand mapping
@@ -4246,67 +3933,64 @@ function createProductCard(product) {
     if (sizes_list.length > 0) {
         const sizes_attr = sizes_list.join(',');
         const size_options_html = sizes_list.map(size => 
-            `<div class="size-option" data-size="${size}" onclick="selectSize('${productId}', '${size}')">${size}</div>`
+            '<div class="size-option" data-size="' + size + '" onclick="selectSize(\'' + productId + '\', \'' + size + '\')">' + size + '</div>'
         ).join('');
         
-        size_picker_html = `
-            <div class="size-picker" data-product-id="${productId}" data-sizes="${sizes_attr}">
-                <div class="size-picker-trigger" onclick="openSizePicker('${productId}')">
-                    <span class="size-placeholder">Select Size</span>
-                    <span class="size-arrow">▼</span>
-                </div>
-                <div class="size-picker-dropdown" id="size-picker-${productId}">
-                    <div class="size-picker-header">
-                        <span>Select Size (US)</span>
-                        <button class="size-picker-close" onclick="closeSizePicker('${productId}')">✕</button>
-                    </div>
-                    <div class="size-picker-options">
-                        ${size_options_html}
-                    </div>
-                </div>
-                <input type="hidden" id="selected-size-${productId}" value="">
-            </div>
-        `;
+        size_picker_html = '<div class="size-picker" data-product-id="' + productId + '" data-sizes="' + sizes_attr + '">' +
+            '<div class="size-picker-trigger" onclick="openSizePicker(\'' + productId + '\')">' +
+                '<span class="size-placeholder">Select Size</span>' +
+                '<span class="size-arrow">▼</span>' +
+            '</div>' +
+            '<div class="size-picker-dropdown" id="size-picker-' + productId + '">' +
+                '<div class="size-picker-header">' +
+                    '<span>Select Size (US)</span>' +
+                    '<button class="size-picker-close" onclick="closeSizePicker(\'' + productId + '\')">✕</button>' +
+                '</div>' +
+                '<div class="size-picker-options">' +
+                    size_options_html +
+                '</div>' +
+            '</div>' +
+            '<input type="hidden" id="selected-size-' + productId + '" value="">' +
+        '</div>';
     } else {
-        size_picker_html = `<span style="font-size: 0.70em; font-family: ${CATALOG_SETTINGS["PRODUCT_NAME_FONT_FAMILY"]}; color: #555; margin: 0; padding: 0;">Sizes (US): ${p_sizes}</span>`;
+        size_picker_html = '<span style="font-size: 0.70em; font-family: ' + CATALOG_SETTINGS["PRODUCT_NAME_FONT_FAMILY"] + '; color: #555; margin: 0; padding: 0;">Sizes (US): ' + p_sizes + '</span>';
     }
     
-    const price_display = product.price_display || `$${product.price?.toFixed(2) || '0.00'}`;
+    const price_display = product.price_display || ('$' + (product.price?.toFixed(2) || '0.00'));
     const original_price = product.original_price || "N/A";
     
-    let p_html = `<span style="color: ${CATALOG_SETTINGS["MAIN_PRICE_COLOR"]}; font-weight:bold;">${price_display}</span>`;
+    let p_html = '<span style="color: ' + CATALOG_SETTINGS["MAIN_PRICE_COLOR"] + '; font-weight:bold;">' + price_display + '</span>';
     if (original_price !== "N/A" && original_price !== price_display) {
-        p_html += ` <s style="color:${CATALOG_SETTINGS["DISCOUNTED_PRICE_COLOR"]}; font-size:0.85em; margin-left:5px;">${original_price}</s>`;
+        p_html += ' <s style="color:' + CATALOG_SETTINGS["DISCOUNTED_PRICE_COLOR"] + '; font-size:0.85em; margin-left:5px;">' + original_price + '</s>';
     }
     
     const image_list = product.image_list || '';
     
-    return `
-    <div class="product-card" data-sku="${product.sku}" data-name="${product.name.toLowerCase()}" data-price="${product.price}" data-weight="${product.weight}" data-category="${product.category}" data-gender="${product.gender}" data-type="${product.type}" data-brand="${displayBrand}" data-tag="${product.tag}" data-source="${product.source}" data-img="${product.image}">
-        <div class="folder-tag">${product.tag}</div>
-        <div class="main-image"><img id="${productId}" src="${product.image}" onclick="openImageModal(this.src)"></div>
-        <div class="thumbnails">${image_list}</div>
-        <div class="product-info">
-            <h4 class="product-name">${product.name}</h4>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin: 2px 0; gap: 10px;">
-                <div style="flex-shrink: 0; display: flex; align-items: center; justify-content: flex-start;" id="size-container-${productId}">
-                    ${size_picker_html}
-                </div>
-                <div style="margin-left: auto; flex-shrink: 0;">
-                    <div class="qty-controls">
-                        <button class="qty-btn" onclick="updateCatalogQty('${productId}', -1)">-</button>
-                        <span style="font-size: 0.8em; font-weight: 600;" id="qty-display-${productId}">1</span>
-                        <button class="qty-btn" onclick="updateCatalogQty('${productId}', 1)">+</button>
-                        <input type="hidden" value="1" id="qty-${productId}">
-                    </div>
-                </div>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f0f0f0; padding-top: 8px;">
-                <div class="product-price">${p_html}</div>
-                <button onclick="addToCart('${productId}')" style="background:#28a745; color:white; border:none; padding:4px 12px; font-size:0.7em; font-weight:bold; border-radius:3px; cursor:pointer;">Add</button>
-            </div>
-        </div>
-    </div>`;
+    return '<div class="product-card" data-sku="' + product.sku + '" data-name="' + product.name.toLowerCase() + '" data-price="' + product.price + '" data-weight="' + product.weight + '" data-category="' + product.category + '" data-gender="' + product.gender + '" data-type="' + product.type + '" data-brand="' + displayBrand + '" data-tag="' + product.tag + '" data-source="' + product.source + '" data-img="' + product.image + '">' +
+        '<div class="folder-tag">' + product.tag + '</div>' +
+        '<div class="main-image"><img id="' + productId + '" src="' + product.image + '" onclick="openImageModal(this.src)"></div>' +
+        '<div class="thumbnails">' + image_list + '</div>' +
+        '<div class="product-info">' +
+            '<h4 class="product-name">' + product.name + '</h4>' +
+            '<div style="display: flex; justify-content: space-between; align-items: center; margin: 2px 0; gap: 10px;">' +
+                '<div style="flex-shrink: 0; display: flex; align-items: center; justify-content: flex-start;" id="size-container-' + productId + '">' +
+                    size_picker_html +
+                '</div>' +
+                '<div style="margin-left: auto; flex-shrink: 0;">' +
+                    '<div class="qty-controls">' +
+                        '<button class="qty-btn" onclick="updateCatalogQty(\'' + productId + '\', -1)">-</button>' +
+                        '<span style="font-size: 0.8em; font-weight: 600;" id="qty-display-' + productId + '">1</span>' +
+                        '<button class="qty-btn" onclick="updateCatalogQty(\'' + productId + '\', 1)">+</button>' +
+                        '<input type="hidden" value="1" id="qty-' + productId + '">' +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+            '<div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f0f0f0; padding-top: 8px;">' +
+                '<div class="product-price">' + p_html + '</div>' +
+                '<button onclick="addToCart(\'' + productId + '\')" style="background:#28a745; color:white; border:none; padding:4px 12px; font-size:0.7em; font-weight:bold; border-radius:3px; cursor:pointer;">Add</button>' +
+            '</div>' +
+        '</div>' +
+    '</div>';
 }
 
 /**
@@ -4329,8 +4013,7 @@ function resetToInitialView() {
           brandFilter = getCustomSelectValue("brand"),
           subBrandFilter = getCustomSelectValue("subBrand"),
           categoryFilter = getCustomSelectValue("category"),
-          typeFilter = getCustomSelectValue("type"),
-          genderFilter = getGenderFilterValue();
+          typeFilter = getCustomSelectValue("type");
     
     let keptCount = 0;
     
@@ -4346,9 +4029,6 @@ function resetToInitialView() {
         const type = card.dataset.type || '';
         const gender = card.dataset.gender || '';
         
-        // Check gender - include Unisex in both Men and Women
-        const matchesGender = gender === genderFilter || gender === "Unisex";
-        
         const matchesSearch = !searchTerm || 
             productName.includes(searchTerm) || 
             (sku && sku.includes(searchTerm));
@@ -4356,8 +4036,11 @@ function resetToInitialView() {
         const matchesSubBrand = !subBrandFilter || tag === subBrandFilter;
         const matchesCategory = !categoryFilter || category === categoryFilter;
         const matchesType = !typeFilter || type === typeFilter;
+        
+        // NEW: Check gender filter
+        const matchesGender = matchesGenderFilter(gender);
 
-        if (matchesGender && matchesSearch && matchesBrand && matchesSubBrand && matchesCategory && matchesType) {
+        if (matchesSearch && matchesBrand && matchesSubBrand && matchesCategory && matchesType && matchesGender) {
             const productId = card.querySelector('.main-image img')?.id;
             if (productId) {
                 visibleProductIds.add(productId);
@@ -4395,7 +4078,7 @@ function checkAndResetIfFiltersCleared() {
           categoryFilter = getCustomSelectValue("category"),
           typeFilter = getCustomSelectValue("type");
     
-    // Check if ALL filters are empty/cleared (except gender which has default)
+    // Check if ALL filters are empty/cleared
     const allFiltersEmpty = !searchTerm && 
                           !brandFilter && 
                           !subBrandFilter && 
@@ -4502,7 +4185,7 @@ function setCODSubMethod(sub) {
     document.getElementById("cod_sub_card").style.display = (sub === 'card') ? "block" : "none";
     document.getElementById("cod_sub_crypto").style.display = (sub === 'crypto') ? "block" : "none";
     document.getElementById("bubble_card").classList.toggle("selected", sub === 'card');
-    document.getElementById("bubble_crypto").classList.toggle("selected", sub === 'crypto");
+    document.getElementById("bubble_crypto").classList.toggle("selected", sub === 'crypto');
 
     updateCompleteButtonText();
     renderCheckout();
@@ -4856,6 +4539,9 @@ window.onload = async () => {
     // Initialize the allCards array with initially loaded products
     const container = document.getElementById("container");
     allCards = Array.from(container.children);
+    
+    // Set default gender filter to "For Her" as requested
+    setGenderFilter('forHer');
     
     // Load exactly INITIAL_PRODUCT_LOAD products
     loadInitialProducts();
@@ -5658,6 +5344,3 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
-
-
-
