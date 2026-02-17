@@ -1415,7 +1415,13 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         overflow-x: hidden !important;
         box-sizing: border-box !important;
     }
-    
+    .checkout-modal-content {
+    transform: scale(0.85);
+    transform-origin: top center;
+    width: 100%;            /* Keep width 100% to maintain scaling from center */
+    max-width: 1000px;      /* Keep original max-width */
+    margin: 2% auto;        /* Adjust margin if needed */
+    }
     h1 {
         font-size: 1.4em !important;
         margin-top: 10px !important;
@@ -5407,3 +5413,4 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
