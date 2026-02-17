@@ -1416,7 +1416,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         box-sizing: border-box !important;
     }
     .checkout-modal-content {
-    transform: scale(0.80);
+    transform: scale(0.70);
     transform-origin: top center;
     width: 100%;            /* Keep width 100% to maintain scaling from center */
     max-width: 1000px;      /* Keep original max-width */
@@ -1449,16 +1449,23 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         box-sizing: border-box !important;
     }
     
-    /* Filter grid - FILL LANDSCAPE SCREEN */
-    .filter-top-row {
-        display: grid !important;
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 12px !important;
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        box-sizing: border-box !important;
-    }
+/* Filter row – use flex for equal‑width items */
+.filter-top-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Make each filter wrapper grow equally */
+.custom-select-wrapper {
+    flex: 1 1 0 !important;       /* allows equal width */
+    min-width: 140px !important;  /* prevents them from becoming too narrow */
+    width: auto !important;        /* override any previous width:100% */
+}
     
     /* Filter selects - Fill grid cells */
     .custom-select-trigger {
@@ -5413,5 +5420,6 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
