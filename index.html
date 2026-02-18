@@ -591,12 +591,6 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         transform: translateY(-10px);
         transition: all 0.2s ease;
     }
-    .size-picker-trigger {
-        font-size: 0.8em !important;
-        padding: 5px 6px !important; /* determines width of size picker box on landscape - landscape size picker */
-        min-width: 80px !important;
-        box-sizing: border-box !important;  /* Add this line */
-    }
     
     .size-picker-dropdown.active {
         opacity: 1;
@@ -1545,16 +1539,6 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     /* Hide mobile filters completely in landscape */
     .mobile-filter-triggers {
         display: none !important;
-    }
-    
-    /* Size picker - Adjust for landscape */
-    .size-picker {
-        max-width: 95px !important;
-    }
-    
-    .size-picker-trigger {
-        font-size: 0.75em !important;
-        padding: 4px 8px !important;
     }
     
     /* Product info - Adjust for landscape */
@@ -5426,6 +5410,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
