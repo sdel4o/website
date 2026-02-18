@@ -1505,9 +1505,9 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         grid-column: span 1 !important;
     }
     
-    /* Catalog container - Fill width */
+    /* Catalog container Landscape - Fill width */
     .catalog-container {
-        grid-template-columns: repeat(4, 1fr) !important;
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important; 
         gap: 10px !important;
         max-width: 100% !important;
         width: 100% !important;
@@ -1518,8 +1518,14 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     
     /* Product cards - Adjust for landscape */
     .product-card {
+        min-width: 0 !important; 
         padding: 8px !important;
         border-radius: 8px !important;
+    }
+    /* Force all children to stay inside */
+    .product-card * {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
     
     .main-image img {
@@ -5435,6 +5441,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
