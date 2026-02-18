@@ -1787,6 +1787,18 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
     -webkit-overflow-scrolling: touch !important;
 }
 
+@media (max-width: 1020px) and (orientation: landscape) {
+    body {
+        outline: 3px solid green !important;
+    }
+    .controls {
+        outline: 3px solid blue !important;
+    }
+    .catalog-container {
+        outline: 3px solid red !important;
+    }
+}
+
 /* ============ CHECKOUT LAYOUT STYLES ============ */
 .header-bar { 
     background: white; 
@@ -5425,6 +5437,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
