@@ -591,6 +591,12 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         transform: translateY(-10px);
         transition: all 0.2s ease;
     }
+    .size-picker-trigger {
+        font-size: 0.8em !important;
+        padding: 5px 6px !important; /* determines width of size picker box on landscape - landscape size picker */
+        min-width: 80px !important;
+        box-sizing: border-box !important;  /* Add this line */
+    }
     
     .size-picker-dropdown.active {
         opacity: 1;
@@ -5420,6 +5426,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
