@@ -1445,7 +1445,6 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     /* Controls - FULL WIDTH in landscape */
     .controls {
         padding: 10px 15px !important;
-        margin: 0 0 10px 0 !important;
         max-width: 100% !important;
         width: 100% !important;
         box-sizing: border-box !important;
@@ -1785,18 +1784,6 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
 #checkoutModal {
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
-}
-
-@media (max-width: 1020px) and (orientation: landscape) {
-    body {
-        outline: 3px solid green !important;
-    }
-    .controls {
-        outline: 3px solid blue !important;
-    }
-    .catalog-container {
-        outline: 3px solid red !important;
-    }
 }
 
 /* ============ CHECKOUT LAYOUT STYLES ============ */
@@ -5437,6 +5424,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
