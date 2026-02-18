@@ -1293,16 +1293,18 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         transform: scale(0.90);
         transform-origin: top center;
     }
-  .checkout-left {
-    padding: 15px 10px !important;  /* Even tighter: 10px left/right */
+/* REDUCE PADDING ON THE LEFT AND RIGHT PANELS */
+.checkout-left {
+    padding: 20px 15px !important;  /* Top/bottom 20px, left/right 15px */
 }
 
 .checkout-right {
-    padding: 15px 10px !important;
+    padding: 20px 15px !important;  /* Top/bottom 20px, left/right 15px */
 }
 
+/* Also reduce padding on the page wrapper */
 .page-wrapper {
-    padding: 0 0px 20px !important;  /* Remove left/right padding completely */
+    padding: 0 5px 20px !important;  /* Left/right padding reduced to 5px */
 }
     
     /* ===== ADD THIS NEW FIX 17 SECTION HERE ===== */
@@ -5424,6 +5426,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
