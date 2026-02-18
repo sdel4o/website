@@ -73,7 +73,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
 }
 
 /* Mobile landscape: same as desktop */
-@media (max-width: 768px) and (orientation: landscape) {
+@media (max-width: 1020px) and (orientation: landscape) {
     .gender-tabs-container {
         justify-content: flex-start;
         gap: 40px;
@@ -298,7 +298,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
 }
 
 /* ============ LANDSCAPE MOBILE ============ */
-@media (max-width: 768px) and (orientation: landscape) {
+@media (max-width: 1020px) and (orientation: landscape) {
     /* Use desktop styles for landscape (no overlay, no bottom sheet) */
     .custom-select-dropdown {
         position: absolute;
@@ -573,7 +573,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
 }
 
 /* ============ LANDSCAPE MOBILE SIZE PICKER ============ */
-@media (max-width: 768px) and (orientation: landscape) {
+@media (max-width: 1020px) and (orientation: landscape) {
     /* Use desktop styles for landscape (no overlay, no bottom sheet) */
     .size-picker-dropdown {
         position: absolute;
@@ -1673,7 +1673,7 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
 }
 
 /* Ensure desktop always shows proper columns - INCLUDES LANDSCAPE */
-@media (min-width: 769px), (orientation: landscape) {
+@media (min-width: 768px), (orientation: landscape) {
     .catalog-container {
         grid-template-columns: repeat(4, 1fr) !important;
     }
@@ -5420,6 +5420,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
