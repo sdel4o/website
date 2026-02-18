@@ -1290,9 +1290,20 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     .checkout-modal-content {
         width: 95% !important;
         margin: 5% auto !important;
-        transform: scale(0.70);
+        transform: scale(0.90);
         transform-origin: top center;
     }
+  .checkout-left {
+    padding: 15px 10px !important;  /* Even tighter: 10px left/right */
+}
+
+.checkout-right {
+    padding: 15px 10px !important;
+}
+
+.page-wrapper {
+    padding: 0 0px 20px !important;  /* Remove left/right padding completely */
+}
     
     /* ===== ADD THIS NEW FIX 17 SECTION HERE ===== */
     /* FIX 17: Checkout quantity controls - Match catalog styling */
@@ -5413,6 +5424,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
