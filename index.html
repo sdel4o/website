@@ -7,13 +7,13 @@
 /* ============ GLOBAL STYLES ============ */
 body { font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0px 20px; }
 h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; margin-bottom: 20px; font-weight: 600; }
-  
-.folder-tag { position: absolute; top: 5px; right: 5px; background: #333; color: white; padding: 2px 6px; font-size: 10px; border-radius: 3px; opacity: 0.7; z-index: 5; }
+
 .product-name { font-size: 0.65em; margin: 10px 0 -10px; font-weight: 600; min-height: 2.5em; color: #333; text-transform: capitalize; }
 .product-price { font-size: 0.85em; }
 .thumbnails { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; margin-top: auto; }
 .thumbnail-img { width: 100%; height: 40px; object-fit: cover; border: 1px solid #eee; border-radius: 4px; cursor: pointer; }
-  
+.folder-tag { position: absolute; top: 5px; right: 5px; background: #333; color: white; padding: 2px 6px; font-size: 10px; border-radius: 3px; opacity: 0.7; z-index: 5; }
+
 /* ============ FOR HER/FOR HIM BUTTONS ============ */
 .gender-tabs-container {
     display: flex;
@@ -597,7 +597,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         transform: translateY(-10px);
         transition: all 0.2s ease;
     }
-  
+
     /* Make "Select Size" text smaller */
     .size-picker .size-placeholder {
         font-size: 8px !important;  /* Adjust this value as needed */
@@ -1293,20 +1293,21 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         transform: scale(0.90);
         transform-origin: top center;
     }
-/* REDUCE PADDING ON THE LEFT AND RIGHT PANELS */
-.checkout-left {
-    padding: 20px 15px !important;  /* Top/bottom 20px, left/right 15px */
-}
 
-.checkout-right {
-    padding: 20px 15px !important;  /* Top/bottom 20px, left/right 15px */
-}
+    /* REDUCE PADDING ON THE LEFT AND RIGHT PANELS */
+    .checkout-left {
+        padding: 20px 15px !important;  /* Top/bottom 20px, left/right 15px */
+    }
 
-/* Also reduce padding on the page wrapper */
-.page-wrapper {
-    padding: 0 10px 20px !important;  /* Left/right padding reduced to 5px */
-}
-    
+    .checkout-right {
+        padding: 20px 15px !important;  /* Top/bottom 20px, left/right 15px */
+    }
+
+    /* Also reduce padding on the page wrapper */
+    .page-wrapper {
+        padding: 0 10px 20px !important;  /* Left/right padding reduced to 10px */
+    }
+
     /* ===== ADD THIS NEW FIX 17 SECTION HERE ===== */
     /* FIX 17: Checkout quantity controls - Match catalog styling */
     .qty-controls {
@@ -1338,11 +1339,11 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     }
     
     .cart-item {
-        padding: 5px 0 !important;
+        padding: 10px 0 !important;
     }
     /* ===== END OF NEW FIX 17 ===== */
 }
-  
+
 /* Small phones */
 @media (max-width: 375px) and (orientation: portrait) {
     .product-card:hover, .qty-btn:hover, .catalog-qty-btn:hover {
@@ -1438,6 +1439,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         overflow-x: hidden !important;
         box-sizing: border-box !important;
     }
+
     .checkout-modal-content {
     transform: scale(0.70);
     transform-origin: top center;
@@ -1445,6 +1447,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     max-width: 1000px;      /* Keep original max-width */
     margin: 2% auto;        /* Adjust margin if needed */
     }
+    
     h1 {
         font-size: 1.4em !important;
         margin-top: 10px !important;
@@ -1455,6 +1458,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     /* Controls - FULL WIDTH in landscape */
     .controls {
         padding: 10px 15px !important;
+        margin: 0 0 10px 0 !important;
         max-width: 100% !important;
         width: 100% !important;
         box-sizing: border-box !important;
@@ -1471,23 +1475,22 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         box-sizing: border-box !important;
     }
     
-/* Filter row – use flex for equal‑width items */
-.filter-top-row {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 12px !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    box-sizing: border-box !important;
-}
-
-/* Make each filter wrapper grow equally */
-.custom-select-wrapper {
-    flex: 1 1 0 !important;       /* allows equal width */
-    min-width: 140px !important;  /* prevents them from becoming too narrow */
-    width: auto !important;        /* override any previous width:100% */
-}
+    /* Filter row – use flex for equal‑width items */
+    .filter-top-row {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 12px !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+    /* Make each filter wrapper grow equally */
+    .custom-select-wrapper {
+        flex: 1 1 0 !important;       /* allows equal width */
+        min-width: 140px !important;  /* prevents them from becoming too narrow */
+        width: auto !important;        /* override any previous width:100% */
+    }
     
     /* Filter selects - Fill grid cells */
     .custom-select-trigger {
@@ -1504,9 +1507,9 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         grid-column: span 1 !important;
     }
     
-    /* Catalog container Landscape - Fill width */
+    /* Catalog container - Fill width */
     .catalog-container {
-        grid-template-columns: repeat(4, minmax(0, 1fr)) !important; 
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
         gap: 10px !important;
         max-width: 100% !important;
         width: 100% !important;
@@ -1517,7 +1520,6 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     
     /* Product cards - Adjust for landscape */
     .product-card {
-        min-width: 0 !important; 
         padding: 8px !important;
         border-radius: 8px !important;
     }
@@ -1530,7 +1532,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     .cart-summary-btn {
         position: absolute !important;
         right: 20px !important;
-        top: 74px !important; /* Changed from 10px to 8px - MOVED UP */ 
+        top: 74px !important; /* Changed from 10px to 8px - MOVED UP */
         padding: 8.5px 14px !important; /* Reduced from 8px(vertical) 16px(horizontal) - NARROWER VERTICALLY */
         font-size: 0.9em !important;
     }
@@ -1564,12 +1566,22 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         display: none !important;
     }
     
+    /* Size picker - Adjust for landscape */
+    .size-picker {
+        max-width: 95px !important;
+    }
+    
+    .size-picker-trigger {
+        font-size: 0.75em !important;
+        padding: 4px 8px !important;
+    }
+    
     /* Product info - Adjust for landscape */
     .product-name {
         font-size: 7px !important;
-        min-height: 2em !important;
+        min-height: 2.2em !important;
         margin: 6px 0 4px 0 !important; /* Added 4px bottom padding */
-        line-height: 1.2 !important;
+        line-height: 1.3 !important;
         padding-bottom: 2px !important; /* Added bottom padding */
     }
     
@@ -1776,7 +1788,7 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
     right: 20px;
     top: 15px;
     color: #aaa;
-    font-size: 36px;
+    font-size: 28px;
     font-weight: bold;
     cursor: pointer;
     z-index: 1003;
@@ -2212,11 +2224,23 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
                             </div>
                             -->
                         </div>
-
                         <!-- Cash on Delivery (COD) Section -->
-                        <div class="payment-row" id="cod_row" style="display:none;" onclick="setPaymentMethod('cod')">
-                            <input type="radio" name="pay_choice" id="radio_cod">
-                            <div class="payment-label">Cash on Delivery (COD)</div>
+                        <div id="cod_row_container">
+
+                            <div class="payment-row" id="cod_row" onclick="handleCODClick()">
+                                <input type="radio" name="pay_choice" id="radio_cod">
+                                <div class="payment-label">Cash on Delivery (COD)</div>
+                                <div class="payment-icons">
+                                    <img src="https://img.icons8.com/color/24/000000/cash-in-hand.png">
+                                </div>
+                            </div>
+
+                            <!-- Disabled message BELOW the row -->
+                            <div id="cod_disabled_msg"
+                                 style="display:none; color:#c9302c; font-size:0.85em; font-weight:600; margin-top:4px; width:100%; text-align:center;">
+                                <!-- JS inserts text here -->
+                            </div>
+
                         </div>
 
                         <!-- COD Deposit Method Section -->
@@ -2293,7 +2317,7 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
                         <!-- COD Payment Breakdown (shown only when COD is selected) -->
                         <div id="codBreakdown" style="display: none; margin-top: 20px; padding-top: 15px; border-top: 1px solid #eee;">
                             <div class="summary-row" style="color: #c9302c; font-weight: bold;">
-                                <span>Due Today (33% Service Fee)</span>
+                                <span id="dueTodayLabel">Due Today (33% Service Fee)</span>
                                 <span id="dueTodayBox">$0.00</span>
                             </div>
                             <div class="summary-row" style="color: #28a745; font-weight: bold;">
@@ -2344,6 +2368,20 @@ const INITIAL_PRODUCT_LOAD = 8;
 const LOAD_MORE_BATCH = 8;
 const FEE_PERCENT = 0;
 const MOBILE_COLUMNS = 2; // Set to 1 or 2 only
+
+// ============================================
+// THRESHOLD & EXTRA DEPOSIT CONFIGURATION
+// ============================================
+// Master toggle for the entire threshold feature
+const THRESHOLD_ENABLED = true;
+// Dollar amount that triggers threshold rules
+const THRESHOLD_AMOUNT = 4000;
+// COD base service fee percentage (e.g. 0.33 = 33%)
+const COD_SERVICE_FEE_PERCENT = 0.33;
+// Extra deposit percentage applied on top of service fee when threshold exceeded
+const EXTRA_DEPOSIT_PERCENT = 0.4;
+// Mode: 'single_extra' | 'cart_extra' | 'single_disable' | 'cart_disable' | 'cod_disable' | 'off'
+const THRESHOLD_MODE = 'cod_disable';
 
 // BRAND MAPPING FROM PYTHON
 const BRAND_NAME_MAP = {
@@ -3188,10 +3226,10 @@ function addToCart(pid) {
             return;
         }
     } else {
-        // No size picker - it's text like "Sizes (US): N/A" (fallback)
+        // No size picker - it's text like "Sizes (EU): N/A" (fallback)
         const sizeText = sizeContainer.textContent || "";
-        // Extract just the size value after "Sizes (US):"
-        selectedSize = sizeText.replace("Sizes (US):", "").trim();
+        // Extract just the size value after "Sizes (EU):"
+        selectedSize = sizeText.replace("Sizes (EU):", "").trim();
         if (!selectedSize || selectedSize === "") {
             selectedSize = "N/A";
         }
@@ -4025,7 +4063,7 @@ function createProductCard(product) {
             '</div>' +
             '<div class="size-picker-dropdown" id="size-picker-' + productId + '">' +
                 '<div class="size-picker-header">' +
-                    '<span>Select Size (US)</span>' +
+                    '<span>Select Size (EU)</span>' +
                     '<button class="size-picker-close" onclick="closeSizePicker(\'' + productId + '\')">✕</button>' +
                 '</div>' +
                 '<div class="size-picker-options">' +
@@ -4035,7 +4073,7 @@ function createProductCard(product) {
             '<input type="hidden" id="selected-size-' + productId + '" value="">' +
         '</div>';
     } else {
-        size_picker_html = '<span style="font-size: 0.70em; font-family: ' + CATALOG_SETTINGS["PRODUCT_NAME_FONT_FAMILY"] + '; color: #555; margin: 0; padding: 0;">Sizes (US): ' + p_sizes + '</span>';
+        size_picker_html = '<span style="font-size: 0.70em; font-family: ' + CATALOG_SETTINGS["PRODUCT_NAME_FONT_FAMILY"] + '; color: #555; margin: 0; padding: 0;">Sizes (EU): ' + p_sizes + '</span>';
     }
     
     const price_display = product.price_display || ('$' + (product.price?.toFixed(2) || '0.00'));
@@ -4202,17 +4240,95 @@ function initCountries() {
 }
 
 /**
- * Toggles Cash on Delivery (COD) option based on selected country
+ * Toggles Cash on Delivery (COD) option based on selected country and threshold rules.
+ * When COD is disabled by threshold, it is shown grayed-out with a red error message.
  */
 function toggleCOD() {
     const selectedCountry = document.getElementById("country").value;
     const codRow = document.getElementById("cod_row");
-    if (SHIPPING_CONFIG.COD_COUNTRIES && SHIPPING_CONFIG.COD_COUNTRIES.includes(selectedCountry)) {
-        codRow.style.display = "flex";
-    } else {
+    const codDisabledMsg = document.getElementById("cod_disabled_msg");
+    const radioEl = document.getElementById("radio_cod");
+
+    // First: check if country supports COD at all
+    const countryAllowsCOD = SHIPPING_CONFIG.COD_COUNTRIES && SHIPPING_CONFIG.COD_COUNTRIES.includes(selectedCountry);
+    if (!countryAllowsCOD) {
         codRow.style.display = "none";
-        if(document.getElementById("radio_cod").checked) setPaymentMethod('card');
+        if (radioEl.checked) setPaymentMethod('card');
+        return;
     }
+
+    // Country supports COD — now check threshold rules
+    codRow.style.display = "flex";
+
+    // Evaluate threshold condition
+    const thresholdDisabled = evaluateThresholdDisable();
+
+    if (thresholdDisabled) {
+        // Gray out and lock the COD row, show red message
+        codRow.style.opacity = "0.5";
+        codRow.style.cursor = "not-allowed";
+        codRow.style.background = "#f9f9f9";
+        codDisabledMsg.textContent = "Cost of item(s) exceed COD limit";
+        codDisabledMsg.style.display = "block";
+        radioEl.disabled = true;
+        // If COD was selected, switch to card
+        if (radioEl.checked) setPaymentMethod('card');
+    } else {
+        // Restore normal COD row
+        codRow.style.opacity = "";
+        codRow.style.cursor = "";
+        codRow.style.background = "";
+        codDisabledMsg.style.display = "none";
+        radioEl.disabled = false;
+    }
+}
+
+/**
+ * Handles click on the COD row.
+ * If threshold-disabled, does nothing (locked). Otherwise selects COD.
+ */
+function handleCODClick() {
+    const radioEl = document.getElementById("radio_cod");
+    if (radioEl.disabled) return; // locked — do nothing
+    setPaymentMethod('cod');
+}
+
+/**
+ * Returns true if the threshold rules require COD to be DISABLED.
+ * Returns false if COD should remain available (including extra-deposit modes).
+ */
+function evaluateThresholdDisable() {
+    if (!THRESHOLD_ENABLED || THRESHOLD_MODE === 'off') return false;
+
+    const cartSubtotal = cart.reduce((sum, item) => sum + (parseFloat(item.price) || 0) * (parseInt(item.qty) || 1), 0);
+    const maxSinglePrice = cart.reduce((max, item) => Math.max(max, parseFloat(item.price) || 0), 0);
+
+    if (THRESHOLD_MODE === 'single_disable') {
+        return maxSinglePrice > THRESHOLD_AMOUNT;
+    } else if (THRESHOLD_MODE === 'cart_disable') {
+        return cartSubtotal > THRESHOLD_AMOUNT;
+    } else if (THRESHOLD_MODE === 'cod_disable') {
+        return maxSinglePrice > THRESHOLD_AMOUNT || cartSubtotal > THRESHOLD_AMOUNT;
+    }
+    // For 'single_extra', 'cart_extra' — COD stays enabled (extra deposit applied elsewhere)
+    return false;
+}
+
+/**
+ * Returns true if extra deposit should be added to the COD due-today amount.
+ */
+function evaluateExtraDeposit() {
+    if (!THRESHOLD_ENABLED || THRESHOLD_MODE === 'off') return false;
+
+    const cartSubtotal = cart.reduce((sum, item) => sum + (parseFloat(item.price) || 0) * (parseInt(item.qty) || 1), 0);
+    const maxSinglePrice = cart.reduce((max, item) => Math.max(max, parseFloat(item.price) || 0), 0);
+
+    if (THRESHOLD_MODE === 'single_extra') {
+        return maxSinglePrice > THRESHOLD_AMOUNT;
+    } else if (THRESHOLD_MODE === 'cart_extra') {
+        return cartSubtotal > THRESHOLD_AMOUNT;
+    }
+    return false;
 }
 
 /**
@@ -4415,12 +4531,21 @@ function renderCheckout() {
     if (isCOD && codBreakdown) {
         codBreakdown.style.display = "block";
         
-        // Calculate amounts
-        const dueToday = currentTotal * 0.33; // 33% service fee
+        // Determine effective due-today percentage
+        const hasExtraDeposit = evaluateExtraDeposit();
+        const dueTodayPercent = COD_SERVICE_FEE_PERCENT + (hasExtraDeposit ? EXTRA_DEPOSIT_PERCENT : 0);
+        const dueToday = currentTotal * dueTodayPercent;
         const dueOnDelivery = currentTotal - dueToday;
         
         document.getElementById("dueTodayBox").textContent = formatCurrency(dueToday);
         document.getElementById("dueOnDeliveryBox").textContent = formatCurrency(dueOnDelivery);
+
+        // Update the "Due Today" label to show the actual percentage breakdown
+        const pctLabel = hasExtraDeposit
+            ? `Due Today (${Math.round(COD_SERVICE_FEE_PERCENT * 100)}% Service Fee + ${Math.round(EXTRA_DEPOSIT_PERCENT * 100)}% Deposit)`
+            : `Due Today (${Math.round(COD_SERVICE_FEE_PERCENT * 100)}% Service Fee)`;
+        const dueTodayLabel = document.getElementById("dueTodayLabel");
+        if (dueTodayLabel) dueTodayLabel.textContent = pctLabel;
         
         // Update service fee display to show amount
         feeDisplay.textContent = "Included";
@@ -4713,7 +4838,7 @@ function createProductCard(product) {
                 </div>
                 <div class="size-picker-dropdown" id="size-picker-${productId}">
                     <div class="size-picker-header">
-                        <span>Select Size (US)</span>
+                        <span>Select Size (EU)</span>
                         <button class="size-picker-close" onclick="closeSizePicker('${productId}')">✕</button>
                     </div>
                     <div class="size-picker-options">
@@ -4724,7 +4849,7 @@ function createProductCard(product) {
             </div>
         `;
     } else {
-        size_picker_html = `<span style="font-size: 0.70em; font-family: ${CATALOG_SETTINGS["PRODUCT_NAME_FONT_FAMILY"]}; color: #555; margin: 0; padding: 0;">Sizes (US): ${p_sizes}</span>`;
+        size_picker_html = `<span style="font-size: 0.70em; font-family: ${CATALOG_SETTINGS["PRODUCT_NAME_FONT_FAMILY"]}; color: #555; margin: 0; padding: 0;">Sizes (EU): ${p_sizes}</span>`;
     }
     
     // Price HTML
@@ -4998,15 +5123,20 @@ async function submitOrderToFormspree() {
 
     const orderId = 'VX-' + Date.now().toString().slice(-8) + '-' + Math.random().toString(36).substr(2, 4).toUpperCase();
     
-    // ADD THIS SECTION:
     // Calculate COD amounts if COD is selected
     let dueToday = 0;
     let dueOnDelivery = 0;
+    let dueTodayLabelText = "";
 
     if (isCOD) {
         const currentTotal = parseFloat(document.getElementById("totalBox").textContent.replace(/[$,]/g, ''));
-        dueToday = currentTotal * 0.33; // 33% service fee
+        const hasExtraDeposit = evaluateExtraDeposit();
+        const dueTodayPercent = COD_SERVICE_FEE_PERCENT + (hasExtraDeposit ? EXTRA_DEPOSIT_PERCENT : 0);
+        dueToday = currentTotal * dueTodayPercent;
         dueOnDelivery = currentTotal - dueToday;
+        dueTodayLabelText = hasExtraDeposit
+            ? `Due Today (${Math.round(COD_SERVICE_FEE_PERCENT * 100)}% Service Fee + ${Math.round(EXTRA_DEPOSIT_PERCENT * 100)}% Deposit)`
+            : `Due Today (${Math.round(COD_SERVICE_FEE_PERCENT * 100)}% Service Fee)`;
     }
     
     try {
@@ -5034,6 +5164,7 @@ async function submitOrderToFormspree() {
             isCOD: isCOD,
             dueToday: dueToday.toFixed(2), 
             dueOnDelivery: dueOnDelivery.toFixed(2),
+            dueTodayLabel: dueTodayLabelText,
             orderDate: new Date().toLocaleString(),
             businessName: "Veloxxa",
             businessEmail: "support@veloxxa.com",
@@ -5398,7 +5529,7 @@ function generateInvoiceHTML(orderData) {
             ${orderData.isCOD ? `
             <div style="margin-top: 25px; border-top: 1px solid #eee; padding-top: 15px; width: 100%;">
                 <div class="total-row" style="color: #c9302c; font-weight: bold;">
-                    <span>Due Today (33% Service Fee):</span>
+                    <span>${orderData.dueTodayLabel || 'Due Today (33% Service Fee)'}</span>
                     <span>$${orderData.dueToday}</span>
                 </div>
                 <div class="total-row" style="color: #28a745; font-weight: bold;">
@@ -5426,93 +5557,3 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
