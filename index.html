@@ -4105,11 +4105,11 @@ function createProductCard(product) {
                 '</div>' +
                 '<div style="margin-left: auto; flex-shrink: 0;">' +
                     '<div class="qty-controls">' +
-                        '<button class="qty-btn" onclick="updateCatalogQty('' + productId + '', -1)">-</button>' +
+                        '<button class="qty-btn" onclick="updateCatalogQty(\'' + productId + '\', -1)">-</button>' +
                         '<span style="font-size: 0.8em; font-weight: 600;" id="qty-display-' + productId + '">1</span>' +
-                        '<button class="qty-btn" onclick="updateCatalogQty('' + productId + '', 1)">+</button>' +
+                        '<button class="qty-btn" onclick="updateCatalogQty(\'' + productId + '\', 1)">+</button>' +
+                        '<input type="hidden" value="1" id="qty-' + productId + '">' +
                     '</div>' +
-                    '<input type="hidden" value="1" id="qty-' + productId + '">' +
                 '</div>' +
             '</div>' +
             '<div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f0f0f0; padding-top: 8px;">' +
@@ -4934,8 +4934,8 @@ function createProductCard(product) {
                         <button class="qty-btn" onclick="updateCatalogQty('${productId}', -1)">-</button>
                         <span style="font-size: 0.8em; font-weight: 600;" id="qty-display-${productId}">1</span>
                         <button class="qty-btn" onclick="updateCatalogQty('${productId}', 1)">+</button>
-                        <input type="hidden" value="1" id="qty-${productId}">
                     </div>
+                    <input type="hidden" value="1" id="qty-${productId}">
                 </div>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f0f0f0; padding-top: 8px;">
