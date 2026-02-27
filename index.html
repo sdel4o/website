@@ -13,7 +13,10 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
 .thumbnails { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; margin-top: auto; }
 .thumbnail-img { width: 100%; height: 40px; object-fit: cover; border: 1px solid #eee; border-radius: 4px; cursor: pointer; }
 .folder-tag { position: absolute; top: 5px; right: 5px; background: #333; color: white; padding: 2px 6px; font-size: 10px; border-radius: 3px; opacity: 0.7; z-index: 5; }
-
+.product-card button,
+.product-card input {
+    margin: 0;
+}
 /* ============ FOR HER/FOR HIM BUTTONS ============ */
 .gender-tabs-container {
     display: flex;
@@ -5750,3 +5753,4 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
