@@ -576,22 +576,6 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         opacity: 1;
         visibility: visible;
     }
-        /* Fix qty buttons overflowing product cards */
-    .product-card .qty-controls {
-        gap: 3px !important;
-    }
-    .product-card .qty-btn {
-        margin: 0 !important;
-        padding: 2px 4px !important;
-        min-width: 18px !important;
-        font-size: 0.7em !important;
-    }
-    /* Fix +/- shift when digits change */
-    .product-card .qty-controls > span {
-        min-width: 14px !important;
-        text-align: center !important;
-        display: inline-block !important;
-    }
 }
 
 /* ============ LANDSCAPE MOBILE SIZE PICKER ============ */
@@ -1218,30 +1202,21 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         height: 32px !important;
     }
     
-    /* FIX 11: Add button - Smaller */
-    .product-info button {
-        padding: 4px 10px !important;
-        font-size: 0.65em !important;
-    }
-    
     /* FIX 12: Quantity controls - Smaller */
-    .catalog-qty-controls {
+    /* Fix qty buttons overflowing product cards */
+    .product-card .qty-controls {
         gap: 3px !important;
-        padding: 3px !important;
     }
-    
-    .catalog-qty-btn {
-        padding: 2px 6px !important;
-        font-size: 0.75em !important;
-        min-width: 24px !important;
-        background: #f0f0f0 !important;
-        border: 1px solid #ddd !important;
-        border-radius: 3px !important;
-        font-weight: bold !important;
-        cursor: pointer !important;
+    .product-card .qty-btn {
+        padding: 2px 4px !important;
+        min-width: 18px !important;
+        font-size: 0.7em !important;
     }
-    .catalog-qty-btn:hover {
-        background: #e5e5e5 !important;
+    /* Fix +/- shift when digits change */
+    .product-card .qty-controls > span {
+        min-width: 14px !important;
+        text-align: center !important;
+        display: inline-block !important;
     }
     
     /* FIX 13: Notification - Proper positioning (NO transform) */
@@ -1491,7 +1466,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         box-sizing: border-box !important;
     }
     
-/* Filter row landscape mode */
+    /* Filter row landscape mode */
     .filter-top-row {
         display: flex !important;
         flex-wrap: nowrap !important;
@@ -1516,7 +1491,6 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         gap: 3px !important;
     }
     .product-card .qty-btn {
-        margin: 0 !important;
         padding: 2px 4px !important;
         min-width: 18px !important;
         font-size: 0.7em !important;
@@ -5776,7 +5750,3 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
-
-
-
-
