@@ -1466,9 +1466,6 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         border-radius: 10px !important;
         max-width: none !important;
     }
-    body {
-    padding: 0 0 15px 0 !important;  /* Remove side padding in landscape */
-    }
     
     /* Search bar - Full width */
     #searchInput {
@@ -1481,15 +1478,15 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     
     /* Filter row – use flex for equal‑width items */
     //* Filter row – use grid for auto-adjusting columns */
-    .filter-top-row {
-        display: grid !important;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
-        gap: 12px !important;
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        box-sizing: border-box !important;
-    }
+.filter-top-row {
+    display: flex !important;
+    flex-wrap: nowrap !important;  /* Change from wrap to nowrap */
+    gap: 12px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
 /* Let each wrapper fill its grid cell */
     .custom-select-wrapper {
         width: 100% !important;
@@ -5738,5 +5735,6 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
