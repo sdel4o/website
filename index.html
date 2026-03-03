@@ -13,10 +13,8 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
 .thumbnails { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; margin-top: auto; }
 .thumbnail-img { width: 100%; height: 40px; object-fit: cover; border: 1px solid #eee; border-radius: 4px; cursor: pointer; }
 .folder-tag { position: absolute; top: 5px; right: 5px; background: #333; color: white; padding: 2px 6px; font-size: 10px; border-radius: 3px; opacity: 0.7; z-index: 5; }
-.product-card button,
-.product-card input {
-    margin: 0;
-}
+.product-card button, .product-card input { margin: 0; }
+
 /* ============ FOR HER/FOR HIM BUTTONS ============ */
 .gender-tabs-container {
     display: flex;
@@ -1203,11 +1201,11 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     .thumbnail-img {
         height: 32px !important;
     }
-    
+        
     /* FIX 12: Quantity controls - Smaller */
     /* Fix qty buttons overflowing product cards */
     .product-card .qty-controls {
-        gap: 6px !important;
+        gap: 5px !important;
     }
     .product-card .qty-btn {
         padding: 3px 4px !important;
@@ -1429,7 +1427,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
     .gold-select, .filter-btn, .cart-summary-btn, .qty-btn, .catalog-qty-btn {
         touch-action: manipulation !important;
     }
-    
+
     body {
         zoom: 1 !important;
         transform: none !important;
@@ -1497,7 +1495,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
 
     /* Fix qty buttons overflowing product cards */
     .product-card .qty-controls {
-        gap: 6px !important;
+        gap: 5px !important;
     }
     .product-card .qty-btn {
         padding: 3px 4px !important;
@@ -1693,9 +1691,8 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
     align-items: center;
     gap: 5px;
     background: #f0f0f0;
-    padding: 2px 3px;
+    padding: 2x 4px;
     border-radius: 6px;
-    margin: 2px 0 5px 0 !important;  /* top:0, right:0, bottom:3px, left:0 */
 }
 
 .catalog-qty-btn {
@@ -2017,7 +2014,7 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
     }
 }
 
-@media (max-width: 950px) {
+@media (max-width: 1020px) {
     .checkout-master { flex-direction: column; }
     .checkout-right { order: -1; margin-bottom: 20px; position: static; width: 100%; box-sizing: border-box; }
     .checkout-left { width: 100%; box-sizing: border-box; }
@@ -5760,37 +5757,3 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
