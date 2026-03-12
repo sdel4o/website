@@ -62,7 +62,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
 }
 
 /* Mobile portrait: For Her left, For Him right */
-@media (max-width: 768px) and (orientation: portrait) {
+@media (max-width: 517px) and (orientation: portrait) {
     .gender-tabs-container {
         justify-content: space-between;
         gap: 0;
@@ -227,7 +227,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
 }
 
 /* ============ MOBILE CUSTOM SELECT (Portrait only) ============ */
-@media (max-width: 768px) and (orientation: portrait) {
+@media (max-width: 517px) and (orientation: portrait) {
     .custom-select-trigger {
         padding: 10px 14px !important;
         font-size: 0.85em !important;
@@ -476,7 +476,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
 }
 
 /* ============ MOBILE SIZE PICKER (Portrait only) ============ */
-@media (max-width: 768px) and (orientation: portrait) {
+@media (max-width: 517px) and (orientation: portrait) {
     .size-picker-trigger {
         font-size: 0.8em !important;
         padding: 4px 6px !important; /* determines width of size picker box in portrait mode */
@@ -839,7 +839,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
 }
 
 /* Mobile responsive notification */
-@media (max-width: 768px) {
+@media (max-width: 517px) {
     .cart-notification {
         top: 10px;
         right: 10px;
@@ -986,7 +986,7 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
 
 /* ============ SIMPLE MOBILE OPTIMIZATION - Mobile CSS ============ */
 /* ============ MOBILE OPTIMIZATION (Portrait Phones Only) ============ */
-@media (max-width: 768px) and (orientation: portrait) {
+@media (max-width: 517px) and (orientation: portrait) {
     /* Performance optimizations */
     .product-card {
         will-change: transform;
@@ -1744,7 +1744,7 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
 }
 
 /* Ensure desktop always shows proper columns - INCLUDES LANDSCAPE */
-@media (min-width: 768px), (orientation: landscape) {
+@media (min-width: 517px), (orientation: landscape) {
     .catalog-container {
         grid-template-columns: repeat(4, 1fr) !important;
     }
@@ -2027,7 +2027,7 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
 }
 
 /* Mobile responsive LOAD MORE BUTTON */
-@media (max-width: 768px) {
+@media (max-width: 517px) {
     #loadMoreBtn {
         padding: 12px 25px;
         font-size: 0.9em;
@@ -2644,7 +2644,7 @@ function toggleCustomDropdown(type) {
         dropdown.closest('.custom-select-wrapper').classList.add('active-wrapper');
         
         // Mobile portrait: show overlay and prevent body scroll
-        if (window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches) {
+        if (window.innerWidth <= 517 && window.matchMedia("(orientation: portrait)").matches) {
             if (overlay) {
                 overlay.classList.add('active');
             }
@@ -2927,7 +2927,7 @@ function openSizePicker(productId) {
         sizePicker.classList.add('active');
         
         // Mobile portrait: show overlay and prevent body scroll
-        if (window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches) {
+        if (window.innerWidth <= 517 && window.matchMedia("(orientation: portrait)").matches) {
             if (overlay) {
                 overlay.classList.add('active');
             }
@@ -3033,14 +3033,14 @@ document.addEventListener('click', function(e) {
     }
     
     // Close if clicking outside on desktop
-    if (window.innerWidth > 768 || 
-        (window.innerWidth <= 768 && window.matchMedia("(orientation: landscape)").matches)) {
+    if (window.innerWidth > 517 || 
+        (window.innerWidth <= 517 && window.matchMedia("(orientation: landscape)").matches)) {
         if (activeSizePicker && !e.target.closest('.size-picker-dropdown')) {
             closeAllSizePickers();
         }
     }
     // Mobile portrait: close when clicking overlay
-    else if (window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches) {
+    else if (window.innerWidth <= 517 && window.matchMedia("(orientation: portrait)").matches) {
         if (e.target.classList.contains('size-overlay')) {
             closeAllSizePickers();
         }
@@ -3265,7 +3265,7 @@ function addToCart(pid) {
             showElegantAlert("Size Required", "<span style='color: #ff4d4d; font-weight: 600;'>Please select a size before adding to cart.</span>", "📏");
             
             // Open the size picker automatically on mobile
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 517) {
                 openSizePicker(pid);
             }
             
@@ -5020,7 +5020,7 @@ function fallbackLoadProductData() {
  * Handles responsive layout adjustments for mobile/desktop
  */
 function handleResponsiveLayout() {
-    const isMobilePortrait = window.innerWidth <= 768 && window.matchMedia("(orientation: portrait)").matches;
+    const isMobilePortrait = window.innerWidth <= 517 && window.matchMedia("(orientation: portrait)").matches;
     
     if (isMobilePortrait) {
         // Mobile portrait layout - 2 columns
@@ -5780,6 +5780,7 @@ function generateInvoiceHTML(orderData) {
 </script>
 </body>
 </html>
+
 
 
 
