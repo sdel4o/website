@@ -985,63 +985,64 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
 }
 
 /* ============ SIMPLE MOBILE OPTIMIZATION - Mobile CSS ============ */
+
 /* ============ MOBILE OPTIMIZATION (Portrait Phones Only) ============ */
-@media (max-width: 768px) and (orientation: portrait) {
+@media (max-width: 768px) and (orientation: portrait) {        
     /* Performance optimizations */
-    .product-card {
+    .product-card {        
         will-change: transform;
         contain: content;
-    }
+    }        
     
-    .catalog-container {
+    .catalog-container {        
         contain: layout style paint;
-    }
+    }        
     
     /* Disable hover effects on mobile for better performance */
-    .product-card:hover, .qty-btn:hover, .catalog-qty-btn:hover {
+    .product-card:hover, .qty-btn:hover, .catalog-qty-btn:hover {        
         transform: none !important;
         box-shadow: none !important;
         transition: none !important;
-    }
+    }        
     
-    .gold-select, .filter-btn, .cart-summary-btn, .qty-btn, .catalog-qty-btn {
-        -webkit-tap-highlight-color: transparent !important; /* Remove blue tap highlight */
-        touch-action: manipulation !important;
-    }
-    .filter-btn {
+    .gold-select, .filter-btn, .cart-summary-btn, .qty-btn, .catalog-qty-btn {        
         -webkit-tap-highlight-color: transparent !important;
         touch-action: manipulation !important;
-    }
+    }        
+    .filter-btn {        
+        -webkit-tap-highlight-color: transparent !important;
+        touch-action: manipulation !important;
+    }        
 
-    body {
+    body {        
         zoom: 1 !important;
         -moz-transform: none !important;
         transform: none !important;
         width: 100% !important;
         min-height: 100vh !important;
-        padding: 0 10px 15px !important;
+        padding: 0 12px 15px !important;
         margin: 0 !important;
         overflow-x: hidden !important;
         position: static !important;
         left: 0 !important;
-        font-size: 14px; /* Base font size for mobile */
-    }
+        font-size: 14px;
+    }        
     
     /* Scale down headings */
-    h1 {
+    h1 {        
         font-size: 1.3em !important;
         line-height: 1.2 !important;
         margin-top: 15px !important;
         margin-bottom: 15px !important;
         padding: 0 5px !important;
-    }
+    }        
     
-    /* FIX 1: Controls - Keep original styling but scale down */
-    .controls {
+    /* FIX 1: Controls - Match landscape styling */
+    .controls {        
         background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
-        padding: 12px !important;
+        padding: 15px !important;
         border-radius: 10px !important;
-        margin: 0 auto 15px !important;
+        margin: 0 auto 20px !important;
         box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
         border: 1.8px solid #D4AF37 !important;
         position: relative !important;
@@ -1051,12 +1052,11 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         gap: 8px !important;
         width: 100% !important;
         box-sizing: border-box !important;
-        font-size: 0.9em !important;
-    }
+    }        
     
-    /* FIX 2: Search Bar - Smaller but proportional */
-    #searchInput {
-        width: 100% !important;
+    /* FIX 2: Search Bar - Perfect height for cart button alignment */
+    #searchInput {        
+        width: calc(100% - 100px) !important; /* Leave space for cart button */
         margin: 0 0 12px 0 !important;
         padding: 12px 18px !important;
         border: 2px solid #D4AF37 !important;
@@ -1067,60 +1067,52 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         font-size: 0.95em !important;
         font-weight: 500 !important;
         box-sizing: border-box !important;
-        display: block !important;
-    }
+        display: inline-block !important;
+        height: 48px !important; /* Fixed height for alignment */
+        line-height: 20px !important;
+    }        
     
-    /* FIX 3: Search bar row — flex with inline cart button */
-    .filter-group {
-        display: flex !important;
-        align-items: center !important;
-        gap: 8px !important;
-        width: 100% !important;
-        margin-bottom: 0 !important;
-        box-sizing: border-box !important;
-    }
-
-    #searchInput {
-        flex: 1 1 auto !important;
-        min-width: 0 !important;
-        margin: 0 0 12px 0 !important;
-    }
-
-    /* FIX 3: Cart button — inline, no absolute positioning */
-    .cart-summary-btn {
-        position: static !important;
-        flex-shrink: 0 !important;
-        margin: 0 0 12px 0 !important;
-        padding: 0 14px !important;
-        height: 46px !important;           /* Matches search bar computed height */
-        font-size: 14px !important;        /* px not em — Android-safe */
-        white-space: nowrap !important;
+    /* FIX 3: Cart Button - Perfect positioning and sizing */
+    .cart-summary-btn {        
+        position: absolute !important;
+        right: 15px !important;
+        top: 78px !important;
+        background: linear-gradient(135deg, #000 0%, #2d2d2d 100%) !important;
+        color: #FFD700 !important;
+        border: 2px solid #D4AF37 !important;
+        padding: 0 18px !important;
+        border-radius: 30px !important;
+        cursor: pointer !important;
         display: flex !important;
         align-items: center !important;
         gap: 6px !important;
-        border: 2px solid #D4AF37 !important;
-        border-radius: 30px !important;
-        background: linear-gradient(135deg, #000 0%, #2d2d2d 100%) !important;
-        color: #FFD700 !important;
         font-family: 'Montserrat', sans-serif !important;
         font-weight: 600 !important;
-        cursor: pointer !important;
+        font-size: 0.9em !important;
+        text-decoration: none !important;
         box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important;
+        margin: 0 !important;
         z-index: 101 !important;
-    }
+        height: 48px !important; /* Match search bar height */
+        line-height: 48px !important;
+        box-sizing: border-box !important;
+        white-space: nowrap !important;
+        min-width: 85px !important;
+        justify-content: center !important;
+    }        
     
-    /* FIX 4: Filter grid - Keep 2 columns */
-    .filter-top-row {
+    /* FIX 4: Filter grid - 2 columns */
+    .filter-top-row {        
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 8px !important;
         width: 100% !important;
         margin: 0 0 0 0 !important;
         box-sizing: border-box !important;
-    }
+    }        
     
-    /* FIX 5: Filter selects - Smaller */
-    .custom-select-trigger {
+    /* FIX 5: Filter selects */
+    .custom-select-trigger {        
         width: 100% !important;
         box-sizing: border-box !important;
         padding: 10px 12px !important;
@@ -1133,18 +1125,13 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         font-size: 0.85em !important;
         font-weight: 500 !important;
         cursor: pointer !important;
-        min-height: 40px !important;
+        min-height: 44px !important;
         display: flex !important;
         align-items: center !important;
         justify-content: space-between !important;
-    }
+    }        
     
-    #subBrandFilter[style*="inline-block"] + * + * + * + #genFilter {
-        grid-column: 1 !important;
-        justify-self: start !important;
-    }
-    
-    /* FIX 7: Bottom row — equal flex buttons with px sizing */
+    /* FIX 6: Sort and Clear buttons - Same size */
     .filter-bottom-row {        
         width: 100% !important;
         margin: 8px 0 0 0 !important;
@@ -1152,97 +1139,107 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         border-top: 1px solid rgba(212, 175, 55, 0.3) !important;
         display: flex !important;
         justify-content: space-between !important;
-        align-items: stretch !important;   /* stretch = equal height always */
-        gap: 8px !important;
+        align-items: center !important;
+        gap: 12px !important; /* Add gap between buttons */
     }        
-
+    
     .clear-filters-container,
     .sort-button-container {        
-        flex: 1 1 0 !important;                        /* Equal width via flex, not % */
+        flex: 1 !important; /* Equal width for both containers */
         width: auto !important;
-        min-width: 0 !important;
+        min-width: 0 !important; /* Allow shrinking */
     }        
-
+    
     .clear-filters-container .filter-btn,
     .sort-button-container .filter-btn {        
         width: 100% !important;
-        height: 44px !important;                   /* Fixed px — no em ambiguity */
-        padding: 0 10px !important;
-        font-size: 13px !important;                /* px — immune to Android font scaling */
-        font-weight: 600 !important;
+        padding: 12px 12px !important; /* Equal padding for both */
         margin: 0 !important;
         border: 2px solid #D4AF37 !important;
         border-radius: 30px !important;
         background: linear-gradient(135deg, #000 0%, #2d2d2d 100%) !important;
         color: #FFD700 !important;
         font-family: 'Montserrat', sans-serif !important;
+        font-size: 0.85em !important;
+        font-weight: 600 !important;
         cursor: pointer !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        gap: 5px !important;
-        white-space: nowrap !important;        /* Prevents wrapping on small screens */
+        gap: 6px !important;
+        height: 44px !important; /* Fixed height for consistency */
+        line-height: 1 !important;
+        white-space: nowrap !important;
         box-sizing: border-box !important;
     }        
     
-    /* FIX 8: Catalog container - Ensure 2 columns fit perfectly */
-    .catalog-container {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 10px !important;
-        padding: 0 2px !important;
-    }
+    /* Ensure icons are the same size */
+    .clear-filters-container .btn-icon,
+    .sort-button-container .btn-icon {        
+        font-size: 1em !important;
+        display: inline-block !important;
+    }        
     
-    /* FIX 9: Product card - Smaller but proportional */
-    .product-card {
+    /* FIX 7: Catalog container - 2 columns */
+    .catalog-container {        
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+        padding: 0 2px !important;
+    }        
+    
+    /* FIX 8: Product card */
+    .product-card {        
         padding: 8px !important;
         border-radius: 8px !important;
         font-size: 0.9em !important;
-    }
+    }        
     
-    .main-image img {
-        height: 180px !important; /* Smaller height to fit 2 cards */
+    .main-image img {        
+        height: 180px !important;
         object-fit: contain !important;
-    }
+    }        
     
-    .product-name {
-        font-size: 0.5em !important;
-        min-height: 2em !important;
+    .product-name {        
+        font-size: 0.55em !important;
+        min-height: 2.2em !important;
         margin: 6px 0 4px !important;
         line-height: 1.2 !important;
-    }
+    }        
     
-    .product-price {
-        font-size: 0.75em !important;
-    }
+    .product-price {        
+        font-size: 0.8em !important;
+    }        
     
-    .thumbnails {
+    .thumbnails {        
         grid-template-columns: repeat(6, 1fr) !important;
         gap: 3px !important;
-    }
+    }        
     
-    .thumbnail-img {
-        height: 32px !important;
-    }
-        
-    /* FIX 12: Quantity controls - Smaller */
-    /* Fix qty buttons overflowing product cards */
-    .product-card .qty-controls {
-        gap: 5px !important;
-    }
-    .product-card .qty-btn {
-        padding: 3px 4px !important;
-        min-width: 18px !important;
-    }
-    /* Fix +/- shift when digits change */
-    .product-card .qty-controls > span {
-        min-width: 14px !important;
+    .thumbnail-img {        
+        height: 35px !important;
+    }        
+    
+    /* FIX 9: Quantity controls */
+    .product-card .qty-controls {        
+        gap: 3px !important;
+    }        
+    
+    .product-card .qty-btn {        
+        padding: 2px 4px !important;
+        min-width: 20px !important;
+        font-size: 0.75em !important;
+    }        
+    
+    .product-card .qty-controls > span {        
+        min-width: 12px !important;
         text-align: center !important;
         display: inline-block !important;
-    }
+        font-size: 0.75em !important;
+    }        
     
-    /* FIX 13: Notification - Proper positioning (NO transform) */
-    .cart-notification {
-        top: 80px !important; /* Below cart button */
+    /* FIX 10: Cart notification */
+    .cart-notification {        
+        top: 80px !important;
         right: 20px !important;
         left: 20px !important;
         text-align: center !important;
@@ -1250,194 +1247,79 @@ h1 { text-align: center; font-size: 1.7em; line-height: 1.0; margin-top: 20px; m
         transform: none !important;
         z-index: 10000 !important;
         font-size: 0.9em !important;
-    }
+    }        
     
-    /* FIX 14: Image modal - Proper positioning (NO transform) */
-    #imageModal[style*="display: block"] {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
-    #modalImg {
-        max-width: 75% !important;
-        max-height: 70vh !important;
-    }
-    #nextBtn {
-    right: 1% !important; 
-    }
-    #prevBtn {
-    left: 1% !important; 
-    }
-   .modal-arrows {
-    /* fixes mobile touch */
-    z-index: 10007 !important;
-    -webkit-tap-highlight-color: transparent !important;
-    touch-action: manipulation !important;
-    cursor: pointer !important;
-    user-select: none !important;
-    outline: none !important;
-    position: relative;
-    }
-    /* FIX 15: Elegant alert - Proper positioning */
-    .elegant-alert-overlay {
-        transform: none !important;
-        width: 100% !important;
-        left: 0 !important;
-        padding: 0 20px !important;
-        box-sizing: border-box !important;
-    }
-    
-    .elegant-alert-box {
-        max-width: 90% !important;
-        padding: 20px !important;
-    }
-    
-    /* FIX 16: Checkout modal - Proper positioning */
-    #checkoutModal {
-        transform: none !important;
-        width: 100% !important;
-        left: 0 !important;
-    }
-    
-    .checkout-modal-content {
-        width: 95% !important;
-        margin: 5% auto !important;
-        transform: scale(0.90);
-        transform-origin: top center;
-    }
-
-    /* REDUCE PADDING ON THE LEFT AND RIGHT PANELS */
-    .checkout-left {
-        padding: 20px 15px !important;  /* Top/bottom 20px, left/right 15px */
-    }
-
-    .checkout-right {
-        padding: 20px 15px !important;  /* Top/bottom 20px, left/right 15px */
-    }
-
-    /* Also reduce padding on the page wrapper */
-    .page-wrapper {
-        padding: 0 10px 20px !important;  /* Left/right padding reduced to 10px */
-    }
-
-    /* ===== ADD THIS NEW FIX 17 SECTION HERE ===== */
-    /* FIX 17: Checkout quantity controls - Match catalog styling */
-    .qty-controls {
-        gap: 3px !important;
-    }
-    
-    .qty-btn {
-        padding: 2px 6px !important;
+    /* FIX 11: Size picker adjustments */
+    .size-picker-trigger {        
         font-size: 0.75em !important;
-        min-width: 24px !important;
-        background: #f0f0f0 !important;
-        border: 1px solid #ddd !important;
-        border-radius: 3px !important;
-        font-weight: bold !important;
-        cursor: pointer !important;
-    }
+        padding: 4px 6px !important;
+        min-width: 60px !important;
+        box-sizing: border-box !important;
+    }        
     
-    .qty-btn:hover {
-        background: #e5e5e5 !important;
-    }
+    .size-picker .size-placeholder {        
+        font-size: 0.75em !important;
+    }        
     
-    .cart-item .item-meta {
-        font-size: 0.7em !important;
-    }
-    
-    .cart-item img {
-        width: 50px !important;
-        height: 50px !important;
-    }
-    
-    .cart-item {
-        padding: 10px 0 !important;
-    }
-    /* ===== END OF NEW FIX 17 ===== */
-}
+    /* Ensure all text is readable */
+    * {        
+        -webkit-text-size-adjust: 100% !important;
+    }        
+}        
 
-/* Small phones */
-@media (max-width: 375px) and (orientation: portrait) {
-    .product-card:hover, .qty-btn:hover, .catalog-qty-btn:hover {
-        transform: none !important;
-        box-shadow: none !important;
-    }
-    .gold-select, .filter-btn, .cart-summary-btn, .qty-btn, .catalog-qty-btn {
-        touch-action: manipulation !important;
-    }
-    body {
+/* Small phones (375px and below) */
+@media (max-width: 375px) and (orientation: portrait) {        
+    body {        
         padding: 0 8px 15px !important;
         font-size: 13px !important;
-    }
+    }        
     
-    h1 {
+    h1 {        
         font-size: 1.2em !important;
-        margin-top: 12px !important;
-    }
+    }        
     
-    .controls {
-        padding: 10px !important;
-    }
+    .controls {        
+        padding: 12px !important;
+    }        
     
-    .cart-summary-btn {
-    padding: 0 10px !important;
-    height: 42px !important;
-    font-size: 12px !important;
-    }
+    #searchInput {        
+        width: calc(100% - 90px) !important;
+        padding: 10px 14px !important;
+        height: 44px !important;
+        font-size: 0.85em !important;
+    }        
     
-    #searchInput {
-        padding: 10px 15px !important;
-        font-size: 0.9em !important;
-        margin-bottom: 10px !important;
-    }
+    .cart-summary-btn {        
+        right: 12px !important;
+        top: 75px !important;
+        padding: 0 14px !important;
+        height: 44px !important;
+        line-height: 44px !important;
+        font-size: 0.8em !important;
+        min-width: 75px !important;
+    }        
     
-    .custom-select-trigger {
+    .custom-select-trigger {        
         padding: 8px 10px !important;
         font-size: 0.8em !important;
-    }
+        min-height: 40px !important;
+    }        
     
     .clear-filters-container .filter-btn,
-    .sort-button-container .filter-btn {
-    height: 40px !important;
-    font-size: 11px !important;
-    padding: 0 8px !important;
-    }
+    .sort-button-container .filter-btn {        
+        padding: 10px 8px !important;
+        font-size: 0.8em !important;
+        height: 40px !important;
+    }        
     
-    .catalog-container {
-        gap: 8px !important;
-    }
-    
-    .main-image img {
+    .main-image img {        
         height: 160px !important;
-    }
+    }        
     
-    .cart-notification {
-        top: 70px !important;
-        right: 15px !important;
-        left: 15px !important;
-        padding: 10px 15px !important;
-        font-size: 0.85em !important;
-    }
-    
-    /* ===== ADDED THIS TO SMALL PHONES SECTION ===== */
-    .catalog-qty-btn {
-        padding: 1px 5px !important;
-        font-size: 0.7em !important;
-        min-width: 22px !important;
-    }
-    
-    .qty-btn {
-        padding: 1px 5px !important;
-        font-size: 0.7em !important;
-        min-width: 22px !important;
-    }
-    
-    .cart-item img {
-        width: 45px !important;
-        height: 45px !important;
-    }
-    /* ===== END OF ADDITION ===== */
-}
+    .product-name {        
+        font-size: 0.5em !important;
+    }        
+}        
 
 /* ============ MOBILE LANDSCAPE ============ */
 @media (max-width: 1020px) and (orientation: landscape) {
@@ -2063,14 +1945,9 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
         </button>
     </div>
     
-    <!-- Search Bar + Cart Button Row -->
+    <!-- Search Bar -->
     <div class="filter-group">
         <input type="text" id="searchInput" oninput="debouncedApplyFilters()" placeholder="🔍 Search products...">
-        <button class="cart-summary-btn" onclick="openCheckoutModal()">
-            <span class="cart-icon">🛒</span>
-            <span class="cart-text">Cart</span>
-            <span class="cart-count" id="cartCount">0</span>
-        </button>
     </div>
     
 <!-- Top Row: All Filters (CUSTOM DROPDOWN STYLING) -->
@@ -2175,6 +2052,13 @@ input, select, button { padding: 8px; margin: 5px; border-radius: 4px; border: 1
             </button>
         </div>
     </div>
+    
+    <!-- Cart Button -->
+    <button class="cart-summary-btn" onclick="openCheckoutModal()">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-text">Cart</span>
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
 </div>
 
 <!-- Size picker overlay (mobile) -->
