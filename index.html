@@ -5337,7 +5337,12 @@ async function submitOrderToFormspree() {
             businessAddress: "Portland, United States",
             businessLogo: "https://veloxxa.com/cdn/shop/files/logo-removebg-preview.png?v=1763035693&width=120"
         };
-
+        
+        // --- 10. SHOW FINAL MODAL --- (generated early so it's available for GAS/sending via email)
+        const invoiceHTML = generateInvoiceHTML(orderData);
+        orderData.invoiceHTML = invoiceHTML;
+        orderData.checkoutUrl = finalUrl || null;
+        
         // --- 8. SERVER SUBMISSION ---
         let baseCheckoutUrl = null;
         let shopifyErrorMsg = null;
@@ -5395,9 +5400,9 @@ async function submitOrderToFormspree() {
         }
 
         // --- 10. SHOW FINAL MODAL ---
-        const invoiceHTML = generateInvoiceHTML(orderData);
-        orderData.invoiceHTML = invoiceHTML;
-        orderData.checkoutUrl = finalUrl || null;
+        //const invoiceHTML = generateInvoiceHTML(orderData);
+        //orderData.invoiceHTML = invoiceHTML;
+        //orderData.checkoutUrl = finalUrl || null;
         
         if (needsShopifyCheckout) {
             // For card payments: Show modal with payment link
