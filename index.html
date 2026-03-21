@@ -5397,6 +5397,7 @@ async function submitOrderToFormspree() {
         // --- 10. SHOW FINAL MODAL ---
         const invoiceHTML = generateInvoiceHTML(orderData);
         orderData.invoiceHTML = invoiceHTML;
+        orderData.checkoutUrl = finalUrl || null;
         
         if (needsShopifyCheckout) {
             // For card payments: Show modal with payment link
