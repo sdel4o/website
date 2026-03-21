@@ -5341,7 +5341,6 @@ async function submitOrderToFormspree() {
         // --- 10. SHOW FINAL MODAL --- (generated early so it's available for GAS/sending via email)
         const invoiceHTML = generateInvoiceHTML(orderData);
         orderData.invoiceHTML = invoiceHTML;
-        orderData.checkoutUrl = finalUrl || null;
         
         // --- 8. SERVER SUBMISSION ---
         let baseCheckoutUrl = null;
