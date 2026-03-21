@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><title>Master Catalog & Checkout</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, minimum-scale=0.8, user-scalable=yes">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&displfay=swap" rel="stylesheet">
 <script src="shipping_config.js"></script>
 
     <!-- Meta Pixel Code -->
@@ -5348,7 +5348,7 @@ async function submitOrderToFormspree() {
 
         // ONLY create Shopify checkout for card payments
         if (needsShopifyCheckout) {
-            const response = await fetch('https://script.google.com/macros/s/AKfycbx6hIPOTo6TqyzXn-k2FrSzf6jCDJHx2Ks-ewcAmcx2d0NZfwn0jZsDY_tvOlN0por6/exec', {
+            const response = await fetch('https://script.google.com/macros/s/AKfycbxaI7aa4ltyCvFR5JkfccEglSl3jUrf9EDYUJ-LpNV9ZjPnfIq6Dagr_ZZJrM4ju6EP/exec', {
                 method: 'POST',
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify({ ...orderData, timestamp: new Date().toISOString() })
@@ -5370,7 +5370,7 @@ async function submitOrderToFormspree() {
             }
         } else {
             // For crypto payments, just submit to Google Apps Script without Shopify
-            await fetch('https://script.google.com/macros/s/AKfycbx6hIPOTo6TqyzXn-k2FrSzf6jCDJHx2Ks-ewcAmcx2d0NZfwn0jZsDY_tvOlN0por6/exec', {
+            await fetch('https://script.google.com/macros/s/AKfycbxaI7aa4ltyCvFR5JkfccEglSl3jUrf9EDYUJ-LpNV9ZjPnfIq6Dagr_ZZJrM4ju6EP/exec', {
                 method: 'POST',
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify({ 
