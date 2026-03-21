@@ -4658,7 +4658,7 @@ function renderCheckout() {
         if (dueTodayLabel) dueTodayLabel.textContent = pctLabel;
         
         // Update service fee display to show amount
-        feeDisplay.textContent = "Included";
+        feeDisplay.textContent = "Included in Price";
     } else {
         if (codBreakdown) {
             codBreakdown.style.display = "none";
@@ -4666,7 +4666,7 @@ function renderCheckout() {
         
         // Regular service fee display
         if (FEE_PERCENT === 0) {
-            feeDisplay.textContent = "Included";
+            feeDisplay.textContent = "Included in Price";
         } else {
             feeDisplay.textContent = formatCurrency(serviceFee);
         }
@@ -5518,10 +5518,12 @@ function generateInvoiceHTML(orderData) {
     const itemsHTML = orderData.items.map(item => `
         <tr>
             <td style="vertical-align: middle;">
-                ${item.image ? `<img src="${item.image}" style="width: 60px; height: 60px; object-fit: contain; border-radius: 4px; border: 1px solid #eee; margin-right: 12px; vertical-align: middle;">` : ''}
-                <span style="vertical-align: middle;">
-                    ${item.brand ? item.brand + ': ' : ''}${item.name} ${item.size && item.size !== "N/A" ? '(Size: ' + item.size + ')' : ''}
-                </span>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    ${item.image ? `<img src="${item.image}" style="width: 60px; height: 60px; object-fit: contain; border-radius: 4px; border: 1px solid #eee; flex-shrink: 0;">` : ''}
+                    <span style="flex: 1;">
+                        ${item.brand ? item.brand + ': ' : ''}${{item.name}} ${item.size && item.size !== "N/A" ? '(Size: ' + item.size + ')' : ''}
+                    </span>
+                </div>
             </td>
             <td style="text-align: center; vertical-align: middle;">${item.qty}</td>
             <td style="text-align: right; vertical-align: middle;">$${item.price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
@@ -5763,7 +5765,7 @@ function generateInvoiceHTML(orderData) {
                 <span>${orderData.shipping}</span>
             </div>
             <div class="total-row">
-                <span>Service Fee:</span>
+                <span>Service Fee (33%):</span>
                 <span>${orderData.fee}</span>
             </div>
             <div class="total-row grand-total">
