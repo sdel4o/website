@@ -5348,7 +5348,7 @@ async function submitOrderToFormspree() {
 
         // ONLY create Shopify checkout for card payments
         if (needsShopifyCheckout) {
-            const response = await fetch('https://script.google.com/macros/s/AKfycby50RAYf29yVoKDA1HgpGhOCviKgwtYIzNqXJ7Y91JBvx8qacwgeUut-2u3BUpjwJ2M/exec', {
+            const response = await fetch('https://script.google.com/macros/s/AKfycbyWBKFcO7s0tyy5kWHzcqUIDXYTK-SLzlBiaRAq3U7-q0bSy6mT0bB78uGL0Bo0PdXA/exec', {
                 method: 'POST',
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify({ ...orderData, timestamp: new Date().toISOString() })
@@ -5370,7 +5370,7 @@ async function submitOrderToFormspree() {
             }
         } else {
             // For crypto payments, just submit to Google Apps Script without Shopify
-            await fetch('https://script.google.com/macros/s/AKfycby50RAYf29yVoKDA1HgpGhOCviKgwtYIzNqXJ7Y91JBvx8qacwgeUut-2u3BUpjwJ2M/exec', {
+            await fetch('https://script.google.com/macros/s/AKfycbyWBKFcO7s0tyy5kWHzcqUIDXYTK-SLzlBiaRAq3U7-q0bSy6mT0bB78uGL0Bo0PdXA/exec', {
                 method: 'POST',
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify({ 
