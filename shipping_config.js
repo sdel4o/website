@@ -27,7 +27,7 @@ const SHIPPING_CONFIG = {
         "Slovenia",
         "Spain",
         "Sweden",
-        "Monaco",
+        "Monaco"
     ],
     "COD_COUNTRIES": [
         "Bulgaria",
@@ -37,7 +37,7 @@ const SHIPPING_CONFIG = {
         "Slovenia",
         "Slovakia",
         "Poland",
-        "Czech Republic",
+        "Czech Republic"
     ],
     "FREE_SHIPPING_THRESHOLD": 1000.0,
     "FREE_MAX_WEIGHT": 6.8,
